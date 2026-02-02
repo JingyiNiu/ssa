@@ -1,27 +1,24 @@
 import { Box, Typography, Button } from "@mui/material";
-import { FaCar, FaBatteryFull } from "react-icons/fa";
+import { FaCar } from "react-icons/fa";
 import { GiCarWheel, GiTyre } from "react-icons/gi";
-import { FaTractor } from "react-icons/fa";
 
-export const SlideControls = () => {
+export const SearchTabs = () => {
   const tabs = [
     { icon: <FaCar size={24} />, label: "SEARCH BY VEHICLE" },
-    { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL SIZE" },
-    { icon: <GiTyre size={24} />, label: "SEARCH TYRE SIZE" },
-    { icon: <FaTractor size={24} />, label: "SEARCH AGRICULTURAL" },
-    { icon: <FaBatteryFull size={24} />, label: "SEARCH BATTERIES" },
+    { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL" },
+    { icon: <GiTyre size={24} />, label: "SEARCH TYRE" },
   ];
 
   return (
     <Box
       sx={{
         position: "absolute",
-        bottom: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
+        left: 0,
         width: "100%",
+        transform: "translateY(-100%)",
+        zIndex: 10,
       }}
-      data-testid="carousel-controls"
+      data-testid="search-tabs"
     >
       <Box
         className="container mx-auto"
@@ -32,9 +29,8 @@ export const SlideControls = () => {
             key={index}
             sx={{
               flex: 1,
-              backgroundColor:
-                index === 0 ? "primary.main" : "rgba(0, 0, 0, 0.8)",
-              color: "white",
+              backgroundColor: index === 0 ? "primary.main" : "#fff",
+              color: index === 0 ? "#fff" : "primary.main",
               py: 3,
               display: "flex",
               flexDirection: "column",
@@ -42,14 +38,12 @@ export const SlideControls = () => {
               borderRadius: 0,
               textTransform: "none",
               borderRight:
-                index < tabs.length - 1
-                  ? "1px solid rgba(255, 255, 255, 0.1)"
-                  : "none",
+                index < tabs.length - 1 ? "1px solid #e0e0e0" : "none",
               "&:hover": {
-                backgroundColor:
-                  index === 0 ? "secondary.dark" : "rgba(0, 0, 0, 0.9)",
+                backgroundColor: index === 0 ? "primary.dark" : "#f0f0f0",
               },
             }}
+            data-testid={`search-control-button`}
           >
             {tab.icon}
             <Typography sx={{ fontSize: "0.75rem", fontWeight: 600 }}>
@@ -60,4 +54,4 @@ export const SlideControls = () => {
       </Box>
     </Box>
   );
-}
+};

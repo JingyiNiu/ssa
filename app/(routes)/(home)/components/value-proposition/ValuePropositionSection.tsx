@@ -31,7 +31,7 @@ export const ValuePropositionSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(0,0,0,0.6)",
+          background: "rgba(255,255,255,0.6)",
           zIndex: 1,
         },
       }}
@@ -50,8 +50,9 @@ export const ValuePropositionSection = () => {
           variant="h2"
           sx={{
             color: "primary.main",
+            fontFamily: "Bebas Neue, sans-serif",
             fontWeight: 700,
-            fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "5rem" },
             lineHeight: 1.2,
             mb: 3,
             textTransform: "uppercase",
@@ -66,7 +67,6 @@ export const ValuePropositionSection = () => {
         <Typography
           variant="body1"
           sx={{
-            color: "white",
             fontSize: { xs: "0.875rem", sm: "1rem" },
             lineHeight: 1.8,
             mb: 4,
@@ -92,8 +92,7 @@ export const ValuePropositionSection = () => {
           <Button
             variant="outlined"
             sx={{
-              color: "white",
-              borderColor: "white",
+              borderColor: "primary.main",
               px: 4,
               py: 1.5,
               fontWeight: 600,
@@ -101,7 +100,6 @@ export const ValuePropositionSection = () => {
               letterSpacing: "0.05em",
               borderRadius: 0,
               "&:hover": {
-                borderColor: "white",
                 bgcolor: "rgba(255,255,255,0.1)",
               },
             }}
@@ -112,8 +110,8 @@ export const ValuePropositionSection = () => {
           <Button
             variant="outlined"
             sx={{
-              color: "white",
-              borderColor: "white",
+              color: "primary.main",
+              borderColor: "primary.main",
               px: 4,
               py: 1.5,
               fontWeight: 600,
@@ -121,7 +119,6 @@ export const ValuePropositionSection = () => {
               letterSpacing: "0.05em",
               borderRadius: 0,
               "&:hover": {
-                borderColor: "white",
                 bgcolor: "rgba(255,255,255,0.1)",
               },
             }}

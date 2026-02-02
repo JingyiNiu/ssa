@@ -9,7 +9,7 @@ import { ShopByBrandsSection } from "./components/shop-by-brands/ShopByBrandsSec
 import { ProductHighlightsSection } from "./components/product-highlights/ProductHighlightsSection";
 import { LatestBlogPostsSection } from "./components/blog-post/LatestBlogPostsSection";
 
-export default function Home() {
+const Home = () => {
   return (
     <Box>
       <HeroSection />
@@ -23,4 +23,6 @@ export default function Home() {
       <LatestBlogPostsSection />
     </Box>
   );
-}
+};
+
+export default Home;

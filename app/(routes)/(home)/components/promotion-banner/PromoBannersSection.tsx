@@ -1,6 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import React from "react";
+import { ActionButton } from "@/app/components/ui/ActionButton";
 
 interface Banner {
   id: number;
@@ -147,24 +148,12 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         </Typography>
 
         <Box>
-          <Button
+          <ActionButton
             variant="contained"
             endIcon={<ArrowForwardIcon />}
-            sx={{
-              bgcolor: "primary.main",
-              color: "white",
-              px: 3,
-              py: 1,
-              fontSize: "0.875rem",
-              fontWeight: 600,
-              textTransform: "none",
-              "&:hover": {
-                bgcolor: "#c73f2d",
-              },
-            }}
           >
             {banner.buttonText}
-          </Button>
+          </ActionButton>
         </Box>
       </Box>
     </Box>
