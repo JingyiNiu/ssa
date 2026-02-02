@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import { Partner } from "./partner";
-import PartnerLogo from "./PartnetLogo";
+import { PartnerLogo } from "./PartnetLogo";
 
-export default function PartnerLogosSection() {
+export const PartnerLogosSection = () => {
   const partners: Partner[] = [
     {
       id: 1,

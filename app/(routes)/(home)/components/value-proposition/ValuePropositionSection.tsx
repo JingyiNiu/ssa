@@ -49,7 +49,7 @@ export const ValuePropositionSection = () => {
         <Typography
           variant="h2"
           sx={{
-            color: "secondary.accent",
+            color: "primary.main",
             fontWeight: 700,
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
             lineHeight: 1.2,

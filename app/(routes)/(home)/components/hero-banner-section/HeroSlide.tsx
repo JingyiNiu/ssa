@@ -1,7 +1,7 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-export default function HeroSlide() {
+export const HeroSlide = () => {
   return (
     <Box
       sx={{

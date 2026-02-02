@@ -151,7 +151,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
             variant="contained"
             endIcon={<ArrowForwardIcon />}
             sx={{
-              bgcolor: "secondary.accent",
+              bgcolor: "primary.main",
               color: "white",
               px: 3,
               py: 1,

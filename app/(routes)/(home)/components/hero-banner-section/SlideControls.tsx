@@ -3,7 +3,7 @@ import { FaCar, FaBatteryFull } from "react-icons/fa";
 import { GiCarWheel, GiTyre } from "react-icons/gi";
 import { FaTractor } from "react-icons/fa";
 
-export default function SlideControls() {
+export const SlideControls = () => {
   const tabs = [
     { icon: <FaCar size={24} />, label: "SEARCH BY VEHICLE" },
     { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL SIZE" },
@@ -33,7 +33,7 @@ export default function SlideControls() {
             sx={{
               flex: 1,
               backgroundColor:
-                index === 0 ? "secondary.accent" : "rgba(0, 0, 0, 0.8)",
+                index === 0 ? "primary.main" : "rgba(0, 0, 0, 0.8)",
               color: "white",
               py: 3,
               display: "flex",

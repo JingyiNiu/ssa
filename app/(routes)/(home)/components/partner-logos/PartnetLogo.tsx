@@ -5,7 +5,7 @@ interface PartnerLogoProps {
   partner: Partner;
 }
 
-export default function PartnerLogo({ partner }: PartnerLogoProps) {
+export const PartnerLogo = ({ partner }: PartnerLogoProps) => {
   return (
     <Box
       sx={{

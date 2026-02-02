@@ -23,7 +23,6 @@ export const theme = createTheme({
     },
     secondary: {
       main: 'rgb(36, 56, 194)', 
-      accent: 'rgb(232, 84, 64)',
       light: 'rgb(247, 250, 255)',
       dark: 'rgb(31, 36, 59)',
       contrastText: '#fff',

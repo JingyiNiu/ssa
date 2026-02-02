@@ -2,10 +2,10 @@
 
 import { Box, Button } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import React, { useState } from "react";
+import { useState } from "react";
 import FilterSelect from "./FilterSelect";
 
-const SearchSection = () => {
+export const SearchSection = () => {
   const [filters, setFilters] = useState({
     make: "",
     model: "",
@@ -157,7 +157,7 @@ const SearchSection = () => {
             justifyContent: "end",
             alignItems: "center",
             gap: 2,
-            position:"relative"
+            position: "relative",
           }}
         >
           <Button
@@ -165,7 +165,7 @@ const SearchSection = () => {
             size="large"
             onClick={handleSearch}
             sx={{
-              bgcolor: "secondary.accent",
+              bgcolor: "primary.main",
               color: "white",
               px: 8,
               py: 1,
@@ -173,7 +173,7 @@ const SearchSection = () => {
               "&:hover": {
                 bgcolor: "secondary.dark",
               },
-              position:"absolute",
+              position: "absolute",
               left: "50%",
               transform: "translateX(-50%)",
             }}
@@ -196,5 +196,3 @@ const SearchSection = () => {
     </Box>
   );
 };
-
-export default SearchSection;

@@ -7,7 +7,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 
 export const Navbar = () => {
   return (
-    <Box sx={{ backgroundColor: "secondary.accent" }} data-testid="header">
+    <Box sx={{ backgroundColor: "primary.main" }} data-testid="header">
       <Box
         className="container mx-auto"
         data-testid="header-container"

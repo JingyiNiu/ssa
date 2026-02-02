@@ -1,9 +1,9 @@
 import { Box, Typography, Card } from "@mui/material";
 import React from "react";
 import { Brand } from "./brand";
-import BrandCard from "./BrandCard";
+import { BrandCard } from "./BrandCard";
 
-export default function ShopByBrandsSection() {
+export const ShopByBrandsSection = () => {
   const brands: Brand[] = [
     {
       id: 1,

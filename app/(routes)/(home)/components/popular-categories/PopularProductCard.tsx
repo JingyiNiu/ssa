@@ -5,7 +5,7 @@ interface PopularCardProps {
   product: Product;
 }
 
-export default function PopularProductCard({ product }: PopularCardProps) {
+export const PopularProductCard = ({ product }: PopularCardProps) => {
   return (
     <Card
       sx={{

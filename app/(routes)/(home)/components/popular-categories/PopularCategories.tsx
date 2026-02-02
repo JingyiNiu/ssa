@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { Product } from "./product";
-import PopularProductCard from "./PopularProductCard";
+import { PopularProductCard } from "./PopularProductCard";
 
-export default function PopularCategories() {
+export const PopularCategories = () => {
   const products: Product[] = [
     {
       id: 1,

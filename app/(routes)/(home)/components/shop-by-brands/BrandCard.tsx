@@ -5,7 +5,7 @@ interface BrandCardProps {
   brand: Brand;
 }
 
-export default function BrandCard({ brand }: BrandCardProps) {
+export const BrandCard = ({ brand }: BrandCardProps) => {
   return (
     <Tooltip title={brand.name}>
       <Card
