@@ -1,8 +1,6 @@
 "use client";
 
 import "@fontsource/bebas-neue";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/roboto";
 
 import { createTheme } from "@mui/material/styles";
 
@@ -50,8 +48,6 @@ export const theme = createTheme({
   },
   typography: {
     fontSize: 16,
-    htmlFontSize: 16,
-
     fontFamily: [
       "Inter",
       "Roboto",

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { HeroSection } from "./components/hero-banner-section/HeroSection";
+import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
 import { PopularCategories } from "./components/popular-categories/PopularCategories";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";

@@ -1,18 +1,25 @@
 "use client"
 
-import { Box, Button } from "@mui/material"
-import RefreshIcon from "@mui/icons-material/Refresh"
-import { useState, useRef } from "react"
-import { ActionButton } from "@/app/components/ui/ActionButton"
-import { SearchTabs } from "./SearchTabs"
+import { Box } from "@mui/material"
+import { useRef, useState } from "react"
+import { SearchTabs, SearchTabType } from "./SearchTabs"
 import { SearchFilter } from "./SearchFilter"
+import { SearchButtons } from "./SearchButtons"
 
 export const SearchSection = () => {
-  const searchFilterRef = useRef<{ getFilters: () => any; resetFilters: () => void }>(null)
+  const [activeTab, setActiveTab] = useState<SearchTabType>("vehicle")
+  const searchFilterRef = useRef<{
+    getFilters: () => any
+    resetFilters: () => void
+  }>(null)
+
+  const handleTabChange = (tab: SearchTabType) => {
+    setActiveTab(tab)
+  }
 
   const handleSearch = () => {
-    const filters = searchFilterRef.current?.getFilters()
-    console.log("Search filters:", filters)
+    const result = searchFilterRef.current?.getFilters()
+    console.log("Search:", result)
     // Implement search logic here
   }
 
@@ -22,44 +29,22 @@ export const SearchSection = () => {
 
   return (
     <Box data-testid="search-section" sx={{ mb: 4 }}>
-      <Box className="container mx-auto" data-testid="search-section-container">
-        <SearchTabs />
-        <Box sx={{ py: 2 }} />
+      <Box 
+        className="container mx-auto" 
+        data-testid="search-section-container"
+        sx={{ position: "relative" }}
+      >
+        {/* 搜索切换按钮 */}
+        <SearchTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
-        <SearchFilter ref={searchFilterRef} />
+        {/* 占位间距 */}
+        <Box sx={{ py: 2 }} data-testid="search-section-spacing" />
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "end",
-            alignItems: "center",
-            gap: 2,
-            position: "relative",
-          }}
-        >
-          <ActionButton
-            onClick={handleSearch}
-            sx={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-              minWidth: 240,
-            }}
-          >
-            SEARCH
-          </ActionButton>
-          <Button
-            variant="text"
-            startIcon={<RefreshIcon />}
-            onClick={handleReset}
-            sx={{
-              color: "text.secondary",
-              textTransform: "none",
-            }}
-          >
-            RESET
-          </Button>
-        </Box>
+        {/* 搜索条件 */}
+        <SearchFilter key={activeTab} ref={searchFilterRef} filterType={activeTab} />
+
+        {/* 搜索按钮 */}
+        <SearchButtons handleSearch={handleSearch} handleReset={handleReset} />
       </Box>
     </Box>
   )

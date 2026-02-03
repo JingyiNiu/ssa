@@ -20,6 +20,7 @@ export function ActionButton({
         bgcolor: "primary.main",
         color: "white",
         fontWeight: 600,
+        fontSize: "0.875rem",
         minWidth: 120,
         py: 1.2,
         boxShadow: "none",
