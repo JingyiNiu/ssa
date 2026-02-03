@@ -1,7 +1,29 @@
-import { Box, Button, TextField } from "@mui/material";
-import { ActionButton } from "../../ui/ActionButton";
+"use client"
+
+import { Box, TextField } from "@mui/material"
+import { ActionButton } from "../../ui/ActionButton"
+import { useRouter } from "next/navigation"
+import { useState, KeyboardEvent } from "react"
 
 export const SearchBar = () => {
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = () => {
+    const query = searchQuery.trim()
+    if (query) {
+      router.push(`/search?query=${encodeURIComponent(query)}`)
+    } else {
+      router.push("/search")
+    }
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch()
+    }
+  }
+
   return (
     <Box
       sx={{ display: "flex", flex: 1, maxWidth: 400, mx: 4 }}
@@ -12,6 +34,9 @@ export const SearchBar = () => {
         variant="outlined"
         size="small"
         fullWidth
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         sx={{
           "& .MuiOutlinedInput-root": {
             color: "primary.main",
@@ -34,7 +59,12 @@ export const SearchBar = () => {
           },
         }}
       />
-      <ActionButton sx={{ borderRadius: 0 }}>Search</ActionButton>
+      <ActionButton
+        sx={{ borderRadius: 0 }}
+        onClick={handleSearch}
+      >
+        Search
+      </ActionButton>
     </Box>
-  );
-};
+  )
+}

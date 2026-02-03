@@ -37,6 +37,9 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
           alignItems: "center",
           justifyContent: "center",
           bgcolor: "white",
+          "&:hover img": {
+            transform: "rotateY(180deg)",
+          },
         }}
       >
         <Box
@@ -47,11 +50,8 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
             maxWidth: "90%",
             maxHeight: "90%",
             objectFit: "contain",
-          }}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src =
-              "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZTBlMGUwIi8+PC9zdmc+";
+            transition: "transform 0.6s ease-in-out",
+            transformStyle: "preserve-3d",
           }}
         />
       </Box>

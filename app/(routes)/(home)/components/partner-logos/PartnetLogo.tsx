@@ -16,13 +16,7 @@ export const PartnerLogo = ({ partner }: PartnerLogoProps) => {
           justifyContent: "center",
           height: 60,
           cursor: "pointer",
-          opacity: 0.6,
-          filter: "grayscale(100%)",
           transition: "all 0.3s ease",
-          "&:hover": {
-            opacity: 1,
-            filter: "grayscale(0%)",
-          },
           "&:hover::before": {
             content: '""',
             position: "absolute",
@@ -35,16 +29,16 @@ export const PartnerLogo = ({ partner }: PartnerLogoProps) => {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             transform: "translate(-50%, -50%)",
-            animation: "ripple 0.5s ease-out",
+            animation: "ripple 1s ease-out",
             pointerEvents: "none",
           },
           "@keyframes ripple": {
             "0%": {
               transform: "translate(-50%, -50%) scale(1)",
-              opacity: 0.8,
+              opacity: 0.6,
             },
             "100%": {
-              transform: "translate(-50%, -50%) scale(2)",
+              transform: "translate(-50%, -50%) scale(1.5)",
               opacity: 0,
             },
           },
@@ -65,4 +59,4 @@ export const PartnerLogo = ({ partner }: PartnerLogoProps) => {
       </Box>
     </Tooltip>
   );
-}
+};

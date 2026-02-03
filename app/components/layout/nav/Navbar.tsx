@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import { SearchBar } from "./SearchBar";
 import { Logo } from "./Logo";

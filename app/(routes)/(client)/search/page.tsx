@@ -2,12 +2,12 @@ import { Placeholder } from "@/app/components/layout/placeholder/Placeholder";
 import { Box } from "@mui/material";
 import React from "react";
 
-const CartPage = () => {
+const SearchPage = () => {
   return (
     <Box>
-      <Placeholder title="Cart" />
+      <Placeholder title="Search" />
     </Box>
   );
 };
 
-export default CartPage;
+export default SearchPage;

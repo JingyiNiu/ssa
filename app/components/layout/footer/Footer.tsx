@@ -222,11 +222,6 @@ export const Footer = () => {
                         objectFit: "cover",
                         flexShrink: 0,
                       }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src =
-                          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjNDQ1NTY2Ii8+PC9zdmc+";
-                      }}
                     />
                     <Box sx={{ flex: 1 }}>
                       <Typography
