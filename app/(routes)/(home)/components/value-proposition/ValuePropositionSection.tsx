@@ -1,5 +1,6 @@
-import { Box, Typography, Button } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material"
+import React from "react"
+import { OutlineButton } from "@/app/components/ui/OutlineButton"
 
 export const ValuePropositionSection = () => {
   return (
@@ -89,42 +90,8 @@ export const ValuePropositionSection = () => {
             flexWrap: "wrap",
           }}
         >
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: "primary.main",
-              px: 4,
-              py: 1.5,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              borderRadius: 0,
-              "&:hover": {
-                bgcolor: "rgba(255,255,255,0.1)",
-              },
-            }}
-          >
-            Learn More
-          </Button>
-
-          <Button
-            variant="outlined"
-            sx={{
-              color: "primary.main",
-              borderColor: "primary.main",
-              px: 4,
-              py: 1.5,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              borderRadius: 0,
-              "&:hover": {
-                bgcolor: "rgba(255,255,255,0.1)",
-              },
-            }}
-          >
-            Our Brands
-          </Button>
+          <OutlineButton>Learn More</OutlineButton>
+          <OutlineButton>Our Brands</OutlineButton>
         </Box>
       </Box>
     </Box>

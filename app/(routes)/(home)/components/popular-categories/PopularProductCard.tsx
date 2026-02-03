@@ -18,6 +18,9 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           transform: "translateY(-4px)",
         },
+        "&:hover img": {
+          transform: "rotateY(180deg)",
+        },
       }}
       data-testid="popular-product-card"
     >
@@ -29,6 +32,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           alignItems: "center",
           justifyContent: "center",
           p: 2,
+          perspective: "1000px",
         }}
       >
         <Box
@@ -39,6 +43,8 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
             maxWidth: "100%",
             maxHeight: "100%",
             objectFit: "contain",
+            transition: "transform 0.6s ease-in-out",
+            transformStyle: "preserve-3d",
           }}
         />
       </CardMedia>

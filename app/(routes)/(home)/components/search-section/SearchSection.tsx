@@ -7,7 +7,7 @@ import { SearchFilter } from "./SearchFilter"
 import { SearchButtons } from "./SearchButtons"
 
 export const SearchSection = () => {
-  const [activeTab, setActiveTab] = useState<SearchTabType>("vehicle")
+  const [activeTab, setActiveTab] = useState<SearchTabType>("wheel")
   const searchFilterRef = useRef<{
     getFilters: () => any
     resetFilters: () => void

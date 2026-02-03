@@ -1,20 +1,24 @@
-import { Box, Typography, Button } from "@mui/material"
-import { FaCar } from "react-icons/fa"
-import { GiCarWheel, GiTyre } from "react-icons/gi"
+import { Box, Typography, Button } from "@mui/material";
+import { FaCar } from "react-icons/fa";
+import { GiCarWheel, GiTyre } from "react-icons/gi";
 
-export type SearchTabType = "vehicle" | "wheel" | "tyre"
+export type SearchTabType = "wheel" | "tyre" | "vehicle";
 
 type SearchTabsProps = {
-  activeTab: SearchTabType
-  onTabChange: (tab: SearchTabType) => void
-}
+  activeTab: SearchTabType;
+  onTabChange: (tab: SearchTabType) => void;
+};
 
 export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
-  const tabs: { icon: React.ReactElement; label: string; type: SearchTabType }[] = [
-    { icon: <FaCar size={24} />, label: "SEARCH BY VEHICLE", type: "vehicle" },
+  const tabs: {
+    icon: React.ReactElement;
+    label: string;
+    type: SearchTabType;
+  }[] = [
     { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL", type: "wheel" },
     { icon: <GiTyre size={24} />, label: "SEARCH TYRE", type: "tyre" },
-  ]
+    { icon: <FaCar size={24} />, label: "SEARCH BY VEHICLE", type: "vehicle" },
+  ];
 
   return (
     <Box
@@ -32,7 +36,7 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
         sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}
       >
         {tabs.map((tab, index) => {
-          const isActive = activeTab === tab.type
+          const isActive = activeTab === tab.type;
           return (
             <Button
               key={index}
@@ -61,9 +65,9 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
                 {tab.label}
               </Typography>
             </Button>
-          )
+          );
         })}
       </Box>
     </Box>
-  )
-}
+  );
+};

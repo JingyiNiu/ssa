@@ -6,32 +6,32 @@ export const PartnerLogosSection = () => {
   const partners: Partner[] = [
     {
       id: 1,
-      name: "Bean Shop",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 2,
-      name: "Appgames",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 3,
-      name: "Oak Bark",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 4,
-      name: "Mi Casa Es Tu Casa",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 5,
-      name: "Scandinavia",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 6,
-      name: "Lady & Daly",
+      name: "Brand name",
       logo: "/images/pics/image-placeholder.png",
     },
   ];

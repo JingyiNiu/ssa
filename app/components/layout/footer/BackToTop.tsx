@@ -55,6 +55,7 @@ export const BackToTop = () => {
               bgcolor: "primary.main",
               color: "white",
               borderStyle: "solid",
+              borderRadius: "50%",
             },
           }}
         >

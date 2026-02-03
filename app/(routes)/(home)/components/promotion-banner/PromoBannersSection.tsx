@@ -67,9 +67,6 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         overflow: "hidden",
         cursor: "pointer",
         transition: "transform 0.3s ease",
-        "&:hover": {
-          transform: "scale(1.02)",
-        },
         "&::before": {
           content: '""',
           position: "absolute",
@@ -81,7 +78,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
           backgroundSize: "contain",
           backgroundPosition: "right",
           backgroundRepeat: "no-repeat",
-          backgroundColor: "#333",
+          backgroundColor: "#fff",
           zIndex: 0,
         },
         "&::after": {
@@ -92,7 +89,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
           right: 0,
           bottom: 0,
           background:
-            "linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
+            "linear-gradient(to right, rgba(255,255,255,0.7), rgba( 255,255,255,0.3))",
           zIndex: 1,
         },
       }}
@@ -111,7 +108,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="h3"
           sx={{
-            color: "white",
+            color: "primary.main",
             fontWeight: 700,
             fontSize: "2rem",
             lineHeight: 1.2,
@@ -124,7 +121,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="h6"
           sx={{
-            color: "white",
+            color: "text.primary",
             fontWeight: 400,
             fontSize: "1rem",
             lineHeight: 1.3,
@@ -137,7 +134,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="body2"
           sx={{
-            color: "rgba(255,255,255,0.9)",
+            color: "text.secondary",
             fontSize: "0.875rem",
             lineHeight: 1.6,
             mb: 3,
@@ -148,10 +145,7 @@ const PromoBanner = ({ banner }: PromoBannerProps) => {
         </Typography>
 
         <Box>
-          <ActionButton
-            variant="contained"
-            endIcon={<ArrowForwardIcon />}
-          >
+          <ActionButton variant="contained" endIcon={<ArrowForwardIcon />}>
             {banner.buttonText}
           </ActionButton>
         </Box>
