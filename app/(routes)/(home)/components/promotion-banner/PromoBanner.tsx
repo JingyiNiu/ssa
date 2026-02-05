@@ -12,7 +12,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
     <Box
       sx={{
         position: "relative",
-        height: 250,
+        height: 280,
         borderRadius: 0,
         overflow: "hidden",
         cursor: "pointer",
@@ -62,7 +62,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
             fontWeight: 700,
             fontSize: "2rem",
             lineHeight: 1.2,
-            mb: 0.5,
+            mb: 1,
           }}
         >
           {banner.title}
@@ -72,7 +72,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
           variant="h6"
           sx={{
             color: "text.primary",
-            fontWeight: 400,
+            fontWeight: 600,
             fontSize: "1rem",
             lineHeight: 1.3,
             mb: 2,
@@ -84,7 +84,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="body2"
           sx={{
-            color: "text.secondary",
+            color: "text.primary",
             fontSize: "0.875rem",
             lineHeight: 1.6,
             mb: 3,

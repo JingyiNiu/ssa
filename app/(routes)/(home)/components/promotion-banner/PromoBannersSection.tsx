@@ -9,7 +9,7 @@ export const PromoBannersSection = () => {
       title: "100% Approved",
       subtitle: "by customers",
       description:
-        "elit, sed do eiusmod tempor incididunt ut dolore magna aliqua. Quis ipsum",
+        "Sed in justo sit amet mauris mattis vulputate. Nunc tristique libero sit amet tristique tempus. ",
       buttonText: "Shop Now",
       backgroundImage: "/images/pics/image-placeholder.png",
     },
@@ -18,7 +18,7 @@ export const PromoBannersSection = () => {
       title: "Get 20% off",
       subtitle: "your first order when you join our newsletter",
       description:
-        "elit, sed do eiusmod tempor incididunt ut dolore magna aliqua. Quis ipsum",
+        "Aliquam ac finibus justo, id venenatis nulla. Cras nec egestas ante. Etiam consequat lacus vitae lorem faucibus scelerisque. Nunc purus neque.",
       buttonText: "Shop Now",
       backgroundImage: "/images/pics/image-placeholder.png",
     },

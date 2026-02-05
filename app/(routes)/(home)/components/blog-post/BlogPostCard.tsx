@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography, Card, Chip, IconButton } from "@mui/material";
+import { Box, Typography, Card, Chip, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import React from "react";
@@ -12,6 +12,12 @@ interface BlogPostCardProps {
 }
 
 export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
+  const theme = useTheme();
+  const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
+  
+  // lg以下时，featured和普通post显示一样
+  const isFeaturedStyle = featured && isLgUp;
+  
   return (
     <Card
       sx={{
@@ -21,7 +27,7 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
         borderRadius: 0,
         boxShadow: "none",
         transition: "all 0.3s ease",
-        height: featured ? "100%" : "auto",
+        height: isFeaturedStyle ? "100%" : "auto",
         "&:hover": {
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           transform: "translateY(-2px)",
@@ -32,8 +38,8 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
       {/* Image Section */}
       <Box
         sx={{
-          width: featured ? "50%" : "40%",
-          minHeight: featured ? 300 : 120,
+          width: isFeaturedStyle ? "50%" : "40%",
+          minHeight: isFeaturedStyle ? 300 : 120,
           position: "relative",
           overflow: "hidden",
         }}
@@ -54,7 +60,7 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
       <Box
         sx={{
           flex: 1,
-          p: featured ? 4 : 2,
+          p: isFeaturedStyle ? 4 : 2,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -95,16 +101,16 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
             sx={{
               fontWeight: 600,
               color: "#333",
-              mb: featured ? 2 : 1,
-              fontSize: featured ? "1.25rem" : "1rem",
+              mb: isFeaturedStyle ? 2 : 1,
+              fontSize: isFeaturedStyle ? "1.25rem" : "1rem",
               lineHeight: 1.4,
             }}
           >
             {post.title}
           </Typography>
 
-          {/* Description (only for featured) */}
-          {featured && post.description && (
+          {/* Description (only for featured on lg+) */}
+          {isFeaturedStyle && post.description && (
             <Typography
               variant="body2"
               sx={{

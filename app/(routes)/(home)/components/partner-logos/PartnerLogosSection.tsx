@@ -1,37 +1,38 @@
 import { Box } from "@mui/material";
 import { Partner } from "./partner";
 import { PartnerLogo } from "./PartnetLogo";
+import SectionTitle from "@/app/components/ui/SectionTitle";
 
 export const PartnerLogosSection = () => {
   const partners: Partner[] = [
     {
       id: 1,
-      name: "Brand name",
+      name: "Company 1",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 2,
-      name: "Brand name",
+      name: "Company 2",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 3,
-      name: "Brand name",
+      name: "Company 3",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 4,
-      name: "Brand name",
+      name: "Company 4",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 5,
-      name: "Brand name",
+      name: "Company 5",
       logo: "/images/pics/image-placeholder.png",
     },
     {
       id: 6,
-      name: "Brand name",
+      name: "Company 6",
       logo: "/images/pics/image-placeholder.png",
     },
   ];
@@ -39,6 +40,7 @@ export const PartnerLogosSection = () => {
   return (
     <Box data-testid="partner-logos-section" sx={{ mb: 4, overflow: "hidden" }}>
       <Box className="container mx-auto">
+        <SectionTitle title="Our Partners" />
         <Box
           sx={{
             display: "grid",

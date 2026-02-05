@@ -17,7 +17,7 @@ const heroSlides: HeroSlideData[] = [
     backgroundImage: "/images/pics/image-placeholder2.png",
     title: "Premium Selection\nBest Value",
     description:
-      "Discover our carefully curated collection of premium products designed for your needs",
+      "Aliquam ullamcorper imperdiet tortor eu gravida. ",
   },
 ];
 
