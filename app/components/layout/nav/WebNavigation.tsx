@@ -2,7 +2,7 @@ import { Box, Link } from "@mui/material";
 import SocialIcons from "./SocialIcons";
 import MenuItems from "./MenuItems";
 
-export const Navigation = () => {
+export const WebNavigation = () => {
   return (
     <Box
       sx={{
@@ -14,9 +14,12 @@ export const Navigation = () => {
         right: 0,
         top: "80%",
         zIndex: 5,
-        mx: 10,
+        mx: {
+          xs: 0,
+          lg: 10,
+        },
       }}
-      data-testid="navigation"
+      data-testid="web-navigation"
     >
       <Box
         sx={{
@@ -27,7 +30,9 @@ export const Navigation = () => {
         }}
       >
         <MenuItems />
-        <SocialIcons />
+        <Box sx={{ display: { xs: "none", xl: "flex" } }}>
+          <SocialIcons />
+        </Box>
       </Box>
     </Box>
   );

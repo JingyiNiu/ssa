@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { Box, TextField } from "@mui/material"
-import { ActionButton } from "../../ui/ActionButton"
-import { useRouter } from "next/navigation"
-import { useState, KeyboardEvent } from "react"
+import { Box, TextField } from "@mui/material";
+import { ActionButton } from "../../ui/ActionButton";
+import { useRouter } from "next/navigation";
+import { useState, KeyboardEvent } from "react";
 
 export const SearchBar = () => {
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    const query = searchQuery.trim()
+    const query = searchQuery.trim();
     if (query) {
-      router.push(`/search?query=${encodeURIComponent(query)}`)
+      router.push(`/search?query=${encodeURIComponent(query)}`);
     } else {
-      router.push("/search")
+      router.push("/search");
     }
-  }
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSearch()
+      handleSearch();
     }
-  }
+  };
 
   return (
     <Box
-      sx={{ display: "flex", flex: 1, maxWidth: 400, mx: 4 }}
+      sx={{ display: "flex", flex: 1, maxWidth: { xs: "100%", md: 400 }, mx: { xs: 0, md: 4 } }}
       data-testid="search-bar"
     >
       <TextField
@@ -59,12 +59,9 @@ export const SearchBar = () => {
           },
         }}
       />
-      <ActionButton
-        sx={{ borderRadius: 0 }}
-        onClick={handleSearch}
-      >
+      <ActionButton sx={{ borderRadius: 0 }} onClick={handleSearch}>
         Search
       </ActionButton>
     </Box>
-  )
-}
+  );
+};

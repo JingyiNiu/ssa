@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { SearchBar } from "./SearchBar";
 import { Logo } from "./Logo";
 import { HeaderActions } from "./HeaderActions";
-import { Navigation } from "./Navigation";
+import { WebNavigation } from "./WebNavigation";
 
 export const Navbar = () => {
   return (
@@ -20,15 +20,34 @@ export const Navbar = () => {
             justifyContent: "space-between",
             alignItems: "center",
             pt: 2,
-            pb: 6,
+            pb: { xs: 2, md: 6 },
           }}
           data-testid="header-wrapper"
         >
           <Logo />
-          <SearchBar />
+          <Box
+            sx={{ display: { xs: "none", md: "flex" } }}
+            data-testid="search-bar-wrapper"
+          >
+            <SearchBar />
+          </Box>
           <HeaderActions />
         </Box>
-        <Navigation />
+
+        <Box
+          sx={{ display: { xs: "block", md: "none" }, mb: 2 }}
+          data-testid="mobile-search-bar-wrapper"
+        >
+          <SearchBar />
+        </Box>
+
+        {/* 网页版导航 */}
+        <Box
+          sx={{ display: { xs: "none", md: "block" } }}
+          data-testid="web-navigation-wrapper"
+        >
+          <WebNavigation />
+        </Box>
       </Box>
     </Box>
   );

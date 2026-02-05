@@ -71,40 +71,33 @@ const MenuItems = () => {
     },
   ];
 
-  const handleMouseEnter = (
-    event: MouseEvent<HTMLElement>,
-    menuLabel: string
-  ) => {
+  const handleClick = (event: MouseEvent<HTMLElement>, menuLabel: string) => {
     setAnchorEl(event.currentTarget);
-    setOpenMenu(menuLabel);
+    setOpenMenu(openMenu === menuLabel ? null : menuLabel);
   };
 
-  const handleMouseLeave = () => {
+  const handleClose = () => {
     setAnchorEl(null);
     setOpenMenu(null);
   };
 
   const handleMenuItemClick = (href: string) => {
     router.push(href);
-    handleMouseLeave();
+    handleClose();
   };
 
   return (
     <Box sx={{ display: "flex", gap: 6 }}>
       {menuItems.map((item, index) => (
-        <Box
-          key={index}
-          onMouseEnter={(e) =>
-            item.hasDropdown && handleMouseEnter(e, item.label)
-          }
-          onMouseLeave={handleMouseLeave}
-          sx={{ position: "relative" }}
-        >
+        <Box key={index} sx={{ position: "relative" }}>
           <Link
             href={item.href || "#"}
             onClick={(e) => {
+              e.preventDefault();
               if (item.hasDropdown) {
-                e.preventDefault();
+                handleClick(e, item.label);
+              } else if (item.href) {
+                router.push(item.href);
               }
             }}
             underline="none"
@@ -129,14 +122,11 @@ const MenuItems = () => {
             <Menu
               anchorEl={anchorEl}
               open={openMenu === item.label}
-              onClose={handleMouseLeave}
+              onClose={handleClose}
               TransitionComponent={Grow}
               transitionDuration={300}
               autoFocus={false}
               disableAutoFocusItem
-              MenuListProps={{
-                onMouseLeave: handleMouseLeave,
-              }}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",

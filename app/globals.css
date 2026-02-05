@@ -27,6 +27,10 @@ body {
 
 .container {
   width: 100%;
+  @media (width <= 64rem) {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
   @media (width >= 40rem) {
     max-width: 40rem;
   }
