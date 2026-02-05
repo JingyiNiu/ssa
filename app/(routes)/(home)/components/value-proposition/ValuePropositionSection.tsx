@@ -19,7 +19,7 @@ export const ValuePropositionSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url(/images/pics/image-placeholder.png)",
+          backgroundImage: "url(/images/pics/value-proposition.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundColor: "#1a1a1a",
@@ -32,7 +32,7 @@ export const ValuePropositionSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(255,255,255,0.6)",
+          background: "rgba(255,255,255,0.8)",
           zIndex: 1,
         },
       }}

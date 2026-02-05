@@ -11,7 +11,7 @@ export const PromoBannersSection = () => {
       description:
         "Sed in justo sit amet mauris mattis vulputate. Nunc tristique libero sit amet tristique tempus. ",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/image-placeholder.png",
+      backgroundImage: "/images/pics/hero-slide.png",
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ export const PromoBannersSection = () => {
       description:
         "Aliquam ac finibus justo, id venenatis nulla. Cras nec egestas ante. Etiam consequat lacus vitae lorem faucibus scelerisque. Nunc purus neque.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/image-placeholder.png",
+      backgroundImage: "/images/pics/hero-slide.png",
     },
   ];
 

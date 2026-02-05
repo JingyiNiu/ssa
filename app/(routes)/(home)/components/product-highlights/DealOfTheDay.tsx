@@ -14,19 +14,19 @@ export const DealOfTheDay = () => {
       id: 1,
       name: "Product 1",
       price: 45.0,
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/product-1.jpg",
     },
     {
       id: 2,
       name: "Product 2",
       price: 99.0,
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/product-2.jpg",
     },
     {
       id: 3,
       name: "Product 3",
       price: 149.0,
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/product-3.jpg",
     },
   ];
 

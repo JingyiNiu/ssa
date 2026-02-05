@@ -51,6 +51,7 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
             sx={{
               fontSize: "4rem",
               fontWeight: 900,
+              color: "#fff",
               mb: 4,
               whiteSpace: "pre-line",
               animation: "slideDown 0.7s ease-out 0.2s both",
@@ -73,6 +74,7 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
             sx={{
               maxWidth: 600,
               mx: "auto",
+              color: "#fff",
               opacity: 0.9,
               animation: "fadeInUp 0.8s ease-out 0.7s both",
               "@keyframes fadeInUp": {

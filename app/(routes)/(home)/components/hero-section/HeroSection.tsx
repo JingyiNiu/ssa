@@ -8,13 +8,13 @@ import { SlideOverlay } from "./SlideOverlay";
 
 const heroSlides: HeroSlideData[] = [
   {
-    backgroundImage: "/images/pics/image-placeholder.png",
+    backgroundImage: "/images/pics/hero-slide.png",
     title: "New Top Product\nHigh Quality",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
   },
   {
-    backgroundImage: "/images/pics/image-placeholder2.png",
+    backgroundImage: "/images/pics/hero-slide.png",
     title: "Premium Selection\nBest Value",
     description:
       "Aliquam ullamcorper imperdiet tortor eu gravida. ",

@@ -12,42 +12,42 @@ export const ShopByBrandsSection = () => {
     {
       id: 1,
       name: "Brand 1",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 2,
       name: "Brand 2",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 3,
       name: "Brand 3",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 4,
       name: "Brand 4",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 5,
       name: "Brand 5",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-2.jpg",
     },
     {
       id: 6,
       name: "Brand 6",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-2.jpg",
     },
     {
       id: 7,
       name: "Brand 7",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-2.jpg",
     },
     {
       id: 8,
       name: "Brand 8",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-2.jpg",
     },
   ];
 

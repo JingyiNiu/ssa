@@ -1,5 +1,3 @@
-"use client";
-
 import { Box } from "@mui/material";
 import FilterSelect from "./FilterSelect";
 import { useState, forwardRef, useImperativeHandle, useEffect } from "react";
@@ -324,14 +322,14 @@ export const SearchFilter = forwardRef<
 
             // sm：2 列 → 每 2 个去掉
             "@media (min-width:600px) and (max-width:1199px)": {
-              "&:nth-child(2n)::after": {
+              "&:nth-of-type(2n)::after": {
                 display: "none",
               },
             },
 
             // lg：4 列 → 每 4 个去掉
             "@media (min-width:1200px)": {
-              "&:nth-child(4n)::after": {
+              "&:nth-of-(4n)::after": {
                 display: "none",
               },
             },

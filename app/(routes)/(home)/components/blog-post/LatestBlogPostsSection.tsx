@@ -10,14 +10,14 @@ export const LatestBlogPostsSection = () => {
       title: "How To Remove Salt From Your Car's Interior And Exterior",
       category: "Latest News",
       date: "September 7, 2021",
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/value-proposition.png",
     },
     {
       id: 2,
       title: "What To Do If You Get Into A Car Accident In Ontario",
       category: "Latest News",
       date: "September 7, 2021",
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/value-proposition.png",
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ export const LatestBlogPostsSection = () => {
         "Proin rhoncus nunc id dui malesuada hendrerit eu eu nisl. Vestibulum ante ipsum primis in faucibus orci luctus...",
       category: "Our News",
       date: "September 7, 2021",
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/value-proposition.png",
       featured: true,
     },
   ];

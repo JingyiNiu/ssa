@@ -8,32 +8,32 @@ export const PartnerLogosSection = () => {
     {
       id: 1,
       name: "Company 1",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-1.jpg",
     },
     {
       id: 2,
       name: "Company 2",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-1.jpg",
     },
     {
       id: 3,
       name: "Company 3",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-1.jpg",
     },
     {
       id: 4,
       name: "Company 4",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 5,
       name: "Company 5",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
     {
       id: 6,
       name: "Company 6",
-      logo: "/images/pics/image-placeholder.png",
+      logo: "/images/pics/product-3.jpg",
     },
   ];
 

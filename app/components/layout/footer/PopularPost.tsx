@@ -8,13 +8,13 @@ export const PopularPost = () => {
       id: 1,
       title: "What To Do If You Get Into...",
       date: "September 11, 2021",
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/value-proposition.png",
     },
     {
       id: 2,
       title: "The 5 Best Christmas Lights Tours In...",
       date: "September 11, 2021",
-      image: "/images/pics/image-placeholder.png",
+      image: "/images/pics/value-proposition.png",
     },
   ];
 
