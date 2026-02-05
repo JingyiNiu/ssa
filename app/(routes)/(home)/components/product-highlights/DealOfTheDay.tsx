@@ -6,6 +6,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { Product } from "../popular-categories/product";
+import { ActionButton } from "@/app/components/ui/ActionButton";
 
 export const DealOfTheDay = () => {
   const deals: Product[] = [
@@ -129,24 +130,12 @@ export const DealOfTheDay = () => {
         ${currentDeal.price.toFixed(2)}
       </Typography>
 
-      <Button
-        variant="contained"
+      <ActionButton
         endIcon={<ArrowForwardIcon />}
         fullWidth
-        sx={{
-          bgcolor: "#e05440",
-          color: "white",
-          py: 1.2,
-          fontWeight: 600,
-          fontSize: "0.875rem",
-          textTransform: "none",
-          "&:hover": {
-            bgcolor: "#c73f2d",
-          },
-        }}
       >
         Add To Cart
-      </Button>
+      </ActionButton>
     </Box>
   );
 };

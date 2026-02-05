@@ -2,10 +2,12 @@ import Button, { ButtonProps } from "@mui/material/Button";
 
 type ActionButtonProps = ButtonProps & {
   loading?: boolean;
+  hoverColor?: string;
 };
 
 export function ActionButton({
   loading,
+  hoverColor = "secondary.dark",
   disabled,
   children,
   sx,
@@ -33,7 +35,7 @@ export function ActionButton({
           left: 0,
           width: "100%",
           height: "100%",
-          bgcolor: "secondary.dark",
+          bgcolor: hoverColor,
           transform: "scaleX(0)",
           transformOrigin: "left",
           transition: "transform 0.3s ease-in-out",

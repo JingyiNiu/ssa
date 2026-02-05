@@ -109,9 +109,6 @@ export const HeroSection = () => {
         ))}
       </Box>
 
-      {/* Fixed Overlay */}
-      <SlideOverlay />
-
       {/* Navigation Arrows */}
       <CarouselArrow
         direction="left"

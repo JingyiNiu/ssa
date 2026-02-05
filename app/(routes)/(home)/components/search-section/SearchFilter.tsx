@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import FilterSelect from "./FilterSelect";
 import { useState, forwardRef, useImperativeHandle, useEffect } from "react";

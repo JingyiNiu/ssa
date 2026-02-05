@@ -24,7 +24,7 @@ export const FooterSectionTitle = ({ title }: FooterSectionTitleProps) => {
         sx={{
           width: 50,
           height: 3,
-          bgcolor: "#e05440",
+          bgcolor: "primary.main",
         }}
       />
     </Box>

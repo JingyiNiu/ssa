@@ -282,7 +282,7 @@ export const Footer = () => {
               fontSize: "0.875rem",
             }}
           >
-            ©2025 Copyright Example. All rights reserved.
+            © {new Date().getFullYear()} Copyright Example. All rights reserved.
           </Typography>
 
           <Box sx={{ display: "flex", gap: 3 }}>

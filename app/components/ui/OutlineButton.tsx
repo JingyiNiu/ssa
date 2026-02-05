@@ -10,8 +10,8 @@ export const OutlineButton = ({ children, sx, ...rest }: OutlineButtonProps) => 
       variant="outlined"
       sx={{
         position: "relative",
-        color: "primary.main",
-        borderColor: "primary.main",
+        color: "white",
+        borderColor: "white",
         px: 4,
         py: 1.5,
         fontWeight: 600,

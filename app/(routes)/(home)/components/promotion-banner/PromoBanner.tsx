@@ -25,7 +25,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
           right: 0,
           bottom: 0,
           backgroundImage: `url(${banner.backgroundImage})`,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "right",
           backgroundRepeat: "no-repeat",
           backgroundColor: "#fff",
@@ -39,7 +39,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
           right: 0,
           bottom: 0,
           background:
-            "linear-gradient(to right, rgba(255,255,255,0.7), rgba( 255,255,255,0.3))",
+            "linear-gradient(to right, rgba(255,255,255,1), rgba( 255,255,255,0.3))",
           zIndex: 1,
         },
       }}

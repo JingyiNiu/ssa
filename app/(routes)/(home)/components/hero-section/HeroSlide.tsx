@@ -1,15 +1,16 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
+import { SlideOverlay } from "./SlideOverlay";
 
 export type HeroSlideData = {
-  backgroundImage: string
-  title: string
-  description: string
-}
+  backgroundImage: string;
+  title: string;
+  description: string;
+};
 
 type HeroSlideProps = {
-  data: HeroSlideData
-  isActive: boolean
-}
+  data: HeroSlideData;
+  isActive: boolean;
+};
 
 export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
   return (
@@ -29,6 +30,9 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
       }}
       data-testid="hero-slide"
     >
+      {/* 遮罩 */}
+      <SlideOverlay />
+
       {/* Content */}
       {isActive && (
         <Box
@@ -37,17 +41,17 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
             position: "relative",
             zIndex: 2,
             textAlign: "center",
-            color: "primary.main",
+            color: "white",
             mb: 20,
           }}
           data-testid="hero-slide-content"
         >
           <Typography
             variant="h2"
-            sx={{ 
-              fontSize: "4rem", 
-              fontWeight: 900, 
-              mb: 4, 
+            sx={{
+              fontSize: "4rem",
+              fontWeight: 900,
+              mb: 4,
               whiteSpace: "pre-line",
               animation: "slideDown 0.7s ease-out 0.2s both",
               "@keyframes slideDown": {
@@ -66,9 +70,9 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
             {data.title}
           </Typography>
           <Typography
-            sx={{ 
-              maxWidth: 600, 
-              mx: "auto", 
+            sx={{
+              maxWidth: 600,
+              mx: "auto",
               opacity: 0.9,
               animation: "fadeInUp 0.8s ease-out 0.7s both",
               "@keyframes fadeInUp": {
@@ -89,5 +93,5 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
         </Box>
       )}
     </Box>
-  )
-}
+  );
+};
