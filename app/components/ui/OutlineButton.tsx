@@ -1,17 +1,21 @@
-import { Button, ButtonProps } from "@mui/material"
+import { Button, ButtonProps } from "@mui/material";
 
 type OutlineButtonProps = ButtonProps & {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-export const OutlineButton = ({ children, sx, ...rest }: OutlineButtonProps) => {
+export const OutlineButton = ({
+  children,
+  sx,
+  ...rest
+}: OutlineButtonProps) => {
   return (
     <Button
       variant="outlined"
       sx={{
         position: "relative",
-        color: "white",
-        borderColor: "white",
+        color: "primary.main",
+        borderColor: "prmary",
         px: 4,
         py: 1.5,
         fontWeight: 600,
@@ -20,25 +24,9 @@ export const OutlineButton = ({ children, sx, ...rest }: OutlineButtonProps) => 
         borderRadius: 0,
         overflow: "hidden",
         zIndex: 1,
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          bgcolor: "primary.main",
-          transform: "scaleY(0)",
-          transformOrigin: "bottom",
-          transition: "transform 0.3s ease-in-out",
-          zIndex: -1,
-        },
-        "&:hover::before": {
-          transform: "scaleX(1)",
-        },
         "&:hover": {
           color: "white",
-          borderColor: "primary.main",
+          bgcolor: "primary.main",
         },
         ...sx,
       }}
@@ -46,5 +34,5 @@ export const OutlineButton = ({ children, sx, ...rest }: OutlineButtonProps) => 
     >
       {children}
     </Button>
-  )
-}
+  );
+};
