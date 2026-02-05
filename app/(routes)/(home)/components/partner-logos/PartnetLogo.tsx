@@ -17,6 +17,7 @@ export const PartnerLogo = ({ partner }: PartnerLogoProps) => {
           height: 60,
           cursor: "pointer",
           transition: "all 0.3s ease",
+          overflow: "hidden",
           "&:hover::before": {
             content: '""',
             position: "absolute",

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { BlogPostCard } from "./BlogPostCard";
 import { BlogPost } from "./blogpost";
+import SectionTitle from "@/app/components/ui/SectionTitle";
 
 export const LatestBlogPostsSection = () => {
   const blogPosts: BlogPost[] = [
@@ -36,22 +37,12 @@ export const LatestBlogPostsSection = () => {
   return (
     <Box sx={{ mb: 8 }} data-testid="latest-blog-posts-section">
       <Box className="container mx-auto">
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 4,
-            fontWeight: 600,
-            color: "#333",
-            fontSize: "1.5rem",
-          }}
-        >
-          Latest Blog Posts
-        </Typography>
+        <SectionTitle title="Latest Blog Posts" />
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
             gap: 3,
           }}
         >

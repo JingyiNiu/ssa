@@ -15,7 +15,8 @@ export const SearchButtons = ({
     <Box
       sx={{
         display: "flex",
-        justifyContent: "end",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: { xs: "center", md: "end" },
         alignItems: "center",
         gap: 2,
         position: "relative",
@@ -25,10 +26,11 @@ export const SearchButtons = ({
       <ActionButton
         onClick={handleSearch}
         sx={{
-          position: "absolute",
+          position: { xs: "relative", md: "absolute" },
           left: "50%",
           transform: "translateX(-50%)",
           minWidth: 240,
+          width: { xs: "100%", md: "auto" },
         }}
         data-testid="search-button-search"
       >
@@ -41,6 +43,8 @@ export const SearchButtons = ({
         sx={{
           color: "text.secondary",
           textTransform: "none",
+          width: { xs: "100%", md: "auto" },
+          fontSize: "0.875rem",
         }}
         data-testid="search-button-reset"
       >

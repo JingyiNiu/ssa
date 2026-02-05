@@ -12,7 +12,7 @@ export function CarouselArrow({ direction, sx, ...rest }: CarouselArrowProps) {
     <IconButton
       sx={{
         position: "absolute",
-        [direction]: 40,
+        [direction]: {xs: 20, md: 40},
         top: "50%",
         transform: "translateY(-50%)",
         backgroundColor: "rgba(255, 255, 255, 0.4)",

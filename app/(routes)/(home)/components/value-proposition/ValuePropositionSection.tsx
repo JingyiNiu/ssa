@@ -53,7 +53,7 @@ export const ValuePropositionSection = () => {
             color: "primary.main",
             fontFamily: "Bebas Neue, sans-serif",
             fontWeight: 700,
-            fontSize: { xs: "2rem", sm: "2.5rem", md: "5rem" },
+            fontSize: { xs: "3rem", sm: "4rem", md: "5rem" },
             lineHeight: 1.2,
             mb: 3,
             textTransform: "uppercase",
@@ -85,6 +85,7 @@ export const ValuePropositionSection = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
             gap: 2,
             justifyContent: "center",
             flexWrap: "wrap",

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { Product } from "./product";
 import { PopularProductCard } from "./PopularProductCard";
+import SectionTitle from "@/app/components/ui/SectionTitle";
 
 export const PopularCategories = () => {
   const products: Product[] = [
@@ -34,21 +35,12 @@ export const PopularCategories = () => {
   return (
     <Box sx={{ mb: 4 }} data-testid="popular-categories-section">
       <Box className="container mx-auto">
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 4,
-            fontWeight: 600,
-            color: "#333",
-          }}
-        >
-          Popular Categories
-        </Typography>
+        <SectionTitle title="Popular Categories" />
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)",lg: "repeat(4, 1fr)" },
             gap: 2,
           }}
         >

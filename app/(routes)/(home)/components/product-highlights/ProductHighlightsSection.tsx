@@ -16,7 +16,7 @@ export const ProductHighlightsSection = () => {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "300px 1fr" },
+            gridTemplateColumns: { xs: "1fr", lg: "400px 1fr" },
             gap: 4,
           }}
         >

@@ -2,6 +2,7 @@ import { Box, Typography, Card } from "@mui/material";
 import React from "react";
 import { Brand } from "./brand";
 import { BrandCard } from "./BrandCard";
+import SectionTitle from "@/app/components/ui/SectionTitle";
 
 export const ShopByBrandsSection = () => {
   const brands: Brand[] = [
@@ -33,23 +34,17 @@ export const ShopByBrandsSection = () => {
       data-testid="shop-by-brands-section"
     >
       <Box className="container mx-auto">
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 4,
-            fontWeight: 600,
-            color: "#333",
-            fontSize: "1.5rem",
-          }}
-        >
-          Shop by Brands
-        </Typography>
+        <SectionTitle title="Shop by Brands" />
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 3,
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
+            gap: { xs: 2, md: 3 },
           }}
         >
           {brands.map((brand) => (
@@ -59,4 +54,4 @@ export const ShopByBrandsSection = () => {
       </Box>
     </Box>
   );
-}
+};

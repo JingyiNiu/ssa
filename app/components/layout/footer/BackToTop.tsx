@@ -46,6 +46,8 @@ export const BackToTop = () => {
             width: 48,
             height: 48,
             bgcolor: "transparent",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             border: "2px dashed",
             borderColor: "primary.main",
             borderRadius: 0,
