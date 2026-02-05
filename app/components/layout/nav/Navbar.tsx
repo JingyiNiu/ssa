@@ -8,7 +8,7 @@ import { WebNavigation } from "./WebNavigation";
 
 export const Navbar = () => {
   return (
-    <Box data-testid="header">
+    <Box data-testid="navbar">
       <Box
         className="container mx-auto"
         data-testid="header-container"

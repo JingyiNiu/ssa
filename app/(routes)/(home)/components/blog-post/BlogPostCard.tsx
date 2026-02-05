@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, Typography, Card, Chip, IconButton, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  Chip,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import React from "react";
@@ -14,10 +22,10 @@ interface BlogPostCardProps {
 export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
-  
+
   // lg以下时，featured和普通post显示一样
   const isFeaturedStyle = featured && isLgUp;
-  
+
   return (
     <Card
       sx={{
@@ -68,7 +76,15 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
       >
         <Box>
           {/* Category and Date */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              mb: 2,
+              flexWrap: "wrap",
+            }}
+          >
             <Chip
               label={post.category}
               size="small"

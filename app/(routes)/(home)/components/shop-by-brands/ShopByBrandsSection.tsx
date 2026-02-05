@@ -12,42 +12,42 @@ export const ShopByBrandsSection = () => {
     {
       id: 1,
       name: "Brand 1",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 2,
       name: "Brand 2",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo3.png",
     },
     {
       id: 3,
       name: "Brand 3",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 4,
       name: "Brand 4",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo3.png",
     },
     {
       id: 5,
       name: "Brand 5",
-      logo: "/images/pics/product-2.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 6,
       name: "Brand 6",
-      logo: "/images/pics/product-2.jpg",
+      logo: "/images/logo/logo3.png",
     },
     {
       id: 7,
       name: "Brand 7",
-      logo: "/images/pics/product-2.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 8,
       name: "Brand 8",
-      logo: "/images/pics/product-2.jpg",
+      logo: "/images/logo/logo3.png",
     },
   ];
 

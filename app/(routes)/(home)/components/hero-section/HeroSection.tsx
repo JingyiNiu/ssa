@@ -16,8 +16,7 @@ const heroSlides: HeroSlideData[] = [
   {
     backgroundImage: "/images/pics/hero-slide.png",
     title: "Premium Selection\nBest Value",
-    description:
-      "Aliquam ullamcorper imperdiet tortor eu gravida. ",
+    description: "Aliquam ullamcorper imperdiet tortor eu gravida. ",
   },
 ];
 
@@ -86,7 +85,7 @@ export const HeroSection = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: 700,
+        height: { xs: 500, md: 700 },
       }}
       data-testid="hero-section"
     >

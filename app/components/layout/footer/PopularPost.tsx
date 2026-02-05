@@ -19,7 +19,7 @@ export const PopularPost = () => {
   ];
 
   return (
-    <Box>
+    <Box data-testid="popular-post" mb={{ xs: 4, md: 0 }}>
       <FooterSectionTitle title="Popular Post" />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         {popularPosts.map((post) => (

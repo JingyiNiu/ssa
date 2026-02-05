@@ -10,7 +10,7 @@ const UsefulLinks = () => {
   ];
 
   return (
-    <Box>
+    <Box data-testid="useful-links" mb={{ xs: 4, md: 0 }}>
       <FooterSectionTitle title="Useful Links" />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
         {usefulLinks.map((link, index) => (

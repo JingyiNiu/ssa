@@ -49,9 +49,9 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "4rem",
+              fontSize: { xs: "2rem", md: "4rem" },
               fontWeight: 900,
-              color: "#fff",
+              color: "primary.main",
               mb: 4,
               whiteSpace: "pre-line",
               animation: "slideDown 0.7s ease-out 0.2s both",
@@ -72,10 +72,11 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
           </Typography>
           <Typography
             sx={{
+              fontSize: {xs: "1rem", md: "1.2rem"},
+              fontWeight: 500,
               maxWidth: 600,
               mx: "auto",
-              color: "#fff",
-              opacity: 0.9,
+              color: "text.primary",
               animation: "fadeInUp 0.8s ease-out 0.7s both",
               "@keyframes fadeInUp": {
                 "0%": {

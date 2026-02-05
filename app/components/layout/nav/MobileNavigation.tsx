@@ -20,11 +20,12 @@ const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Wheels", href: "/wheel" },
+    { label: "Wheels", href: "/wheels" },
     { label: "Tyres", href: "/tyres" },
+    { label: "Brands", href: "/brands" },
     { label: "Accessories", href: "/accessories" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Sales", href: "/sales" },
+    { label: "About", href: "/about" },
   ];
 
   const handleNavigation = (href: string) => {

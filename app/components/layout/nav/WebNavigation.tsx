@@ -16,7 +16,7 @@ export const WebNavigation = () => {
         zIndex: 5,
         mx: {
           xs: 0,
-          lg: 10,
+          xl: 10,
         },
       }}
       data-testid="web-navigation"
@@ -30,7 +30,7 @@ export const WebNavigation = () => {
         }}
       >
         <MenuItems />
-        <Box sx={{ display: { xs: "none", xl: "flex" } }}>
+        <Box sx={{ display: { xs: "none", lg: "flex" } }}>
           <SocialIcons />
         </Box>
       </Box>

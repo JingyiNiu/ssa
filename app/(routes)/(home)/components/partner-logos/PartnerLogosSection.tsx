@@ -8,32 +8,32 @@ export const PartnerLogosSection = () => {
     {
       id: 1,
       name: "Company 1",
-      logo: "/images/pics/product-1.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 2,
       name: "Company 2",
-      logo: "/images/pics/product-1.jpg",
+      logo: "/images/logo/logo3.png",
     },
     {
       id: 3,
       name: "Company 3",
-      logo: "/images/pics/product-1.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 4,
       name: "Company 4",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo3.png",
     },
     {
       id: 5,
       name: "Company 5",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo2.png",
     },
     {
       id: 6,
       name: "Company 6",
-      logo: "/images/pics/product-3.jpg",
+      logo: "/images/logo/logo3.png",
     },
   ];
 
@@ -44,7 +44,11 @@ export const PartnerLogosSection = () => {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" },
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(6, 1fr)",
+            },
             gap: { xs: 2, md: 3, lg: 4 },
             alignItems: "center",
           }}
@@ -56,4 +60,4 @@ export const PartnerLogosSection = () => {
       </Box>
     </Box>
   );
-}
+};

@@ -3,7 +3,7 @@ import { FooterSectionTitle } from "./FooterSectionTitle";
 
 const GetInTouch = () => {
   return (
-    <Box>
+    <Box data-testid="get-in-touch" mb={{ xs: 4, md: 0 }}>
       <FooterSectionTitle title="Get in touch" />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <Box>
