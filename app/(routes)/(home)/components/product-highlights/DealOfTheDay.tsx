@@ -5,30 +5,11 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
-import { Product } from "../../../../components/layout/product-list/product";
+import { allProducts, Product } from "../../../../components/layout/product-list/product";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 
 export const DealOfTheDay = () => {
-  const deals: Product[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 45.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 99.0,
-      image: "/images/pics/product-2.jpg",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 149.0,
-      image: "/images/pics/product-3.jpg",
-    },
-  ];
+  const deals: Product[] = allProducts.slice(0, 3);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
