@@ -1,12 +1,15 @@
 "use client";
 
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, useMediaQuery, useTheme } from "@mui/material";
 import { ActionButton } from "../../ui/ActionButton";
 import { useRouter } from "next/navigation";
 import { useState, KeyboardEvent } from "react";
+import { IoSearch } from "react-icons/io5";
 
 export const SearchBar = () => {
   const router = useRouter();
+  const theme = useTheme();
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
@@ -64,8 +67,12 @@ export const SearchBar = () => {
           },
         }}
       />
-      <ActionButton sx={{ borderRadius: 0 }} onClick={handleSearch}>
-        Search
+      <ActionButton
+        sx={{ borderRadius: 0, minWidth: { xs: "50px", sm: "fit-content" } }}
+        onClick={handleSearch}
+        data-testid="search-button"
+      >
+        {isSmUp ? "Search" : <IoSearch />}
       </ActionButton>
     </Box>
   );

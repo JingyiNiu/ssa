@@ -37,8 +37,7 @@ const FindADealer = () => {
           }}
         >
           {/* 左侧：Dealer 列表 */}
-          <Paper
-            elevation={1}
+          <Box
             sx={{
               flex: { xs: "1", md: "0 0 40%" },
               maxHeight: "400px",
@@ -61,7 +60,7 @@ const FindADealer = () => {
                 );
               })}
             </Box>
-          </Paper>
+          </Box>
 
           {/* 右侧：地图 */}
           <Box
@@ -70,8 +69,7 @@ const FindADealer = () => {
             }}
             data-testid="dealer-map"
           >
-            <Paper
-              elevation={1}
+            <Box
               sx={{
                 position: "sticky",
                 top: 20,
@@ -104,7 +102,7 @@ const FindADealer = () => {
                   </Typography>
                 </Box>
               )}
-            </Paper>
+            </Box>
           </Box>
         </Box>
       </Box>

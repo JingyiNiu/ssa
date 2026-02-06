@@ -84,16 +84,20 @@ export const HeroSection = () => {
               left: { xs: 20, md: "auto" },
               backgroundColor: "white",
               overflow: "hidden",
+              width: { xs: "auto", md: "500px" },
             }}
           >
             <Tabs
               value={activeTab}
               onChange={handleTabChange}
               sx={{
-                minHeight: "auto",
-                minWidth: "500px",
+                width: "100%",
+                display: "flex",
                 "& .MuiTabs-indicator": {
                   display: "none",
+                },
+                "& .MuiTabs-flexContainer": {
+                  width: "100%",
                 },
               }}
               data-testid="hero-tabs"
@@ -141,8 +145,9 @@ export const HeroSection = () => {
                   sx={{
                     py: 1,
                     px: 2,
-                    width: `${100 / wheelTabs.length}%`,
-                    height: "100px",
+                    flex: 1,
+                    maxWidth: "none",
+                    height: { xs: 150, sm: 120 },
                     minHeight: "auto",
                     textTransform: "none",
                     color: "text.secondary",

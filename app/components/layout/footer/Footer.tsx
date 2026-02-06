@@ -1,11 +1,10 @@
 "use client";
 
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Link } from "@mui/material";
 import CompanyInfo from "./CompanyInfo";
-import UsefulLinks from "./UsefulLinks";
-import GetInTouch from "./GetInTouch";
-import PopularPost from "./PopularPost";
-import FooterBottom from "./FooterBottom";
+import CopyrightSection from "./CopyrightSection";
+import { footerLinks } from "./footer";
+import { FooterSectionTitle } from "./FooterSectionTitle";
 
 export const Footer = () => {
   return (
@@ -28,16 +27,29 @@ export const Footer = () => {
             }}
           >
             <CompanyInfo />
-            <UsefulLinks />
-            <GetInTouch />
-            <PopularPost />
+            {footerLinks.map((section) => (
+              <Box key={section.title}>
+                <FooterSectionTitle title={section.title} />
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  {section.links.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      sx={{ color: "white", fontSize: "0.875rem" }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </Box>
+              </Box>
+            ))}
           </Box>
         </Box>
       </Box>
 
       <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
 
-      <FooterBottom />
+      <CopyrightSection />
     </Box>
   );
 };

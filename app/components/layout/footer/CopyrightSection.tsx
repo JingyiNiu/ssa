@@ -1,6 +1,6 @@
 import { Box, Typography, Link } from "@mui/material";
 
-const FooterBottom = () => {
+const CopyrightSection = () => {
   return (
     <Box sx={{ py: 3 }}>
       <Box
@@ -37,4 +37,4 @@ const FooterBottom = () => {
   );
 };
 
-export default FooterBottom;
+export default CopyrightSection;

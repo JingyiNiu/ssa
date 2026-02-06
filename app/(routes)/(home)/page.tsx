@@ -7,7 +7,7 @@ import { PartnerLogosSection } from "./components/partner-logos/PartnerLogosSect
 import { ValuePropositionSection } from "./components/value-proposition/ValuePropositionSection";
 import { ShopByBrandsSection } from "./components/shop-by-brands/ShopByBrandsSection";
 import { ProductHighlightsSection } from "./components/product-highlights/ProductHighlightsSection";
-import { LatestBlogPostsSection } from "./components/blog-post/LatestBlogPostsSection";
+import FindADealer from "@/app/components/find-a-dealer/FindADealer";
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ const Home = () => {
       <ValuePropositionSection />
       <ShopByBrandsSection />
       <ProductHighlightsSection />
-      <LatestBlogPostsSection />
+      <FindADealer />
     </Box>
   );
 };
