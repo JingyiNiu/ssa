@@ -72,7 +72,7 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
           variant="body1"
           sx={{
             fontWeight: 600,
-            color: "#e05440",
+            color: "primary.main",
             fontSize: "0.875rem",
           }}
         >

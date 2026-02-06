@@ -26,7 +26,12 @@ export const SearchBar = () => {
 
   return (
     <Box
-      sx={{ display: "flex", flex: 1, maxWidth: { xs: "100%", md: 400 }, mx: { xs: 0, md: 4 } }}
+      sx={{
+        display: "flex",
+        flex: 1,
+        width: { xs: "100%", md: 400, lg: 450, xl: 500 },
+        mx: { xs: 0, md: 4 },
+      }}
       data-testid="search-bar"
     >
       <TextField
@@ -54,7 +59,7 @@ export const SearchBar = () => {
             },
             "& input::placeholder": {
               color: "primary.main",
-              opacity: 0.5,
+              opacity: 0.8,
             },
           },
         }}

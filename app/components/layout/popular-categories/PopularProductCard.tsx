@@ -88,7 +88,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
             variant="body1"
             sx={{
               fontWeight: 600,
-              color: product.originalPrice ? "#e05440" : "#333",
+              color: product.originalPrice ? "primary.main" : "#333",
               fontSize: "0.875rem",
             }}
           >

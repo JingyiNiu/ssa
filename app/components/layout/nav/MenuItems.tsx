@@ -2,7 +2,8 @@
 
 import { Box, Link, Menu, MenuItem, Grow } from "@mui/material";
 import React, { useState, MouseEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { isActive } from "@/app/utils";
 
 type SubItem = {
   label: string;
@@ -18,6 +19,7 @@ type MenuItemType = {
 
 const MenuItems = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
@@ -116,8 +118,15 @@ const MenuItems = () => {
               alignItems: "center",
               gap: 0.5,
               cursor: "pointer",
+              position: "relative",
+              pb: 0.5,
+              transition: "all 0.3s ease",
+              borderBottom: "2px solid",
+              borderColor: isActive(pathname, item.href) ? "#fff" : "transparent",
+              opacity: isActive(pathname, item.href) ? 1 : 0.9,
               "&:hover": {
-                opacity: 0.8,
+                color: "rgba(255,255,255,0.9)",
+                borderColor: "rgba(255,255,255,0.3)",
               },
             }}
           >

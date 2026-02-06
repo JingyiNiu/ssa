@@ -145,7 +145,7 @@ export const DealOfTheDay = () => {
             sx={{
               fontWeight: 600,
               textAlign: "center",
-              color: "#e05440",
+              color: "primary.main",
               mb: 2,
             }}
           >

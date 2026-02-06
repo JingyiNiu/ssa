@@ -14,7 +14,7 @@ const heroSlides: HeroSlideData[] = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
   },
   {
-    backgroundImage: "/images/pics/hero-slide.png",
+    backgroundImage: "/images/pics/value-proposition.png",
     title: "Premium Selection\nBest Value",
     description: "Aliquam ullamcorper imperdiet tortor eu gravida. ",
   },

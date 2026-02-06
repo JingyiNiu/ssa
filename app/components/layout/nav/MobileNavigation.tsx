@@ -9,7 +9,8 @@ import {
   Divider,
 } from "@mui/material";
 import { IoClose } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { isActive } from "@/app/utils";
 
 type MobileNavigationProps = {
   onClose: () => void;
@@ -17,6 +18,7 @@ type MobileNavigationProps = {
 
 const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const menuItems = [
     { label: "Home", href: "/" },
@@ -79,6 +81,7 @@ const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
               sx={{
                 py: 2,
                 px: 3,
+                color: isActive(pathname, item.href) ? "primary.main" : "text.primary",
                 "&:hover": {
                   bgcolor: "primary.light",
                 },

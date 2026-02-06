@@ -171,7 +171,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 borderRadius: 3,
                 bgcolor: "#e0e0e0",
                 "& .MuiLinearProgress-bar": {
-                  bgcolor: "#e74c3c",
+                  bgcolor: "primary.main",
                   borderRadius: 3,
                 },
               }}
@@ -256,7 +256,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             variant="h6"
             sx={{
               fontWeight: 700,
-              color: product.originalPrice ? "#e05440" : "#333",
+              color: product.originalPrice ? "primary.main" : "#333",
               fontSize: "1.125rem",
             }}
           >

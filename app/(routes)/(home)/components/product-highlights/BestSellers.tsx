@@ -90,7 +90,7 @@ export const BestSellers = () => {
               "&:hover": { bgcolor: "#f5f5f5" },
             }}
           >
-            <ChevronLeftIcon fontSize="small" sx={{ color: "#e05440" }} />
+            <ChevronLeftIcon fontSize="small" sx={{ color: "primary.main" }} />
           </IconButton>
           <IconButton
             size="small"
@@ -101,7 +101,7 @@ export const BestSellers = () => {
               "&:hover": { bgcolor: "#f5f5f5" },
             }}
           >
-            <ChevronRightIcon fontSize="small" sx={{ color: "#e05440" }} />
+            <ChevronRightIcon fontSize="small" sx={{ color: "primary.main" }} />
           </IconButton>
         </Box>
       </Box>
@@ -166,11 +166,11 @@ export const BestSellers = () => {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              bgcolor: currentPage === index ? "#e05440" : "grey.300",
+              bgcolor: currentPage === index ? "primary.main" : "grey.300",
               cursor: "pointer",
               transition: "all 0.3s",
               "&:hover": {
-                bgcolor: currentPage === index ? "#c54030" : "grey.400",
+                bgcolor: currentPage === index ? "primary.main" : "grey.400",
               },
             }}
           />
