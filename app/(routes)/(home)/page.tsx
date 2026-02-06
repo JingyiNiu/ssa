@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
-import { PopularCategories } from "./components/popular-categories/PopularCategories";
+import { PopularCategories } from "../../components/layout/popular-categories/PopularCategories";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";
 import { PartnerLogosSection } from "./components/partner-logos/PartnerLogosSection";
 import { ValuePropositionSection } from "./components/value-proposition/ValuePropositionSection";

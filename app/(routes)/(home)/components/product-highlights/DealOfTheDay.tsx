@@ -5,7 +5,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
-import { Product } from "../popular-categories/product";
+import { Product } from "../../../../components/layout/product-list/product";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 
 export const DealOfTheDay = () => {

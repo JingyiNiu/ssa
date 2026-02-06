@@ -4,7 +4,7 @@ import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { DealOfTheDay } from "./DealOfTheDay";
-import { Product } from "../popular-categories/product";
+import { Product } from "../../../../components/layout/product-list/product";
 import { BestSellerCard } from "./BestSellerCard";
 import { useState, useEffect } from "react";
 

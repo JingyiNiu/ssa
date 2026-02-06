@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { SlideOverlay } from "./SlideOverlay";
+import { SlideOverlay } from "../../../../components/ui/SlideOverlay";
 
 export type HeroSlideData = {
   backgroundImage: string;

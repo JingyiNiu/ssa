@@ -4,7 +4,7 @@ import { Box, Link, Menu, MenuItem, Grow } from "@mui/material";
 import React, { useState, MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
-type DropdownItem = {
+type SubItem = {
   label: string;
   href: string;
 };
@@ -13,7 +13,7 @@ type MenuItemType = {
   label: string;
   hasDropdown: boolean;
   href?: string;
-  dropdownItems?: DropdownItem[];
+  subItems?: SubItem[];
 };
 
 const MenuItems = () => {
@@ -31,30 +31,30 @@ const MenuItems = () => {
       label: "Wheels",
       hasDropdown: false,
       href: "/wheels",
-      // dropdownItems: [
-      //   { label: "Steel Wheels", href: "/wheel?type=steel" },
-      //   { label: "Alloy Wheels", href: "/wheel?type=alloy" },
-      // ],
+      subItems: [
+        { label: "Steel Wheels", href: "/wheel?type=steel" },
+        { label: "Alloy Wheels", href: "/wheel?type=alloy" },
+      ],
     },
     {
       label: "Tyres",
       hasDropdown: false,
       href: "/tyres",
-      // dropdownItems: [
-      //   { label: "BLACKLION", href: "/tyres?brand=blacklion" },
-      //   { label: "JINYU", href: "/tyres?brand=jinyu" },
-      //   { label: "AOTELI", href: "/tyres?brand=aoteli" },
-      //   { label: "FARROAD", href: "/tyres?brand=farroad" },
-      //   { label: "GRENLANDER", href: "/tyres?brand=grenlander" },
-      //   { label: "SAILUN", href: "/tyres?brand=sailun" },
-      //   { label: "ROVELO", href: "/tyres?brand=rovelo" },
-      //   { label: "ROADX", href: "/tyres?brand=roadx" },
-      //   { label: "FORTUNE", href: "/tyres?brand=fortune" },
-      //   { label: "BLACKHAWK", href: "/tyres?brand=blackhawk" },
-      //   { label: "ROADCLAW", href: "/tyres?brand=roadclaw" },
-      //   { label: "Winrun", href: "/tyres?brand=winrun" },
-      //   { label: "Genco", href: "/tyres?brand=genco" },
-      // ],
+      subItems: [
+        { label: "BLACKLION", href: "/tyres?brand=blacklion" },
+        { label: "JINYU", href: "/tyres?brand=jinyu" },
+        { label: "AOTELI", href: "/tyres?brand=aoteli" },
+        { label: "FARROAD", href: "/tyres?brand=farroad" },
+        { label: "GRENLANDER", href: "/tyres?brand=grenlander" },
+        { label: "SAILUN", href: "/tyres?brand=sailun" },
+        { label: "ROVELO", href: "/tyres?brand=rovelo" },
+        { label: "ROADX", href: "/tyres?brand=roadx" },
+        { label: "FORTUNE", href: "/tyres?brand=fortune" },
+        { label: "BLACKHAWK", href: "/tyres?brand=blackhawk" },
+        { label: "ROADCLAW", href: "/tyres?brand=roadclaw" },
+        { label: "Winrun", href: "/tyres?brand=winrun" },
+        { label: "Genco", href: "/tyres?brand=genco" },
+      ],
     },
     {
       label: "Brands",
@@ -125,7 +125,7 @@ const MenuItems = () => {
             {item.hasDropdown && <span style={{ marginLeft: 4 }}>+</span>}
           </Link>
 
-          {item.hasDropdown && item.dropdownItems && (
+          {item.hasDropdown && item.subItems && (
             <Menu
               anchorEl={anchorEl}
               open={openMenu === item.label}
@@ -161,10 +161,10 @@ const MenuItems = () => {
                 },
               }}
             >
-              {item.dropdownItems.map((dropdownItem, idx) => (
+              {item.subItems.map((subItem, idx) => (
                 <MenuItem
                   key={idx}
-                  onClick={() => handleMenuItemClick(dropdownItem.href)}
+                  onClick={() => handleMenuItemClick(subItem.href)}
                   sx={{
                     py: 1.5,
                     fontSize: "0.875rem",
@@ -184,7 +184,7 @@ const MenuItems = () => {
                     },
                   }}
                 >
-                  {dropdownItem.label}
+                  {subItem.label}
                 </MenuItem>
               ))}
             </Menu>

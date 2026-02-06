@@ -1,8 +1,9 @@
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Link } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { TiSocialSkype } from "react-icons/ti";
+import { socialIcons } from "../nav/SocialIcons";
 
 export const CompanyInfo = () => {
   return (
@@ -24,8 +25,7 @@ export const CompanyInfo = () => {
           lineHeight: 1.8,
         }}
       >
-        The probability of someone needing your services or wantin Lorem ipsum
-        dolor sit amet.
+        Lorem ipsum dolor sit amet.
       </Typography>
 
       <Typography
@@ -40,47 +40,28 @@ export const CompanyInfo = () => {
         Phasellus porta lorem id nisl mattis, in sollicitudin augue scelerisque.
       </Typography>
 
-      <Box sx={{ display: "flex", gap: 1 }}>
-        <IconButton
-          size="small"
-          sx={{
-            color: "white",
-            bgcolor: "rgba(255,255,255,0.1)",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
-          }}
-        >
-          <FacebookIcon fontSize="small" />
-        </IconButton>
-        <IconButton
-          size="small"
-          sx={{
-            color: "white",
-            bgcolor: "rgba(255,255,255,0.1)",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
-          }}
-        >
-          <InstagramIcon fontSize="small" />
-        </IconButton>
-        <IconButton
-          size="small"
-          sx={{
-            color: "white",
-            bgcolor: "rgba(255,255,255,0.1)",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
-          }}
-        >
-          <TiSocialSkype />
-        </IconButton>
-        <IconButton
-          size="small"
-          sx={{
-            color: "white",
-            bgcolor: "rgba(255,255,255,0.1)",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
-          }}
-        >
-          <TwitterIcon fontSize="small" />
-        </IconButton>
+      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+        {socialIcons.map((social, index) => (
+          <Link
+            key={index}
+            href={social.href}
+            sx={{
+              color: "#fff",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              "&:hover": {
+                opacity: 0.8,
+                backgroundColor: "rgba(255,255,255,0.1)",
+              },
+            }}
+          >
+            {social.icon}
+          </Link>
+        ))}
       </Box>
     </Box>
   );

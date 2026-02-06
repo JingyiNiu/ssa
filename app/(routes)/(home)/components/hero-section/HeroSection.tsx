@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { useState, useEffect, useRef } from "react";
 import { HeroSlide, HeroSlideData } from "./HeroSlide";
 import { CarouselArrow } from "./CarouselArrow";
-import { SlideOverlay } from "./SlideOverlay";
+import { SlideOverlay } from "../../../../components/ui/SlideOverlay";
 
 const heroSlides: HeroSlideData[] = [
   {

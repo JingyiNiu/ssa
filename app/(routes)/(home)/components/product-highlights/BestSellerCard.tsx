@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography, Card, CardContent } from "@mui/material";
-import { Product } from "../popular-categories/product";
+import { Product } from "../../../../components/layout/product-list/product";
 
 interface BestSellerCardProps {
   product: Product;

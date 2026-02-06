@@ -5,7 +5,6 @@ const UsefulLinks = () => {
   const usefulLinks = [
     { label: "About", href: "/about" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Faqs", href: "/faqs" },
     { label: "Our Blog", href: "/blog" },
   ];
 

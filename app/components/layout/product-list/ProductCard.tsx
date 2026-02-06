@@ -9,7 +9,7 @@ import {
 import { Star, StarBorder, StarHalf } from "@mui/icons-material";
 import { Product } from "./product";
 
-interface PopularCardProps {
+interface ProductCardProps {
   product: Product;
 }
 
@@ -36,7 +36,7 @@ const RatingStars = ({ rating = 0 }: { rating?: number }) => {
   return <Box sx={{ display: "flex", gap: 0.2 }}>{stars}</Box>;
 };
 
-export const PopularProductCard = ({ product }: PopularCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
   const totalStock = product.stock
     ? product.stock.available + product.stock.sold
     : 0;

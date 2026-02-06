@@ -11,7 +11,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        py: 6,
       }}
       data-testid="client-layout"
     >
