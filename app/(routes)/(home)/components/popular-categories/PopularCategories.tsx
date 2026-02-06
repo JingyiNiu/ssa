@@ -1,76 +1,40 @@
 "use client";
 
-import { Box, Typography, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+  Tabs,
+  Tab,
+} from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Product } from "./product";
-import { PopularProductCard } from "./PopularProductCard";
+import { allProducts, categories, CategoryType, Product } from "./product";
+import { PopularProductCard } from "./ProductCard";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { useState } from "react";
 
 export const PopularCategories = () => {
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down("lg"));
-  
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 45.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 50.0,
-      image: "/images/pics/product-2.jpg",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 50.0,
-      originalPrice: 55.0,
-      image: "/images/pics/product-3.jpg",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      price: 60.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 5,
-      name: "Product 5",
-      price: 70.0,
-      originalPrice: 75.0,
-      image: "/images/pics/product-2.jpg",
-    },
-    {
-      id: 6,
-      name: "Product 6",
-      price: 80.0,
-      image: "/images/pics/product-3.jpg",
-    },
-    {
-      id: 7,
-      name: "Product 7",
-      price: 90.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 8,
-      name: "Product 8",
-      price: 100.0,
-      image: "/images/pics/product-2.jpg",
-    },
-  ];
+
+  // Tab切换状态
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryType>("category1");
+
+  // 定义分类选项
 
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
-  
+
+  // 根据选中的类别过滤产品
+  const products = allProducts.filter((p) => p.category === selectedCategory);
+
   // 根据屏幕尺寸设置每页显示数量
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
   const itemsPerPage = isSmDown && isMdDown ? 2 : 4; // sm: 2个，xs: 4个（单列2行）
-  
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const handlePrevious = () => {
@@ -84,13 +48,69 @@ export const PopularCategories = () => {
   };
 
   const displayedProducts = isMdDown
-    ? products.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+    ? products.slice(
+        currentPage * itemsPerPage,
+        (currentPage + 1) * itemsPerPage
+      )
     : products;
+
+  // 处理Tab切换
+  const handleCategoryChange = (
+    event: React.SyntheticEvent,
+    newValue: CategoryType
+  ) => {
+    setSelectedCategory(newValue);
+    setCurrentPage(0); // 切换类别时重置页码
+  };
 
   return (
     <Box sx={{ mb: 4 }} data-testid="popular-categories-section">
       <Box className="container mx-auto">
-        <SectionTitle title="Popular Categories" />
+        {/* 标题和Tab容器 */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 2,
+            mb: 3,
+          }}
+        >
+          <SectionTitle title="Popular Categories" />
+
+          {/* Tab切换组件 */}
+          <Tabs
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            sx={{
+              minHeight: "auto",
+              "& .MuiTab-root": {
+                minHeight: "auto",
+                py: 1,
+                px: 2,
+                fontSize: "qrem",
+                fontWeight: 600,
+                textTransform: "none",
+                color: "text.secondary",
+                "&.Mui-selected": {
+                  color: "primary.main",
+                },
+              },
+              "& .MuiTabs-indicator": {
+                height: 2,
+              },
+            }}
+          >
+            {categories.map((category) => (
+              <Tab
+                key={category.value}
+                label={category.label}
+                value={category.value}
+              />
+            ))}
+          </Tabs>
+        </Box>
 
         <Box sx={{ position: "relative" }}>
           {/* 左箭头按钮 - 仅 md 以下显示 */}
@@ -227,7 +247,8 @@ export const PopularCategories = () => {
                   cursor: "pointer",
                   transition: "all 0.3s",
                   "&:hover": {
-                    bgcolor: currentPage === index ? "primary.dark" : "grey.400",
+                    bgcolor:
+                      currentPage === index ? "primary.dark" : "grey.400",
                   },
                 }}
               />
