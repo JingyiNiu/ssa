@@ -8,7 +8,7 @@ import { SlideOverlay } from "../../../../components/ui/SlideOverlay";
 
 const heroSlides: HeroSlideData[] = [
   {
-    backgroundImage: "/images/pics/hero-slide.png",
+    backgroundImage: "/images/pics/banner.png",
     title: "New Top Product\nHigh Quality",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",

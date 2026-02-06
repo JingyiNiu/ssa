@@ -2,18 +2,18 @@
 
 import { Box, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import FilterSelect from "../../../(home)/components/search-section/FilterSelect";
-import { searchConfig } from "../../../(home)/components/search-section/search";
+import FilterSelect from "@/app/(routes)/(home)/components/search-section/FilterSelect";
+import { searchConfig } from "@/app/(routes)/(home)/components/search-section/search";
 import SearchIcon from "@mui/icons-material/Search";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 
 export const SearchSection = () => {
   const [searchText, setSearchText] = useState("");
-  const wheelConfig = searchConfig.wheel;
+  const tyreConfig = searchConfig.tyre;
 
   // 初始化筛选器状态
   const getInitialFilters = () => {
-    return wheelConfig.fields.reduce(
+    return tyreConfig.fields.reduce(
       (acc, field) => {
         acc[field.key] = "";
         return acc;
@@ -50,7 +50,7 @@ export const SearchSection = () => {
               variant="h6"
               sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
             >
-              Filter wheels by size/range
+              Filter tyres by size
             </Typography>
             <Typography
               variant="body2"
@@ -61,12 +61,12 @@ export const SearchSection = () => {
                 fontSize: "0.8rem",
               }}
             >
-              Try 18x8, 18x8.5, 18x8 5/114.3, '18x9 6/139.7 Assault'
+              Search how you know it - try 2254018, 22540, or just 225
             </Typography>
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                placeholder="Filter wheels by size/range..."
+                placeholder="Filter tyres by size..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 variant="outlined"
@@ -86,7 +86,7 @@ export const SearchSection = () => {
               variant="h6"
               sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
             >
-              Filter wheels by specifications
+              Filter tyres by specifications
             </Typography>
             <Typography
               variant="body2"
@@ -102,7 +102,7 @@ export const SearchSection = () => {
             <Box
               sx={{
                 display: "grid",
-                gridTemplateColumns: wheelConfig.gridColumns,
+                gridTemplateColumns: tyreConfig.gridColumns,
                 gap: 2,
                 mb: 3,
                 bgcolor: "grey.50",
@@ -112,7 +112,7 @@ export const SearchSection = () => {
                 border: "1px solid #e0e0e0",
               }}
             >
-              {wheelConfig.fields.map((field) => (
+              {tyreConfig.fields.map((field) => (
                 <FilterSelect
                   key={field.key}
                   label={field.label}

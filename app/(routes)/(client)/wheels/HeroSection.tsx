@@ -64,14 +64,13 @@ export const HeroSection = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/hero-slide.png)",
-          backgroundSize: "contain",
+          backgroundImage: "url(/images/pics/wheels.png)",
+          backgroundSize: "cover",
           backgroundPosition: "left",
           backgroundRepeat: "no-repeat",
         }}
         data-testid="hero-slides-container"
       >
-        <SlideOverlay />
         <Box
           sx={{ position: "relative", zIndex: 10 }}
           className="container mx-auto"
@@ -147,7 +146,7 @@ export const HeroSection = () => {
                     minHeight: "auto",
                     textTransform: "none",
                     color: "text.secondary",
-                    backgroundColor: "primary.light",
+                    backgroundColor: "#fff",
                     transition: "all 0.3s ease",
                     "&.Mui-selected": {
                       color: "white",

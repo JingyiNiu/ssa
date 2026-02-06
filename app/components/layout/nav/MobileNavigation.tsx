@@ -11,6 +11,7 @@ import {
 import { IoClose } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import { isActive } from "@/app/utils";
+import { menuItems } from "./nav";
 
 type MobileNavigationProps = {
   onClose: () => void;
@@ -19,16 +20,6 @@ type MobileNavigationProps = {
 const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
   const router = useRouter();
   const pathname = usePathname();
-
-  const menuItems = [
-    { label: "Home", href: "/" },
-    { label: "Wheels", href: "/wheels" },
-    { label: "Tyres", href: "/tyres" },
-    { label: "Brands", href: "/brands" },
-    { label: "Accessories", href: "/accessories" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "About", href: "/about" },
-  ];
 
   const handleNavigation = (href: string) => {
     router.push(href);
@@ -81,7 +72,9 @@ const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
               sx={{
                 py: 2,
                 px: 3,
-                color: isActive(pathname, item.href) ? "primary.main" : "text.primary",
+                color: isActive(pathname, item.href)
+                  ? "primary.main"
+                  : "text.primary",
                 "&:hover": {
                   bgcolor: "primary.light",
                 },

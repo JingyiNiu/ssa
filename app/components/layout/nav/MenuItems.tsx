@@ -4,81 +4,13 @@ import { Box, Link, Menu, MenuItem, Grow } from "@mui/material";
 import React, { useState, MouseEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { isActive } from "@/app/utils";
-
-type SubItem = {
-  label: string;
-  href: string;
-};
-
-type MenuItemType = {
-  label: string;
-  hasDropdown: boolean;
-  href?: string;
-  subItems?: SubItem[];
-};
+import { menuItems } from "./nav";
 
 const MenuItems = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-
-  const menuItems: MenuItemType[] = [
-    {
-      label: "Home",
-      hasDropdown: false,
-      href: "/",
-    },
-    {
-      label: "Wheels",
-      hasDropdown: false,
-      href: "/wheels",
-      subItems: [
-        { label: "Steel Wheels", href: "/wheel?type=steel" },
-        { label: "Alloy Wheels", href: "/wheel?type=alloy" },
-      ],
-    },
-    {
-      label: "Tyres",
-      hasDropdown: false,
-      href: "/tyres",
-      subItems: [
-        { label: "BLACKLION", href: "/tyres?brand=blacklion" },
-        { label: "JINYU", href: "/tyres?brand=jinyu" },
-        { label: "AOTELI", href: "/tyres?brand=aoteli" },
-        { label: "FARROAD", href: "/tyres?brand=farroad" },
-        { label: "GRENLANDER", href: "/tyres?brand=grenlander" },
-        { label: "SAILUN", href: "/tyres?brand=sailun" },
-        { label: "ROVELO", href: "/tyres?brand=rovelo" },
-        { label: "ROADX", href: "/tyres?brand=roadx" },
-        { label: "FORTUNE", href: "/tyres?brand=fortune" },
-        { label: "BLACKHAWK", href: "/tyres?brand=blackhawk" },
-        { label: "ROADCLAW", href: "/tyres?brand=roadclaw" },
-        { label: "Winrun", href: "/tyres?brand=winrun" },
-        { label: "Genco", href: "/tyres?brand=genco" },
-      ],
-    },
-    {
-      label: "Brands",
-      hasDropdown: false,
-      href: "/brands",
-    },
-    {
-      label: "Accessories",
-      hasDropdown: false,
-      href: "/accessories",
-    },
-    {
-      label: "Gallery",
-      hasDropdown: false,
-      href: "/gallery",
-    },
-    {
-      label: "About",
-      hasDropdown: false,
-      href: "/about",
-    },
-  ];
 
   const handleClick = (event: MouseEvent<HTMLElement>, menuLabel: string) => {
     setAnchorEl(event.currentTarget);
@@ -122,7 +54,9 @@ const MenuItems = () => {
               pb: 0.5,
               transition: "all 0.3s ease",
               borderBottom: "2px solid",
-              borderColor: isActive(pathname, item.href) ? "#fff" : "transparent",
+              borderColor: isActive(pathname, item.href)
+                ? "#fff"
+                : "transparent",
               opacity: isActive(pathname, item.href) ? 1 : 0.9,
               "&:hover": {
                 color: "rgba(255,255,255,0.9)",
