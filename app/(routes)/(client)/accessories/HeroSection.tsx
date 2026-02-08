@@ -17,20 +17,6 @@ export const HeroSection = () => {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("steel");
 
-  // Tab 配置数据
-  const wheelTabs: WheelTab[] = [
-    {
-      value: "steel",
-      label: "Steel Wheels",
-      description: "Durable and affordable",
-    },
-    {
-      value: "alloy",
-      label: "Alloy Wheels",
-      description: "Lightweight and stylish",
-    },
-  ];
-
   // 从 URL 读取 type 参数
   useEffect(() => {
     const type = searchParams.get("type");

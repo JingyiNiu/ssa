@@ -1,6 +1,6 @@
 import { Placeholder } from "@/app/components/layout/placeholder/Placeholder";
 import { Box } from "@mui/material";
-import React from "react";
+import React, { Suspense } from "react";
 import { HeroSection } from "./HeroSection";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { SearchSection } from "./SearchSection";
@@ -10,9 +10,13 @@ import FindADealer from "@/app/components/find-a-dealer/FindADealer";
 const AccessoriesPage = () => {
   return (
     <Box>
-      <HeroSection />
+      <Suspense fallback={<Box sx={{ height: 300 }} />}>
+        <HeroSection />
+      </Suspense>
       <PopularCategories />
-      <SearchSection />
+      <Suspense fallback={<Box sx={{ height: 200 }} />}>
+        <SearchSection />
+      </Suspense>
       <ProductList />
       <FindADealer />
     </Box>
