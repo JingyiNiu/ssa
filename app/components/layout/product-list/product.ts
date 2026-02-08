@@ -1,0 +1,330 @@
+export interface Product {
+  id: number;
+  category: CategoryType;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  brand?: { name: string; image?: string };
+  stock?: {
+    available: number;
+    sold: number;
+  };
+  description?: string;
+  rating?: number;
+}
+
+// 定义产品类别
+export type CategoryType = "category1" | "category2" | "category3";
+
+export interface Category {
+  value: CategoryType;
+  label: string;
+}
+
+export const categories: Category[] = [
+  { value: "category1", label: "Category 1" },
+  { value: "category2", label: "Category 2" },
+  { value: "category3", label: "Category 3" },
+];
+
+// 所有产品数据（添加category字段）
+export const allProducts: Product[] = [
+  // ===== category1 (8) =====
+  {
+    id: 1,
+    category: "category1",
+    name: "All-Terrain Wheel Pro",
+    description:
+      "Durable all-terrain wheel designed for both city driving and off-road adventures.",
+    price: 49.99,
+    originalPrice: 59.99,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 20, sold: 80 },
+    rating: 4.5,
+  },
+  {
+    id: 2,
+    category: "category1",
+    name: "Urban Performance Wheel",
+    description:
+      "Sleek performance wheel offering improved handling and a modern street look.",
+    price: 79.99,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 15, sold: 40 },
+    rating: 4.2,
+  },
+  {
+    id: 3,
+    category: "category1",
+    name: "Rugged Steel Wheel",
+    description:
+      "Heavy-duty steel wheel built for reliability in tough road conditions.",
+    price: 99.99,
+    originalPrice: 129.99,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 8, sold: 120 },
+    rating: 4.8,
+  },
+  {
+    id: 4,
+    category: "category1",
+    name: "Lightweight Alloy Wheel",
+    description:
+      "Lightweight alloy construction improves fuel efficiency and driving comfort.",
+    price: 35.0,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 30, sold: 10 },
+    rating: 3.9,
+  },
+  {
+    id: 5,
+    category: "category1",
+    name: "Off-Road Sport Wheel",
+    description:
+      "Sporty off-road wheel with enhanced grip and aggressive styling.",
+    price: 59.0,
+    originalPrice: 69.0,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 12, sold: 55 },
+    rating: 4.1,
+  },
+  {
+    id: 6,
+    category: "category1",
+    name: "Heavy Duty Wheel X",
+    description:
+      "Designed for heavy loads, perfect for trucks and utility vehicles.",
+    price: 120.0,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 5, sold: 200 },
+    rating: 4.9,
+  },
+  {
+    id: 7,
+    category: "category1",
+    name: "Classic Road Wheel",
+    description:
+      "Classic road wheel with timeless design and balanced performance.",
+    price: 89.99,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 10, sold: 60 },
+    rating: 4.3,
+  },
+  {
+    id: 8,
+    category: "category1",
+    name: "Premium Matte Wheel",
+    description:
+      "Premium matte finish wheel for a bold and refined appearance.",
+    price: 45.5,
+    image: "/images/pics/product-1.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 25, sold: 30 },
+    rating: 4.0,
+  },
+
+  // ===== category2 (8) =====
+  {
+    id: 9,
+    category: "category2",
+    name: "High Grip Tyre",
+    description:
+      "High-performance tyre delivering excellent grip and braking in all conditions.",
+    price: 199.0,
+    originalPrice: 249.0,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 6, sold: 90 },
+    rating: 4.7,
+  },
+  {
+    id: 10,
+    category: "category2",
+    name: "All-Season Tyre",
+    description:
+      "Reliable all-season tyre engineered for comfort and long-lasting wear.",
+    price: 159.99,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 14, sold: 35 },
+    rating: 4.4,
+  },
+  {
+    id: 11,
+    category: "category2",
+    name: "Performance Road Tyre",
+    description:
+      "Performance-focused tyre designed for precise handling and stability.",
+    price: 220.0,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 4, sold: 150 },
+    rating: 4.9,
+  },
+  {
+    id: 12,
+    category: "category2",
+    name: "Economy City Tyre",
+    description: "Cost-effective tyre offering smooth and quiet city driving.",
+    price: 99.99,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 18, sold: 22 },
+    rating: 4.0,
+  },
+  {
+    id: 13,
+    category: "category2",
+    name: "Touring Comfort Tyre",
+    description:
+      "Touring tyre built for long-distance comfort and reduced road noise.",
+    price: 139.0,
+    originalPrice: 169.0,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 9, sold: 75 },
+    rating: 4.2,
+  },
+  {
+    id: 14,
+    category: "category2",
+    name: "Sport Handling Tyre",
+    description:
+      "Sport tyre engineered for responsive steering and cornering control.",
+    price: 180.0,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 7, sold: 110 },
+    rating: 4.6,
+  },
+  {
+    id: 15,
+    category: "category2",
+    name: "Daily Drive Tyre",
+    description:
+      "Everyday tyre designed for balanced performance and durability.",
+    price: 110.0,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 20, sold: 15 },
+    rating: 3.8,
+  },
+  {
+    id: 16,
+    category: "category2",
+    name: "Premium Touring Tyre",
+    description:
+      "Premium touring tyre with enhanced comfort and long tread life.",
+    price: 149.5,
+    image: "/images/pics/product-2.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 11, sold: 45 },
+    rating: 4.1,
+  },
+
+  // ===== category3 (8) =====
+  {
+    id: 17,
+    category: "category3",
+    name: "Compact Utility Kit",
+    description:
+      "Compact utility product designed for everyday automotive needs.",
+    price: 29.99,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 50, sold: 20 },
+    rating: 4.0,
+  },
+  {
+    id: 18,
+    category: "category3",
+    name: "Essential Auto Accessory",
+    description:
+      "Essential accessory that enhances convenience and vehicle functionality.",
+    price: 39.99,
+    originalPrice: 49.99,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 40, sold: 35 },
+    rating: 4.3,
+  },
+  {
+    id: 19,
+    category: "category3",
+    name: "Multi-Purpose Car Tool",
+    description:
+      "Versatile car tool suitable for maintenance and emergency situations.",
+    price: 59.0,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 22, sold: 60 },
+    rating: 4.6,
+  },
+  {
+    id: 20,
+    category: "category3",
+    name: "Budget Vehicle Add-on",
+    description: "Affordable add-on offering practical everyday value.",
+    price: 25.0,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 80, sold: 10 },
+    rating: 3.9,
+  },
+  {
+    id: 21,
+    category: "category3",
+    name: "Premium Vehicle Add-on",
+    description:
+      "Premium add-on designed to enhance comfort and driving experience.",
+    price: 45.0,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 33, sold: 44 },
+    rating: 4.1,
+  },
+  {
+    id: 22,
+    category: "category3",
+    name: "Advanced Car Accessory",
+    description:
+      "Advanced accessory offering improved usability and durability.",
+    price: 75.0,
+    originalPrice: 95.0,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 12, sold: 90 },
+    rating: 4.7,
+  },
+  {
+    id: 23,
+    category: "category3",
+    name: "Everyday Car Essential",
+    description: "Reliable everyday essential suitable for all vehicle types.",
+    price: 34.99,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand One", image: "/images/logo/logo1.png" },
+    stock: { available: 60, sold: 18 },
+    rating: 4.0,
+  },
+  {
+    id: 24,
+    category: "category3",
+    name: "Professional Auto Accessory",
+    description:
+      "Professional-grade accessory built for performance and longevity.",
+    price: 89.0,
+    image: "/images/pics/product-3.jpg",
+    brand: { name: "Brand Two", image: "/images/logo/logo1.png" },
+    stock: { available: 9, sold: 120 },
+    rating: 4.8,
+  },
+];

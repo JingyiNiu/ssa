@@ -7,7 +7,7 @@ export const ValuePropositionSection = () => {
     <Box
       sx={{
         position: "relative",
-        minHeight: 400,
+        minHeight: 600,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

@@ -14,8 +14,8 @@ export const Placeholder = ({ title }: PlaceholderProps) => {
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "background.default",
-        pt: 10,
-        pb: 6,
+        pt: 20,
+        pb: 16,
       }}
     >
       <Container maxWidth="md">

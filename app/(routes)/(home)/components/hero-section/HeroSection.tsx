@@ -4,17 +4,17 @@ import { Box } from "@mui/material";
 import { useState, useEffect, useRef } from "react";
 import { HeroSlide, HeroSlideData } from "./HeroSlide";
 import { CarouselArrow } from "./CarouselArrow";
-import { SlideOverlay } from "./SlideOverlay";
+import { SlideOverlay } from "../../../../components/ui/SlideOverlay";
 
 const heroSlides: HeroSlideData[] = [
   {
-    backgroundImage: "/images/pics/hero-slide.png",
+    backgroundImage: "/images/pics/banner.png",
     title: "New Top Product\nHigh Quality",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
   },
   {
-    backgroundImage: "/images/pics/hero-slide.png",
+    backgroundImage: "/images/pics/value-proposition.png",
     title: "Premium Selection\nBest Value",
     description: "Aliquam ullamcorper imperdiet tortor eu gravida. ",
   },

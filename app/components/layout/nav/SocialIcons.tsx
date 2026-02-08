@@ -2,7 +2,7 @@ import { Box, Link } from "@mui/material";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
-const socialIcons = [
+export const socialIcons = [
   { icon: <FaFacebookF size={16} />, href: "#" },
   { icon: <FaInstagram size={16} />, href: "#" },
   { icon: <IoLogoWhatsapp size={16} />, href: "#" },

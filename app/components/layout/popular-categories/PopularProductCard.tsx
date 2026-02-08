@@ -1,5 +1,5 @@
 import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
-import { Product } from "./product";
+import { Product } from "../product-list/product";
 
 interface PopularCardProps {
   product: Product;
@@ -88,7 +88,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
             variant="body1"
             sx={{
               fontWeight: 600,
-              color: product.originalPrice ? "#e05440" : "#333",
+              color: product.originalPrice ? "primary.main" : "#333",
               fontSize: "0.875rem",
             }}
           >
@@ -98,4 +98,4 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
       </CardContent>
     </Card>
   );
-}
+};

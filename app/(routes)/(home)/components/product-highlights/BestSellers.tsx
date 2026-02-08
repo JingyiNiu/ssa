@@ -4,66 +4,13 @@ import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { DealOfTheDay } from "./DealOfTheDay";
-import { Product } from "../popular-categories/product";
+import { allProducts, Product } from "../../../../components/layout/product-list/product";
 import { BestSellerCard } from "./BestSellerCard";
 import { useState, useEffect } from "react";
 
 export const BestSellers = () => {
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 26.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 20.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 30.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      price: 15.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 5,
-      name: "Product 5",
-      price: 25.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 6,
-      name: "Product 6",
-      price: 35.0,
-      image: "/images/pics/product-1.jpg",
-    },    {
-      id: 7,
-      name: "Product 7",
-      price: 15.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 8,
-      name: "Product 8",
-      price: 25.0,
-      image: "/images/pics/product-1.jpg",
-    },
-    {
-      id: 9,
-      name: "Product 9",
-      price: 35.0,
-      image: "/images/pics/product-1.jpg",
-    },
-  ];
+
+  const products: Product[] = allProducts.slice(0, 18);
 
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
@@ -143,7 +90,7 @@ export const BestSellers = () => {
               "&:hover": { bgcolor: "#f5f5f5" },
             }}
           >
-            <ChevronLeftIcon fontSize="small" sx={{ color: "#e05440" }} />
+            <ChevronLeftIcon fontSize="small" sx={{ color: "primary.main" }} />
           </IconButton>
           <IconButton
             size="small"
@@ -154,7 +101,7 @@ export const BestSellers = () => {
               "&:hover": { bgcolor: "#f5f5f5" },
             }}
           >
-            <ChevronRightIcon fontSize="small" sx={{ color: "#e05440" }} />
+            <ChevronRightIcon fontSize="small" sx={{ color: "primary.main" }} />
           </IconButton>
         </Box>
       </Box>
@@ -219,11 +166,11 @@ export const BestSellers = () => {
               width: 8,
               height: 8,
               borderRadius: "50%",
-              bgcolor: currentPage === index ? "#e05440" : "grey.300",
+              bgcolor: currentPage === index ? "primary.main" : "grey.300",
               cursor: "pointer",
               transition: "all 0.3s",
               "&:hover": {
-                bgcolor: currentPage === index ? "#c54030" : "grey.400",
+                bgcolor: currentPage === index ? "primary.main" : "grey.400",
               },
             }}
           />

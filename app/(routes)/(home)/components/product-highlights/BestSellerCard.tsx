@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography, Card, CardContent } from "@mui/material";
-import { Product } from "../popular-categories/product";
+import { Product } from "../../../../components/layout/product-list/product";
 
 interface BestSellerCardProps {
   product: Product;
@@ -72,7 +72,7 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
           variant="body1"
           sx={{
             fontWeight: 600,
-            color: "#e05440",
+            color: "primary.main",
             fontSize: "0.875rem",
           }}
         >

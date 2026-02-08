@@ -1,12 +1,15 @@
 "use client";
 
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, useMediaQuery, useTheme } from "@mui/material";
 import { ActionButton } from "../../ui/ActionButton";
 import { useRouter } from "next/navigation";
 import { useState, KeyboardEvent } from "react";
+import { IoSearch } from "react-icons/io5";
 
 export const SearchBar = () => {
   const router = useRouter();
+  const theme = useTheme();
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
@@ -26,7 +29,12 @@ export const SearchBar = () => {
 
   return (
     <Box
-      sx={{ display: "flex", flex: 1, maxWidth: { xs: "100%", md: 400 }, mx: { xs: 0, md: 4 } }}
+      sx={{
+        display: "flex",
+        flex: 1,
+        width: { xs: "100%", md: 400, lg: 450, xl: 500 },
+        mx: { xs: 0, md: 4 },
+      }}
       data-testid="search-bar"
     >
       <TextField
@@ -54,13 +62,17 @@ export const SearchBar = () => {
             },
             "& input::placeholder": {
               color: "primary.main",
-              opacity: 0.5,
+              opacity: 0.8,
             },
           },
         }}
       />
-      <ActionButton sx={{ borderRadius: 0 }} onClick={handleSearch}>
-        Search
+      <ActionButton
+        sx={{ borderRadius: 0, minWidth: { xs: "50px", sm: "fit-content" } }}
+        onClick={handleSearch}
+        data-testid="search-button"
+      >
+        {isSmUp ? "Search" : <IoSearch />}
       </ActionButton>
     </Box>
   );

@@ -89,7 +89,7 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
               label={post.category}
               size="small"
               sx={{
-                bgcolor: "#ffe8e0",
+                bgcolor: "primary.light",
                 color: "primary.main",
                 fontWeight: 600,
                 fontSize: "0.75rem",
@@ -146,12 +146,12 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
           <IconButton
             size="small"
             sx={{
-              bgcolor: "#e05440",
+              bgcolor: "primary.main",
               color: "white",
               width: 24,
               height: 24,
               "&:hover": {
-                bgcolor: "#c73f2d",
+                bgcolor: "primary.main",
               },
             }}
           >
@@ -160,7 +160,7 @@ export const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
           <Typography
             variant="body2"
             sx={{
-              color: "#e05440",
+              color: "primary.main",
               fontWeight: 600,
               fontSize: "0.8rem",
               textTransform: "uppercase",

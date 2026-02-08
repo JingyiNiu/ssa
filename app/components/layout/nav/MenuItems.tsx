@@ -2,81 +2,15 @@
 
 import { Box, Link, Menu, MenuItem, Grow } from "@mui/material";
 import React, { useState, MouseEvent } from "react";
-import { useRouter } from "next/navigation";
-
-type DropdownItem = {
-  label: string;
-  href: string;
-};
-
-type MenuItemType = {
-  label: string;
-  hasDropdown: boolean;
-  href?: string;
-  dropdownItems?: DropdownItem[];
-};
+import { useRouter, usePathname } from "next/navigation";
+import { isActive } from "@/app/utils";
+import { menuItems } from "./nav";
 
 const MenuItems = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-
-  const menuItems: MenuItemType[] = [
-    {
-      label: "Home",
-      hasDropdown: false,
-      href: "/",
-    },
-    {
-      label: "Wheels",
-      hasDropdown: false,
-      href: "/wheels",
-      // dropdownItems: [
-      //   { label: "Steel Wheels", href: "/wheel?type=steel" },
-      //   { label: "Alloy Wheels", href: "/wheel?type=alloy" },
-      // ],
-    },
-    {
-      label: "Tyres",
-      hasDropdown: false,
-      href: "/tyres",
-      // dropdownItems: [
-      //   { label: "BLACKLION", href: "/tyres?brand=blacklion" },
-      //   { label: "JINYU", href: "/tyres?brand=jinyu" },
-      //   { label: "AOTELI", href: "/tyres?brand=aoteli" },
-      //   { label: "FARROAD", href: "/tyres?brand=farroad" },
-      //   { label: "GRENLANDER", href: "/tyres?brand=grenlander" },
-      //   { label: "SAILUN", href: "/tyres?brand=sailun" },
-      //   { label: "ROVELO", href: "/tyres?brand=rovelo" },
-      //   { label: "ROADX", href: "/tyres?brand=roadx" },
-      //   { label: "FORTUNE", href: "/tyres?brand=fortune" },
-      //   { label: "BLACKHAWK", href: "/tyres?brand=blackhawk" },
-      //   { label: "ROADCLAW", href: "/tyres?brand=roadclaw" },
-      //   { label: "Winrun", href: "/tyres?brand=winrun" },
-      //   { label: "Genco", href: "/tyres?brand=genco" },
-      // ],
-    },
-    {
-      label: "Brands",
-      hasDropdown: false,
-      href: "/brands",
-    },
-    {
-      label: "Accessories",
-      hasDropdown: false,
-      href: "/accessories",
-    },
-    {
-      label: "Gallery",
-      hasDropdown: false,
-      href: "/gallery",
-    },
-    {
-      label: "About",
-      hasDropdown: false,
-      href: "/about",
-    },
-  ];
 
   const handleClick = (event: MouseEvent<HTMLElement>, menuLabel: string) => {
     setAnchorEl(event.currentTarget);
@@ -116,8 +50,17 @@ const MenuItems = () => {
               alignItems: "center",
               gap: 0.5,
               cursor: "pointer",
+              position: "relative",
+              pb: 0.5,
+              transition: "all 0.3s ease",
+              borderBottom: "2px solid",
+              borderColor: isActive(pathname, item.href)
+                ? "#fff"
+                : "transparent",
+              opacity: isActive(pathname, item.href) ? 1 : 0.9,
               "&:hover": {
-                opacity: 0.8,
+                color: "rgba(255,255,255,0.9)",
+                borderColor: "rgba(255,255,255,0.3)",
               },
             }}
           >
@@ -125,7 +68,7 @@ const MenuItems = () => {
             {item.hasDropdown && <span style={{ marginLeft: 4 }}>+</span>}
           </Link>
 
-          {item.hasDropdown && item.dropdownItems && (
+          {item.hasDropdown && item.subItems && (
             <Menu
               anchorEl={anchorEl}
               open={openMenu === item.label}
@@ -161,10 +104,10 @@ const MenuItems = () => {
                 },
               }}
             >
-              {item.dropdownItems.map((dropdownItem, idx) => (
+              {item.subItems.map((subItem, idx) => (
                 <MenuItem
                   key={idx}
-                  onClick={() => handleMenuItemClick(dropdownItem.href)}
+                  onClick={() => handleMenuItemClick(subItem.href)}
                   sx={{
                     py: 1.5,
                     fontSize: "0.875rem",
@@ -184,7 +127,7 @@ const MenuItems = () => {
                     },
                   }}
                 >
-                  {dropdownItem.label}
+                  {subItem.label}
                 </MenuItem>
               ))}
             </Menu>
