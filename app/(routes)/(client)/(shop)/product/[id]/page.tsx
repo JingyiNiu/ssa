@@ -2,7 +2,7 @@ import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import { Box } from "@mui/material";
 import ProductHero from "./ProductHero";
 import ProductDetails from "./ProductDetails";
-import { Product } from "@/app/components/layout/product-list/product";
+import { ProductDetails as ProductDetailsType } from "./product";
 
 type ProductPageProps = {
   params: Promise<{
@@ -11,7 +11,7 @@ type ProductPageProps = {
 };
 
 // TODO: 后端完成后替换为真实的 API 调用
-async function fetchProductById(id: string): Promise<Product> {
+async function fetchProductById(id: string): Promise<ProductDetailsType> {
   // 预留 API 调用接口
   // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`);
   // if (!response.ok) {
@@ -24,7 +24,7 @@ async function fetchProductById(id: string): Promise<Product> {
   return {
     id: 1,
     category: "wheel",
-    name: "Alloy Wheel X7",
+    name: "Sample Product for demonstration",
     price: 289.0,
     originalPrice: 329.0,
     image: "/images/pics/product-1.jpg",
@@ -45,6 +45,26 @@ async function fetchProductById(id: string): Promise<Product> {
       "/images/pics/product-1.jpg",
       "/images/pics/product-2.jpg",
       "/images/pics/product-3.jpg",
+    ],
+    features: [
+      "Factory original quality for less.",
+      "Direct replacement.",
+      "Installation is identical to factory unit.",
+      "No vehicle modifications required.",
+    ],
+    reviews: [
+      {
+        id: 1,
+        rating: 4.6,
+        comment: "Great product!",
+        createdAt: "2026-01-01",
+      },
+      {
+        id: 2,
+        rating: 4.5,
+        comment: "Good product!",
+        createdAt: "2026-01-02",
+      },
     ],
   };
 }
