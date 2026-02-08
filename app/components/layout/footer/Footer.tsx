@@ -3,8 +3,8 @@
 import { Box, Divider, Link } from "@mui/material";
 import CompanyInfo from "./CompanyInfo";
 import CopyrightSection from "./CopyrightSection";
-import { footerLinks } from "./footer";
 import { FooterSectionTitle } from "./FooterSectionTitle";
+import { footerLinks } from "./footerLinks";
 
 export const Footer = () => {
   return (
