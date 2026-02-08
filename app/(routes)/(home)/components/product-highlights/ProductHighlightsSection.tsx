@@ -2,12 +2,6 @@ import { Box } from "@mui/material";
 import { DealOfTheDay } from "./DealOfTheDay";
 import { BestSellers } from "./BestSellers";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
 
 export const ProductHighlightsSection = () => {
   return (

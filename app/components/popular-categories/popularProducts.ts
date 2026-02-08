@@ -1,36 +1,6 @@
-export interface Product {
-  id: number;
-  category: CategoryType;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  brand?: { name: string; image?: string };
-  stock?: {
-    available: number;
-    sold: number;
-  };
-  description?: string;
-  specifications?: string;
-  rating?: number;
-}
+import { Product } from "../layout/product-list/product";
 
-// 定义产品类别
-export type CategoryType = "wheel" | "tyre" | "accessory";
-
-export interface Category {
-  value: CategoryType;
-  label: string;
-}
-
-export const categories: Category[] = [
-  { value: "wheel", label: "Wheels" },
-  { value: "tyre", label: "Tyres" },
-  { value: "accessory", label: "Accessories" },
-];
-
-// 所有产品数据（添加category字段）
-export const allProducts: Product[] = [
+export const popularProducts: Product[] = [
   // ===== wheel (8) =====
   {
     id: 1,

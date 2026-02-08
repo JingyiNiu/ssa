@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { brandItems } from "./brand";
 
-export const HeroSection = () => {
+export const BrandHero = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   // 默认选中第一个品牌

@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Typography, Card, CardContent } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { Product } from "../../../../components/layout/product-list/product";
 
 interface BestSellerCardProps {
@@ -8,8 +9,15 @@ interface BestSellerCardProps {
 }
 
 export const BestSellerCard = ({ product }: BestSellerCardProps) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/product/${product.id}`);
+  };
+
   return (
     <Card
+      onClick={handleClick}
       sx={{
         display: "flex",
         flexDirection: "row",

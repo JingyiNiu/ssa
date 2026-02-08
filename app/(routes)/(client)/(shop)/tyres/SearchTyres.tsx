@@ -7,7 +7,7 @@ import { searchConfig } from "@/app/(routes)/(home)/components/search-section/se
 import SearchIcon from "@mui/icons-material/Search";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 
-export const SearchSection = () => {
+export const SearchTyres = () => {
   const [searchText, setSearchText] = useState("");
   const tyreConfig = searchConfig.tyre;
 
@@ -50,7 +50,7 @@ export const SearchSection = () => {
               variant="h6"
               sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
             >
-              Filter accessories
+              Filter tyres by size
             </Typography>
             <Typography
               variant="body2"
@@ -61,12 +61,12 @@ export const SearchSection = () => {
                 fontSize: "0.8rem",
               }}
             >
-              Search how you know it - try panel, seat cover, etc.
+              Search how you know it - try 2254018, 22540, or just 225
             </Typography>
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                placeholder="Filter accessories..."
+                placeholder="Filter tyres by size..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 variant="outlined"
@@ -77,6 +77,50 @@ export const SearchSection = () => {
                   },
                 }}
               />
+            </Box>
+          </Box>
+
+          {/* 筛选器 */}
+          <Box sx={{ mb: 4 }}>
+            <Typography
+              variant="h6"
+              sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
+            >
+              Filter tyres by specifications
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                mb: 2,
+                fontWeight: 400,
+                color: "grey.300",
+                fontSize: "0.8rem",
+              }}
+            >
+              Narrow down your search using technical specs
+            </Typography>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: tyreConfig.gridColumns,
+                gap: 2,
+                mb: 3,
+                bgcolor: "grey.50",
+                px: 2,
+                py: 1,
+                borderRadius: 1,
+                border: "1px solid #e0e0e0",
+              }}
+            >
+              {tyreConfig.fields.map((field) => (
+                <FilterSelect
+                  key={field.key}
+                  label={field.label}
+                  value={filters[field.key]}
+                  onChange={(value) => handleFilterChange(field.key, value)}
+                  options={field.options}
+                />
+              ))}
             </Box>
           </Box>
 

@@ -2,7 +2,7 @@
 
 import { Box, Typography, Paper } from "@mui/material";
 import React, { useState } from "react";
-import SectionTitle from "../ui/SectionTitle";
+import SectionTitle from "@/app/components/ui/SectionTitle";
 import { stores } from "./dealers";
 import DealerCard from "./DealerCard";
 

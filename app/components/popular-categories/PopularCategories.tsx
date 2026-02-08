@@ -9,7 +9,7 @@ import {
   Tab,
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { allProducts, categories, CategoryType } from "../product-list/product";
+import { allProducts, categories, CategoryType } from "../layout/product-list/product";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { useState } from "react";
 import { PopularProductCard } from "./PopularProductCard";

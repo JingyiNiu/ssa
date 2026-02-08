@@ -1,21 +1,20 @@
-import { Placeholder } from "@/app/components/layout/placeholder/Placeholder";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
-import { HeroSection } from "./HeroSection";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
-import { SearchSection } from "./SearchSection";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
-import FindADealer from "@/app/components/find-a-dealer/FindADealer";
+import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
+import { WheelsHero } from "./WheelsHero";
+import { SearchWheels } from "./SearchWheels";
 
-const page = () => {
+const WheelPage = () => {
   return (
     <Box>
-      <Suspense fallback={<Box sx={{ height: 600 }} />}>
-        <HeroSection />
+      <Suspense fallback={<Box sx={{ height: 500 }} />}>
+        <WheelsHero />
       </Suspense>
       <PopularCategories />
       <Suspense fallback={<Box sx={{ height: 200 }} />}>
-        <SearchSection />
+        <SearchWheels />
       </Suspense>
       <ProductList />
       <FindADealer />
@@ -23,4 +22,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default WheelPage;

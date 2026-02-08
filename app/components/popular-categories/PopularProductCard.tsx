@@ -2,7 +2,7 @@
 
 import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Product } from "../product-list/product";
+import { Product } from "../layout/product-list/product";
 
 interface PopularCardProps {
   product: Product;

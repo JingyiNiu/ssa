@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Typography,
@@ -7,6 +9,7 @@ import {
   LinearProgress,
 } from "@mui/material";
 import { Star, StarBorder, StarHalf } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 import { Product } from "./product";
 
 interface ProductCardProps {
@@ -37,6 +40,7 @@ const RatingStars = ({ rating = 0 }: { rating?: number }) => {
 };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const router = useRouter();
   const totalStock = product.stock
     ? product.stock.available + product.stock.sold
     : 0;
@@ -44,8 +48,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     ? (product.stock.sold / totalStock) * 100
     : 0;
 
+  const handleClick = () => {
+    router.push(`/product/${product.id}`);
+  };
+
   return (
     <Card
+      onClick={handleClick}
       sx={{
         cursor: "pointer",
         transition: "all 0.3s ease",

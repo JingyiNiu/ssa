@@ -1,6 +1,5 @@
 "use client";
 
-import { SlideOverlay } from "@/app/components/ui/SlideOverlay";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +11,7 @@ type WheelTab = {
   icon?: React.ReactNode;
 };
 
-export const HeroSection = () => {
+export const WheelsHero = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
