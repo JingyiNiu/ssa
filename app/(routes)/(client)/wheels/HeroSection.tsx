@@ -15,7 +15,6 @@ type WheelTab = {
 export const HeroSection = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState("steel");
 
   // Tab 配置数据
   const wheelTabs: WheelTab[] = [
@@ -31,13 +30,26 @@ export const HeroSection = () => {
     },
   ];
 
-  // 从 URL 读取 type 参数
+  // 默认选中第一个 tab
+  const [activeTab, setActiveTab] = useState(
+    wheelTabs.length > 0 ? wheelTabs[0].value : "steel"
+  );
+
+  // 从 URL 读取 type 参数，或设置默认值
   useEffect(() => {
     const type = searchParams.get("type");
     if (type === "steel" || type === "alloy") {
       setActiveTab(type);
+    } else if (wheelTabs.length > 0) {
+      // 如果 URL 没有参数，设置第一个 tab 并更新 URL
+      const firstTab = wheelTabs[0].value;
+      setActiveTab(firstTab);
+
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("type", firstTab);
+      router.replace(`/wheels?${params.toString()}`);
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setActiveTab(newValue);

@@ -8,15 +8,26 @@ import { brandItems } from "./brand";
 export const HeroSection = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  // 默认选中第一个品牌
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(
+    brandItems.length > 0 ? brandItems[0].value : null
+  );
 
-  // 从 URL 读取 brand 参数
+  // 从 URL 读取 brand 参数，或设置默认值
   useEffect(() => {
     const brand = searchParams.get("brand");
     if (brand) {
       setSelectedBrand(brand);
+    } else if (brandItems.length > 0) {
+      // 如果 URL 没有参数，设置第一个品牌并更新 URL
+      const firstBrand = brandItems[0].value;
+      setSelectedBrand(firstBrand);
+      
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("brand", firstBrand);
+      router.replace(`/brands?${params.toString()}`);
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   const handleBrandClick = (brandValue: string) => {
     setSelectedBrand(brandValue);
