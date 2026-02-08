@@ -5,6 +5,7 @@ export interface Product {
   price: number;
   originalPrice?: number;
   image: string;
+  images?: string[]; // 多张产品图片（用于产品详情页展示）
   brand?: { name: string; image?: string };
   stock?: {
     available: number;

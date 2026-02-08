@@ -41,6 +41,11 @@ async function fetchProductById(id: string): Promise<Product> {
     specifications:
       "Size: 18x8.5 | PCD: 5x114.3 | Offset: +35 | Finish: Matte Black",
     rating: 4.6,
+    images: [
+      "/images/pics/product-1.jpg",
+      "/images/pics/product-2.jpg",
+      "/images/pics/product-3.jpg",
+    ],
   };
 }
 
