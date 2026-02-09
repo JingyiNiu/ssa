@@ -17,6 +17,7 @@ import {
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useState } from "react";
 import CheckoutDetailsForm from "./CheckoutDetailsForm";
+import { useCartStore } from "@/app/store/cartStore";
 
 interface CheckoutDetailsStepProps {
   onNext: () => void;
@@ -26,6 +27,19 @@ interface CheckoutDetailsStepProps {
 const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
   const [paymentMethod, setPaymentMethod] = useState("check");
   const [shipToDifferent, setShipToDifferent] = useState(false);
+  const { 
+    items, 
+    getSubtotal, 
+    getTax, 
+    getShipping, 
+    getTotal 
+  } = useCartStore();
+
+  // 计算金额
+  const subtotal = getSubtotal();
+  const tax = getTax();
+  const shipping = getShipping();
+  const total = getTotal();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,20 +106,23 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
 
               {/* 产品列表 */}
               <Box sx={{ mb: 2 }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
-                  <Typography variant="body2" color="text.secondary">
-                    2-Piece Slotted Big Brake Kit - Blue × 1
-                  </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    $25.00
-                  </Typography>
-                </Box>
+                {items.map((item) => (
+                  <Box
+                    key={item.product.id}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mb: 1,
+                    }}
+                  >
+                    <Typography variant="body2" color="text.secondary">
+                      {item.product.name} × {item.quantity}
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      ${(item.product.price * item.quantity).toFixed(2)}
+                    </Typography>
+                  </Box>
+                ))}
               </Box>
 
               <Divider sx={{ my: 2 }} />
@@ -125,7 +142,26 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                   variant="body2"
                   sx={{ fontWeight: 600, color: "#d32f2f" }}
                 >
-                  $25.00
+                  ${subtotal.toFixed(2)}
+                </Typography>
+              </Box>
+
+              {/* GST */}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  mb: 1.5,
+                }}
+              >
+                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  GST (15%)
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600 }}
+                >
+                  ${tax.toFixed(2)}
                 </Typography>
               </Box>
 
@@ -143,10 +179,18 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                   Shipping
                 </Typography>
                 <Typography variant="body2">
-                  Flat rate:{" "}
-                  <Box component="span" sx={{ color: "#d32f2f" }}>
-                    $10.00
-                  </Box>
+                  {shipping === 0 ? (
+                    <Box component="span" sx={{ color: "success.main", fontWeight: 600 }}>
+                      FREE
+                    </Box>
+                  ) : (
+                    <>
+                      Flat rate:{" "}
+                      <Box component="span" sx={{ color: "#d32f2f", fontWeight: 600 }}>
+                        ${shipping.toFixed(2)}
+                      </Box>
+                    </>
+                  )}
                 </Typography>
               </Box>
 
@@ -168,7 +212,7 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                   variant="h6"
                   sx={{ fontWeight: "bold", color: "#d32f2f" }}
                 >
-                  $35.00
+                  ${total.toFixed(2)}
                 </Typography>
               </Box>
 
@@ -277,9 +321,23 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
               </Typography>
 
               {/* Place Order 按钮 */}
-              <ActionButton fullWidth type="submit">
+              <ActionButton 
+                fullWidth 
+                type="submit"
+                disabled={items.length === 0}
+              >
                 Place Order
               </ActionButton>
+              
+              {items.length === 0 && (
+                <Typography
+                  variant="caption"
+                  color="error"
+                  sx={{ display: "block", mt: 1, textAlign: "center" }}
+                >
+                  Your cart is empty
+                </Typography>
+              )}
             </Box>
           </Box>
         </Box>

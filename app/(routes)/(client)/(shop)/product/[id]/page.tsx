@@ -22,7 +22,7 @@ async function fetchProductById(id: string): Promise<ProductDetailsType> {
 
   // 临时模拟数据
   return {
-    id: 1,
+    id: "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
     category: "wheel",
     name: "Sample Product for demonstration",
     price: 289.0,
@@ -54,13 +54,13 @@ async function fetchProductById(id: string): Promise<ProductDetailsType> {
     ],
     reviews: [
       {
-        id: 1,
+        id: "rev-a1b2c3d4-e5f6-4a7b-8c9d-111111111111",
         rating: 4.6,
         comment: "Great product!",
         createdAt: "2026-01-01",
       },
       {
-        id: 2,
+        id: "rev-b2c3d4e5-f6a7-4b8c-9d0e-222222222222",
         rating: 4.5,
         comment: "Good product!",
         createdAt: "2026-01-02",

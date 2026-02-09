@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import StarIcon from "@mui/icons-material/Star";
 import { ActionButton } from "@/app/components/ui/ActionButton";
+import { useCartStore } from "@/app/store/cartStore";
 
 interface ProductInfoProps {
   product: ProductDetails;
@@ -20,6 +21,8 @@ interface ProductInfoProps {
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
+  const { addItem, getItemQuantity } = useCartStore();
+  const cartQuantity = getItemQuantity(product.id);
 
   // 获取最大可用库存
   const maxStock = product.stock?.available || 0;
@@ -36,6 +39,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     } else if (type === "decrease" && quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    addItem(product, quantity);
   };
 
   return (
@@ -172,6 +179,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </Typography>
         )}
 
+        {/* 选择数量添加到购物车 */}
         <Box
           sx={{
             display: "flex",
@@ -211,7 +219,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </Box>
 
           {/* 添加到购物车按钮 */}
-          <ActionButton sx={{ flexGrow: 1 }} disabled={maxStock === 0}>
+          <ActionButton 
+            sx={{ flexGrow: 1 }} 
+            disabled={maxStock === 0}
+            onClick={handleAddToCart}
+          >
             {maxStock === 0 ? "Out of Stock" : "Add To Cart"}
           </ActionButton>
         </Box>

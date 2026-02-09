@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   category: CategoryType;
   name: string;
   price: number;
@@ -34,7 +34,7 @@ export const categories: Category[] = [
 export const allProducts: Product[] = [
   // ===== wheel (8) =====
   {
-    id: 1,
+    id: "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
     category: "wheel",
     name: "All-Terrain Wheel Pro",
     description:
@@ -47,7 +47,7 @@ export const allProducts: Product[] = [
     rating: 4.5,
   },
   {
-    id: 2,
+    id: "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
     category: "wheel",
     name: "Urban Performance Wheel",
     description:
@@ -59,7 +59,7 @@ export const allProducts: Product[] = [
     rating: 4.2,
   },
   {
-    id: 3,
+    id: "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
     category: "wheel",
     name: "Rugged Steel Wheel",
     description:
@@ -72,7 +72,7 @@ export const allProducts: Product[] = [
     rating: 4.8,
   },
   {
-    id: 4,
+    id: "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
     category: "wheel",
     name: "Lightweight Alloy Wheel",
     description:
@@ -84,7 +84,7 @@ export const allProducts: Product[] = [
     rating: 3.9,
   },
   {
-    id: 5,
+    id: "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
     category: "wheel",
     name: "Off-Road Sport Wheel",
     description:
@@ -97,7 +97,7 @@ export const allProducts: Product[] = [
     rating: 4.1,
   },
   {
-    id: 6,
+    id: "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
     category: "wheel",
     name: "Heavy Duty Wheel X",
     description:
@@ -109,7 +109,7 @@ export const allProducts: Product[] = [
     rating: 4.9,
   },
   {
-    id: 7,
+    id: "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
     category: "wheel",
     name: "Classic Road Wheel",
     description:
@@ -121,7 +121,7 @@ export const allProducts: Product[] = [
     rating: 4.3,
   },
   {
-    id: 8,
+    id: "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
     category: "wheel",
     name: "Premium Matte Wheel",
     description:
@@ -135,7 +135,7 @@ export const allProducts: Product[] = [
 
   // ===== tyre (8) =====
   {
-    id: 9,
+    id: "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
     category: "tyre",
     name: "High Grip Tyre",
     description:
@@ -148,7 +148,7 @@ export const allProducts: Product[] = [
     rating: 4.7,
   },
   {
-    id: 10,
+    id: "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
     category: "tyre",
     name: "All-Season Tyre",
     description:
@@ -160,7 +160,7 @@ export const allProducts: Product[] = [
     rating: 4.4,
   },
   {
-    id: 11,
+    id: "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
     category: "tyre",
     name: "Performance Road Tyre",
     description:
@@ -172,7 +172,7 @@ export const allProducts: Product[] = [
     rating: 4.9,
   },
   {
-    id: 12,
+    id: "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
     category: "tyre",
     name: "Economy City Tyre",
     description: "Cost-effective tyre offering smooth and quiet city driving.",
@@ -183,7 +183,7 @@ export const allProducts: Product[] = [
     rating: 4.0,
   },
   {
-    id: 13,
+    id: "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
     category: "tyre",
     name: "Touring Comfort Tyre",
     description:
@@ -196,7 +196,7 @@ export const allProducts: Product[] = [
     rating: 4.2,
   },
   {
-    id: 14,
+    id: "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
     category: "tyre",
     name: "Sport Handling Tyre",
     description:
@@ -208,7 +208,7 @@ export const allProducts: Product[] = [
     rating: 4.6,
   },
   {
-    id: 15,
+    id: "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
     category: "tyre",
     name: "Daily Drive Tyre",
     description:
@@ -220,7 +220,7 @@ export const allProducts: Product[] = [
     rating: 3.8,
   },
   {
-    id: 16,
+    id: "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
     category: "tyre",
     name: "Premium Touring Tyre",
     description:
@@ -234,7 +234,7 @@ export const allProducts: Product[] = [
 
   // ===== accessory (8) =====
   {
-    id: 17,
+    id: "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
     category: "accessory",
     name: "Compact Utility Kit",
     description:
@@ -246,7 +246,7 @@ export const allProducts: Product[] = [
     rating: 4.0,
   },
   {
-    id: 18,
+    id: "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
     category: "accessory",
     name: "Essential Auto Accessory",
     description:
@@ -259,7 +259,7 @@ export const allProducts: Product[] = [
     rating: 4.3,
   },
   {
-    id: 19,
+    id: "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
     category: "accessory",
     name: "Multi-Purpose Car Tool",
     description:
@@ -271,7 +271,7 @@ export const allProducts: Product[] = [
     rating: 4.6,
   },
   {
-    id: 20,
+    id: "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
     category: "accessory",
     name: "Budget Vehicle Add-on",
     description: "Affordable add-on offering practical everyday value.",
@@ -282,7 +282,7 @@ export const allProducts: Product[] = [
     rating: 3.9,
   },
   {
-    id: 21,
+    id: "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
     category: "accessory",
     name: "Premium Vehicle Add-on",
     description:
@@ -294,7 +294,7 @@ export const allProducts: Product[] = [
     rating: 4.1,
   },
   {
-    id: 22,
+    id: "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
     category: "accessory",
     name: "Advanced Car Accessory",
     description:
@@ -307,7 +307,7 @@ export const allProducts: Product[] = [
     rating: 4.7,
   },
   {
-    id: 23,
+    id: "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
     category: "accessory",
     name: "Everyday Car Essential",
     description: "Reliable everyday essential suitable for all vehicle types.",
@@ -318,7 +318,7 @@ export const allProducts: Product[] = [
     rating: 4.0,
   },
   {
-    id: 24,
+    id: "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
     category: "accessory",
     name: "Professional Auto Accessory",
     description:

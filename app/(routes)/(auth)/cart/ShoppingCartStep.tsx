@@ -17,41 +17,33 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { ActionButton } from "@/app/components/ui/ActionButton";
+import { useCartStore } from "@/app/store/cartStore";
 
 interface ShoppingCartStepProps {
   onNext: () => void;
 }
 
-// 临时模拟数据
-const mockCartItems = [
-  {
-    id: 1,
-    name: "Alloy Wheel X7",
-    price: 289.0,
-    quantity: 2,
-    image: "/images/pics/product-1.jpg",
-  },
-  {
-    id: 2,
-    name: "Premium Brake Pad Set",
-    price: 159.0,
-    quantity: 1,
-    image: "/images/pics/product-2.jpg",
-  },
-];
-
 const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
+  const { 
+    items, 
+    removeItem, 
+    incrementQuantity, 
+    decrementQuantity, 
+    getSubtotal,
+    getTax,
+    getShipping,
+    getTotal
+  } = useCartStore();
+
   // 计算总计
-  const subtotal = mockCartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-  const tax = subtotal * 0.15; // 假设 15% 税率
-  const total = subtotal + tax;
+  const subtotal = getSubtotal();
+  const tax = getTax();
+  const shipping = getShipping();
+  const total = getTotal();
 
   return (
     <Box>
-      {mockCartItems.length === 0 ? (
+      {items.length === 0 ? (
         <Box sx={{ p: 4, textAlign: "center" }}>
           <Typography variant="h6" color="text.secondary">
             Your cart is empty
@@ -83,16 +75,16 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {mockCartItems.map((item) => (
-                  <TableRow key={item.id}>
+                {items.map((item) => (
+                  <TableRow key={item.product.id}>
                     <TableCell>
                       <Box
                         sx={{ display: "flex", alignItems: "center", gap: 2 }}
                       >
                         <Box
                           component="img"
-                          src={item.image}
-                          alt={item.name}
+                          src={item.product.image}
+                          alt={item.product.name}
                           sx={{
                             width: 80,
                             height: 80,
@@ -101,13 +93,13 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                           }}
                         />
                         <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                          {item.name}
+                          {item.product.name}
                         </Typography>
                       </Box>
                     </TableCell>
                     <TableCell align="center">
                       <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                        ${item.price.toFixed(2)}
+                        ${item.product.price.toFixed(2)}
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
@@ -119,7 +111,10 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                           borderRadius: 1,
                         }}
                       >
-                        <IconButton size="small">
+                        <IconButton 
+                          size="small"
+                          onClick={() => decrementQuantity(item.product.id)}
+                        >
                           <RemoveIcon fontSize="small" />
                         </IconButton>
                         <Typography
@@ -127,7 +122,10 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                         >
                           {item.quantity}
                         </Typography>
-                        <IconButton size="small">
+                        <IconButton 
+                          size="small"
+                          onClick={() => incrementQuantity(item.product.id)}
+                        >
                           <AddIcon fontSize="small" />
                         </IconButton>
                       </Box>
@@ -137,11 +135,15 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                         variant="body1"
                         sx={{ fontWeight: 600, color: "#d32f2f" }}
                       >
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ${(item.product.price * item.quantity).toFixed(2)}
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
-                      <IconButton color="error" size="small">
+                      <IconButton 
+                        color="error" 
+                        size="small"
+                        onClick={() => removeItem(item.product.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
@@ -191,6 +193,26 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                     ${tax.toFixed(2)}
                   </Typography>
                 </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    mb: 1,
+                  }}
+                >
+                  <Typography variant="body1" color="text.secondary">
+                    Shipping:
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                    {shipping === 0 ? (
+                      <Box component="span" sx={{ color: "success.main" }}>
+                        FREE
+                      </Box>
+                    ) : (
+                      `$${shipping.toFixed(2)}`
+                    )}
+                  </Typography>
+                </Box>
                 <Divider sx={{ my: 2 }} />
                 <Box
                   sx={{
@@ -209,7 +231,11 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                     ${total.toFixed(2)}
                   </Typography>
                 </Box>
-                <ActionButton fullWidth onClick={onNext}>
+                <ActionButton 
+                  fullWidth 
+                  onClick={onNext}
+                  disabled={items.length === 0}
+                >
                   Proceed to Checkout
                 </ActionButton>
               </Box>

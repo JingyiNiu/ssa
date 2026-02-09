@@ -7,7 +7,7 @@ export interface ProductDetails extends Product {
 }
 
 export interface Review {
-  id: number;
+  id: string;
   rating: number;
   comment: string;
   createdAt: string;

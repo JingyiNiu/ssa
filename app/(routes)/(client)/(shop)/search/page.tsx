@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { SelectChangeEvent } from "@mui/material";
 import {
@@ -15,7 +15,7 @@ import { ProductGrid } from "./ProductGrid";
 import { EmptySearchState } from "./EmptySearchState";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 
-const SearchPage = () => {
+const SearchContent = () => {
   const searchParams = useSearchParams();
 
   // 从URL读取搜索词用于显示（不用于过滤）
@@ -108,7 +108,7 @@ const SearchPage = () => {
     sortBy !== "relevance";
 
   return (
-    <Box data-testid="search-page">
+    <>
       <SearchHero />
       <Box sx={{ my: 8 }} className="container mx-auto">
         {/* 过滤和排序栏 */}
@@ -147,6 +147,16 @@ const SearchPage = () => {
       </Box>
 
       <FindADealer />
+    </>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Box data-testid="search-page">
+      <Suspense fallback={<Box sx={{ minHeight: "50vh" }} />}>
+        <SearchContent />
+      </Suspense>
     </Box>
   );
 };
