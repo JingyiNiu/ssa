@@ -28,7 +28,7 @@ const MenuItems = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", gap: 6 }}>
+    <Box sx={{ display: "flex", gap: { xs: 2, md: 5, lg: 6 } }}>
       {menuItems.map((item, index) => (
         <Box key={index} sx={{ position: "relative" }}>
           <Link

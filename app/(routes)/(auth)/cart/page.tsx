@@ -3,7 +3,7 @@ import CartSteps from "./CartSteps";
 
 const CartPage = () => {
   return (
-    <Box sx={{ minHeight: "100vh", py: 4 }} data-testid="cart-page">
+    <Box sx={{ py: 4 }} data-testid="cart-page">
       <CartSteps />
     </Box>
   );

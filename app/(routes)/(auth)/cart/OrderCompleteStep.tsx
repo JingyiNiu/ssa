@@ -4,9 +4,13 @@ import { Box, Typography, Paper, Button, Divider } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/store/cartStore";
 
 const OrderCompleteStep = () => {
   const router = useRouter();
+  const getTotal = useCartStore((state) => state.getTotal);
+  const totalAmount = getTotal();
+  
   const orderNumber = `SSA-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
   const orderDate = new Date().toLocaleDateString("en-US", {
     year: "numeric",
@@ -77,7 +81,7 @@ const OrderCompleteStep = () => {
               variant="body2"
               sx={{ fontWeight: 600, color: "#d32f2f" }}
             >
-              $825.70
+              ${totalAmount.toFixed(2)}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>

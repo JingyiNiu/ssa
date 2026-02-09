@@ -8,12 +8,14 @@ export const WebNavigation = () => {
       sx={{
         backgroundColor: "primary.main",
         color: "white",
-        px: 4,
+        px: { xs: 2, md: 3, lg: 6 },
         position: "absolute",
         left: 0,
         right: 0,
         top: "80%",
         zIndex: 20,
+        mx: { xs: 0, md: 6, lg: 10 },
+        boxShadow: "0 8px 12px rgba(0, 0, 0, 0.1)",
       }}
       data-testid="web-navigation"
     >

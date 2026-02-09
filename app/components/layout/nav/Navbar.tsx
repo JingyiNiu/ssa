@@ -8,7 +8,18 @@ import { WebNavigation } from "./WebNavigation";
 
 export const Navbar = () => {
   return (
-    <Box data-testid="navbar">
+    <Box
+      data-testid="navbar"
+      sx={{
+        position: "sticky",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        backgroundColor: "white",
+        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.08)",
+      }}
+    >
       <Box
         className="container mx-auto"
         data-testid="header-container"
