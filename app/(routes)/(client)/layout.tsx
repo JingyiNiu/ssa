@@ -20,6 +20,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           flex: 1,
           width: "100%",
         }}
+        data-testid="client-layout-main"
       >
         {children}
       </Box>

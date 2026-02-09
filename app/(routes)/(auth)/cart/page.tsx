@@ -1,11 +1,10 @@
-import { Placeholder } from "@/app/components/layout/placeholder/Placeholder";
 import { Box } from "@mui/material";
-import React from "react";
+import CartSteps from "./CartSteps";
 
 const CartPage = () => {
   return (
-    <Box>
-      <Placeholder title="Cart" />
+    <Box sx={{ minHeight: "100vh", py: 4 }} data-testid="cart-page">
+      <CartSteps />
     </Box>
   );
 };
