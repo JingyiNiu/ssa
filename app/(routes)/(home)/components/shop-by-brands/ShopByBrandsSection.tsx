@@ -53,20 +53,23 @@ export const ShopByBrandsSection = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   
-  const getItemsPerPage = () => {
-    if (typeof window !== "undefined") {
-      // if (window.innerWidth < 600) return 1; 
-      if (window.innerWidth < 900) return 2;
-      return 4; // md+
-    }
-    return 4;
-  };
-
-  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
+  // 初始值设为 4，避免 hydration 不匹配
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   
   React.useEffect(() => {
+    // 设置初始的每页显示数量
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 900) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(4);
+      }
+    };
+    
+    updateItemsPerPage();
+    
     const handleResize = () => {
-      setItemsPerPage(getItemsPerPage());
+      updateItemsPerPage();
       setCurrentPage(0); // 重置到第一页
     };
     

@@ -9,26 +9,57 @@ import {
   Tab,
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { allProducts, categories, CategoryType } from "../product-list/product";
+import { Product } from "../product-list/product";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { useState } from "react";
 import { PopularProductCard } from "./PopularProductCard";
 
-export const PopularCategories = () => {
+interface PopularCategoriesProps {
+  products: Product[];
+}
+
+// 定义排序类型
+type SortType = "top-rated" | "sales" | "latest";
+
+interface SortOption {
+  value: SortType;
+  label: string;
+}
+
+const sortOptions: SortOption[] = [
+  { value: "top-rated", label: "Top Rated" },
+  { value: "sales", label: "Best Sales" },
+  { value: "latest", label: "Latest Products" },
+];
+
+export const PopularCategories = ({ products: allProducts }: PopularCategoriesProps) => {
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down("lg"));
 
   // Tab切换状态
-  const [selectedCategory, setSelectedCategory] =
-    useState<CategoryType>("wheel");
-
-  // 定义分类选项
+  const [selectedSort, setSelectedSort] = useState<SortType>("top-rated");
 
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
 
-  // 根据选中的类别过滤产品
-  const products = allProducts.filter((p) => p.category === selectedCategory);
+  // 根据选中的排序方式处理产品，限制每个分类显示8个产品
+  const products = [...allProducts]
+    .sort((a, b) => {
+      switch (selectedSort) {
+        case "top-rated":
+          // 按评分降序排序
+          return (b.rating || 0) - (a.rating || 0);
+        case "sales":
+          // 按销量降序排序
+          return (b.stock?.sold || 0) - (a.stock?.sold || 0);
+        case "latest":
+          // 按创建时间降序排序（最新的在前）
+          return new Date(b.createdAt || "").getTime() - new Date(a.createdAt || "").getTime();
+        default:
+          return 0;
+      }
+    })
+    .slice(0, 8); // 限制每个分类最多显示8个产品
 
   // 根据屏幕尺寸设置每页显示数量
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -54,12 +85,12 @@ export const PopularCategories = () => {
     : products;
 
   // 处理Tab切换
-  const handleCategoryChange = (
+  const handleSortChange = (
     event: React.SyntheticEvent,
-    newValue: CategoryType
+    newValue: SortType
   ) => {
-    setSelectedCategory(newValue);
-    setCurrentPage(0); // 切换类别时重置页码
+    setSelectedSort(newValue);
+    setCurrentPage(0); // 切换排序时重置页码
   };
 
   return (
@@ -76,12 +107,12 @@ export const PopularCategories = () => {
             mb: 3,
           }}
         >
-          <SectionTitle title="Popular Categories" />
+          <SectionTitle title="Popular Products" />
 
           {/* Tab切换组件 */}
           <Tabs
-            value={selectedCategory}
-            onChange={handleCategoryChange}
+            value={selectedSort}
+            onChange={handleSortChange}
             sx={{
               minHeight: "auto",
               "& .MuiTab-root": {
@@ -101,11 +132,11 @@ export const PopularCategories = () => {
               },
             }}
           >
-            {categories.map((category) => (
+            {sortOptions.map((option) => (
               <Tab
-                key={category.value}
-                label={category.label}
-                value={category.value}
+                key={option.value}
+                label={option.label}
+                value={option.value}
               />
             ))}
           </Tabs>

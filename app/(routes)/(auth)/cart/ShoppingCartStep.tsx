@@ -98,9 +98,28 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                       </Box>
                     </TableCell>
                     <TableCell align="center">
-                      <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                        ${item.product.price.toFixed(2)}
-                      </Typography>
+                      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.5 }}>
+                        {item.product.originalPrice && (
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: "text.secondary",
+                              textDecoration: "line-through",
+                            }}
+                          >
+                            ${item.product.originalPrice.toFixed(2)}
+                          </Typography>
+                        )}
+                        <Typography 
+                          variant="body1" 
+                          sx={{ 
+                            fontWeight: 600,
+                            color: item.product.originalPrice ? "error.main" : "text.primary"
+                          }}
+                        >
+                          ${item.product.price.toFixed(2)}
+                        </Typography>
+                      </Box>
                     </TableCell>
                     <TableCell align="center">
                       <Box

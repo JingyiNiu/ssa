@@ -114,12 +114,30 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                     >
                       {item.product.name}
                     </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "primary.main", fontWeight: 600 }}
-                    >
-                      ${item.product.price.toFixed(2)}
-                    </Typography>
+                    
+                    {/* Price with optional original price */}
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      {item.product.originalPrice && (
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: "text.secondary",
+                            textDecoration: "line-through",
+                          }}
+                        >
+                          ${item.product.originalPrice.toFixed(2)}
+                        </Typography>
+                      )}
+                      <Typography
+                        variant="body2"
+                        sx={{ 
+                          color: item.product.originalPrice ? "error.main" : "primary.main", 
+                          fontWeight: 600 
+                        }}
+                      >
+                        ${item.product.price.toFixed(2)}
+                      </Typography>
+                    </Box>
 
                     {/* Quantity Controls */}
                     <Box

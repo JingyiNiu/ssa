@@ -5,14 +5,22 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
-import { allProducts, Product } from "../../../../components/layout/product-list/product";
+import { Product } from "../../../../components/layout/product-list/product";
 import { ActionButton } from "@/app/components/ui/ActionButton";
+import { useCartStore } from "@/app/store/cartStore";
 
-export const DealOfTheDay = () => {
-  const deals: Product[] = allProducts.slice(0, 3);
+interface DealOfTheDayProps {
+  products: Product[];
+}
+
+export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
+  const deals: Product[] = products; // 直接使用传入的产品（已从每个 category 选择）
+  const { addItem } = useCartStore();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
+
+  const currentDeal = deals[currentIndex];
 
   const handlePrev = () => {
     setDirection("left");
@@ -24,7 +32,9 @@ export const DealOfTheDay = () => {
     setCurrentIndex((prev) => (prev < deals.length - 1 ? prev + 1 : 0));
   };
 
-  const currentDeal = deals[currentIndex];
+  const handleAddToCart = () => {
+    addItem(currentDeal, 1);
+  };
 
   return (
     <Box
@@ -140,21 +150,46 @@ export const DealOfTheDay = () => {
             {currentDeal.name}
           </Typography>
 
-          <Typography
-            variant="h6"
+          {/* 价格显示 */}
+          <Box
             sx={{
-              fontWeight: 600,
-              textAlign: "center",
-              color: "primary.main",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 1,
               mb: 2,
             }}
           >
-            ${currentDeal.price.toFixed(2)}
-          </Typography>
+            {currentDeal.originalPrice && (
+              <Typography
+                variant="body2"
+                sx={{
+                  textDecoration: "line-through",
+                  color: "text.secondary",
+                  fontWeight: 400,
+                }}
+              >
+                ${currentDeal.originalPrice.toFixed(2)}
+              </Typography>
+            )}
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                color: "primary.main",
+              }}
+            >
+              ${currentDeal.price.toFixed(2)}
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
-      <ActionButton endIcon={<ArrowForwardIcon />} fullWidth>
+      <ActionButton 
+        endIcon={<ArrowForwardIcon />} 
+        fullWidth
+        onClick={handleAddToCart}
+      >
         Add To Cart
       </ActionButton>
     </Box>

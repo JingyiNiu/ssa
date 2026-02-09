@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import ProductHero from "./ProductHero";
 import ProductDetails from "./ProductDetails";
 import { ProductDetails as ProductDetailsType } from "./product";
+import { brands } from "@/app/components/layout/product-list/product";
 
 type ProductPageProps = {
   params: Promise<{
@@ -22,16 +23,13 @@ async function fetchProductById(id: string): Promise<ProductDetailsType> {
 
   // 临时模拟数据
   return {
-    id: "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    id: "sample-product-demo-0000-0000-000000000000",
     category: "wheel",
     name: "Sample Product for demonstration",
     price: 289.0,
     originalPrice: 329.0,
     image: "/images/pics/product-1.jpg",
-    brand: {
-      name: "SSA Wheels",
-      image: "/images/logo/logo2.png",
-    },
+    brand: brands[0],
     stock: {
       available: 12,
       sold: 48,
@@ -54,13 +52,13 @@ async function fetchProductById(id: string): Promise<ProductDetailsType> {
     ],
     reviews: [
       {
-        id: "rev-a1b2c3d4-e5f6-4a7b-8c9d-111111111111",
+        id: "rev-sample-demo-0000-0000-111111111111",
         rating: 4.6,
         comment: "Great product!",
         createdAt: "2026-01-01",
       },
       {
-        id: "rev-b2c3d4e5-f6a7-4b8c-9d0e-222222222222",
+        id: "rev-sample-demo-0000-0000-222222222222",
         rating: 4.5,
         comment: "Good product!",
         createdAt: "2026-01-02",

@@ -112,13 +112,44 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
-                      mb: 1,
+                      alignItems: "flex-start",
+                      mb: 2,
                     }}
                   >
-                    <Typography variant="body2" color="text.secondary">
-                      {item.product.name} × {item.quantity}
-                    </Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    <Box sx={{ flex: 1 }}>
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                        {item.product.name} × {item.quantity}
+                      </Typography>
+                      {item.product.originalPrice && (
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: "text.secondary",
+                              textDecoration: "line-through",
+                            }}
+                          >
+                            ${item.product.originalPrice.toFixed(2)} each
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: "error.main",
+                              fontWeight: 600,
+                            }}
+                          >
+                            ${item.product.price.toFixed(2)} each
+                          </Typography>
+                        </Box>
+                      )}
+                    </Box>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        fontWeight: 600,
+                        color: item.product.originalPrice ? "error.main" : "text.primary"
+                      }}
+                    >
                       ${(item.product.price * item.quantity).toFixed(2)}
                     </Typography>
                   </Box>
