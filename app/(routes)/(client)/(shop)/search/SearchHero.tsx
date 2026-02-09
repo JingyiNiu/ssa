@@ -3,13 +3,13 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-export const TyresHero = () => {
+export const SearchHero = () => {
   return (
     <Box
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: 400,
+        height: 200,
       }}
       data-testid="hero-section"
     >
@@ -20,7 +20,7 @@ export const TyresHero = () => {
           height: "100%",
           backgroundImage: "url(/images/pics/tyres.png)",
           backgroundSize: "cover",
-          backgroundPosition: "left",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
         data-testid="hero-slides-container"
