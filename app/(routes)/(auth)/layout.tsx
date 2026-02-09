@@ -11,9 +11,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        py: 6,
+        py: { xs: 1, md: 10 },
       }}
-      data-testid="client-layout"
+      data-testid="auth-layout"
     >
       <Box
         component="main"
@@ -21,6 +21,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           flex: 1,
           width: "100%",
         }}
+        data-testid="auth-layout-main"
       >
         {children}
       </Box>

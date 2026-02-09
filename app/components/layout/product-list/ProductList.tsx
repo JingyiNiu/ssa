@@ -5,10 +5,13 @@ import { ProductCard } from "./ProductCard";
 import { useState } from "react";
 import { allProducts, Product } from "./product";
 
-export const ProductList = () => {
-  const [products, setProducts] = useState<Product[]>(allProducts);
+export const ProductList = ({ products }: { products: Product[] }) => {
   return (
-    <Box className="container mx-auto" data-testid="product-list" sx={{ mb: 4 }}>
+    <Box
+      className="container mx-auto"
+      data-testid="product-list"
+      sx={{ mb: 4 }}
+    >
       <Box
         sx={{
           display: "grid",

@@ -3,31 +3,35 @@
 import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { DealOfTheDay } from "./DealOfTheDay";
-import { allProducts, Product } from "../../../../components/layout/product-list/product";
+import { Product } from "../../../../components/layout/product-list/product";
 import { BestSellerCard } from "./BestSellerCard";
 import { useState, useEffect } from "react";
 
-export const BestSellers = () => {
+interface BestSellersProps {
+  products: Product[];
+}
 
-  const products: Product[] = allProducts.slice(0, 18);
+export const BestSellers = ({ products }: BestSellersProps) => {
+  // 直接使用传入的产品（已在父组件筛选和排序）
 
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
   
   // 响应式每页显示数量：移动端3个，桌面6个
-  const getItemsPerPage = () => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 600 ? 3 : 6; // xs: 3, sm+: 6
-    }
-    return 6;
-  };
-
-  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
+  // 初始值设为 6，避免 hydration 不匹配
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   
   useEffect(() => {
+    // 设置初始的每页显示数量
+    const updateItemsPerPage = () => {
+      const newItemsPerPage = window.innerWidth < 600 ? 3 : 6;
+      setItemsPerPage(newItemsPerPage);
+    };
+    
+    updateItemsPerPage();
+    
     const handleResize = () => {
-      setItemsPerPage(getItemsPerPage());
+      updateItemsPerPage();
       setCurrentPage(0); // 重置到第一页
     };
     

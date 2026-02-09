@@ -1,4 +1,7 @@
+"use client";
+
 import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { Product } from "../product-list/product";
 
 interface PopularCardProps {
@@ -6,8 +9,15 @@ interface PopularCardProps {
 }
 
 export const PopularProductCard = ({ product }: PopularCardProps) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/product/${product.id}`);
+  };
+
   return (
     <Card
+      onClick={handleClick}
       sx={{
         cursor: "pointer",
         transition: "all 0.3s ease",

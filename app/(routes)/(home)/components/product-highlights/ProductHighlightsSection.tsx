@@ -1,15 +1,14 @@
 import { Box } from "@mui/material";
 import { DealOfTheDay } from "./DealOfTheDay";
 import { BestSellers } from "./BestSellers";
+import { Product } from "@/app/components/layout/product-list/product";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+interface ProductHighlightsSectionProps {
+  dealOfTheDayProducts: Product[];
+  bestSellersProducts: Product[];
 }
 
-export const ProductHighlightsSection = () => {
+export const ProductHighlightsSection = ({ dealOfTheDayProducts, bestSellersProducts }: ProductHighlightsSectionProps) => {
   return (
     <Box sx={{ mb: 10 }} data-testid="product-highlights-section">
       <Box className="container mx-auto">
@@ -20,8 +19,8 @@ export const ProductHighlightsSection = () => {
             gap: 4,
           }}
         >
-          <DealOfTheDay />
-          <BestSellers />
+          <DealOfTheDay products={dealOfTheDayProducts} />
+          <BestSellers products={bestSellersProducts} />
         </Box>
       </Box>
     </Box>

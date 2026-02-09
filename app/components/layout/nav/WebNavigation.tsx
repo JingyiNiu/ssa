@@ -14,10 +14,6 @@ export const WebNavigation = () => {
         right: 0,
         top: "80%",
         zIndex: 20,
-        mx: {
-          xs: 0,
-          xl: 10,
-        },
       }}
       data-testid="web-navigation"
     >
