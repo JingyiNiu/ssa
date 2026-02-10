@@ -9,6 +9,7 @@ import {
   allProducts,
   Product,
 } from "@/app/components/layout/product-list/product";
+import { BrandList } from "./BrandList";
 
 // 模拟 API 调用获取产品数据
 async function fetchProducts(): Promise<Product[]> {
@@ -26,14 +27,8 @@ async function fetchProducts(): Promise<Product[]> {
 const page = () => {
   return (
     <Box>
-      <Suspense fallback={<Box sx={{ height: 600 }} />}>
-        <BrandHero />
-      </Suspense>
-      {/* <PopularCategories /> */}
-      <Suspense fallback={<Box sx={{ height: 200 }} />}>
-        <SearchBrands />
-      </Suspense>
-      {/* <ProductList /> */}
+      <BrandHero />
+      <BrandList />
       <FindADealer />
     </Box>
   );

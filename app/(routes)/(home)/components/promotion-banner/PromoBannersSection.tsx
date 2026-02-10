@@ -6,6 +6,7 @@ export const PromoBannersSection = () => {
   const banners: Banner[] = [
     {
       id: 1,
+      productId: "3f9a1c2e-6b4f-4a6e-9d8a-1b2c3d4e5f60",
       title: "100% Approved",
       subtitle: "by customers",
       description:
@@ -15,6 +16,7 @@ export const PromoBannersSection = () => {
     },
     {
       id: 2,
+      productId: "a7c2e9b4-1d53-4f88-8c0a-9e6d2b7a4c11",
       title: "Get 20% off",
       subtitle: "your first order when you join our newsletter",
       description:

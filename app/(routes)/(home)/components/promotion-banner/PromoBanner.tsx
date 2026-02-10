@@ -1,13 +1,21 @@
+"use client";
+
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { Box, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Banner } from "./banner";
+import { useRouter } from "next/navigation";
 
 interface PromoBannerProps {
   banner: Banner;
 }
 
 export const PromoBanner = ({ banner }: PromoBannerProps) => {
+  const router = useRouter();
+  
+  const handleClick = () => {
+    router.push(`/product/${banner.productId}`);
+  };
   return (
     <Box
       sx={{
@@ -99,6 +107,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
             variant="contained"
             endIcon={<ArrowForwardIcon />}
             sx={{ width: { xs: "100%", md: "auto" } }}
+            onClick={handleClick}
           >
             {banner.buttonText}
           </ActionButton>

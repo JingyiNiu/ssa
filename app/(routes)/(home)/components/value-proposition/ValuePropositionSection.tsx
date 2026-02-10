@@ -1,8 +1,13 @@
-import { Box, Typography } from "@mui/material"
-import React from "react"
-import { OutlineButton } from "@/app/components/ui/OutlineButton"
+"use client";
+
+import { Box, Typography } from "@mui/material";
+import React from "react";
+import { OutlineButton } from "@/app/components/ui/OutlineButton";
+import { useRouter } from "next/navigation";
 
 export const ValuePropositionSection = () => {
+  const router = useRouter();
+
   return (
     <Box
       sx={{
@@ -91,8 +96,8 @@ export const ValuePropositionSection = () => {
             flexWrap: "wrap",
           }}
         >
-          <OutlineButton>Learn More</OutlineButton>
-          <OutlineButton>Our Brands</OutlineButton>
+          <OutlineButton onClick={() => router.push("/about")}>Learn More</OutlineButton>
+          <OutlineButton onClick={() => router.push("/brands")}>Our Brands</OutlineButton>
         </Box>
       </Box>
     </Box>

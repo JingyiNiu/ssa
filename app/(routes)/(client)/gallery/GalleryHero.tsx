@@ -3,7 +3,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-export const AccessoriesHero = () => {
+export const GalleryHero = () => {
   return (
     <Box
       sx={{
@@ -18,7 +18,7 @@ export const AccessoriesHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/accessories.png)",
+          backgroundImage: "url(/images/pics/gallery.png)",
           backgroundSize: "cover",
           backgroundPosition: "bottom",
           backgroundRepeat: "no-repeat",
