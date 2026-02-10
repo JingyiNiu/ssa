@@ -51,6 +51,11 @@ export const menuItems: MenuItemType[] = [
     href: "/accessories",
   },
   {
+    label: "Brands",
+    hasDropdown: false,
+    href: "/brands",
+  },
+  {
     label: "Gallery",
     hasDropdown: false,
     href: "/gallery",

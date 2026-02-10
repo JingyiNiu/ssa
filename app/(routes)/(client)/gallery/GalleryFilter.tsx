@@ -26,7 +26,7 @@ export const GalleryFilter = ({ onFilterChange }: GalleryFilterProps) => {
   };
 
   const categories = [
-    { value: "all", label: "All Images" },
+    { value: "all", label: "All" },
     { value: "wheel", label: "Wheels" },
     { value: "tyre", label: "Tyres" },
     { value: "accessory", label: "Accessories" },

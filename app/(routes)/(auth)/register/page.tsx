@@ -217,27 +217,6 @@ const RegisterPage = () => {
             />
           </Box>
 
-          {/* Company Trading Name */}
-          <Box sx={{ mb: 3 }}>
-            <Typography
-              variant="body2"
-              sx={{
-                fontWeight: 600,
-                mb: 1,
-                color: "text.primary",
-              }}
-            >
-              Company Trading Name
-            </Typography>
-            <TextField
-              fullWidth
-              placeholder="Enter your company trading name (if different)"
-              value={formData.companyTradingName}
-              onChange={handleChange("companyTradingName")}
-              sx={inputStyle}
-            />
-          </Box>
-
           {/* Incorporation Number */}
           <Box sx={{ mb: 3 }}>
             <Typography
