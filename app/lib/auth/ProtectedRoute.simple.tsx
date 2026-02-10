@@ -1,13 +1,13 @@
 /**
  * 简单的受保护路由组件
- * 不依赖 AuthProvider，直接使用 auth 函数
+ * 使用 authStore 进行状态管理
  */
 
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isAuthenticated } from './index';
+import { useAuthStore } from '@/app/store/authStore';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -16,27 +16,25 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   const [isChecking, setIsChecking] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
   const router = useRouter();
+  const isAuth = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
-    // 检查认证状态
-    const checkAuth = () => {
-      const authenticated = isAuthenticated();
-      setIsAuth(authenticated);
+    // authStore 会自动初始化，稍作延迟等待 rehydrate 完成
+    const timer = setTimeout(() => {
       setIsChecking(false);
-
-      if (!authenticated) {
+      
+      if (!isAuth) {
         // 保存当前路径，登录后返回
         if (typeof window !== 'undefined') {
           sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
         }
         router.push('/login');
       }
-    };
+    }, 100); // 100ms 延迟等待 store rehydrate
 
-    checkAuth();
-  }, [router]);
+    return () => clearTimeout(timer);
+  }, [router, isAuth]);
 
   if (isChecking) {
     return fallback || <div>Loading...</div>;

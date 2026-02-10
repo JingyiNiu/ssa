@@ -9,9 +9,12 @@ import {
   Divider,
 } from "@mui/material";
 import { IoClose } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import { MdLogin } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
 import { isActive } from "@/app/utils";
 import { menuItems } from "./nav";
+import { useAuthStore } from "@/app/lib/auth";
 
 type MobileNavigationProps = {
   onClose: () => void;
@@ -20,6 +23,8 @@ type MobileNavigationProps = {
 const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
   const router = useRouter();
   const pathname = usePathname();
+  const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
+  const isHydrated = useAuthStore((state) => state.isHydrated);
 
   const handleNavigation = (href: string) => {
     router.push(href);
@@ -27,7 +32,10 @@ const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
   };
 
   return (
-    <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+      data-testid="mobile-navigation"
+    >
       {/* Header */}
       <Box
         sx={{
@@ -90,6 +98,43 @@ const MobileNavigation = ({ onClose }: MobileNavigationProps) => {
             </ListItemButton>
           </ListItem>
         ))}
+
+        {/* Account / Login Item - 等待 hydration 完成后显示 */}
+        {isHydrated && (
+          <>
+            <Divider sx={{ my: 2 }} />
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation(isLoggedIn ? "/account" : "/login")}
+                sx={{
+                  py: 2,
+                  px: 3,
+                  color: isActive(pathname, isLoggedIn ? "/account" : "/login")
+                    ? "primary.main"
+                    : "text.primary",
+                  "&:hover": {
+                    bgcolor: "primary.light",
+                  },
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                  {isLoggedIn ? (
+                    <FaRegUser size={20} />
+                  ) : (
+                    <MdLogin size={20} />
+                  )}
+                  <ListItemText
+                    primary={isLoggedIn ? "账户" : "登录"}
+                    primaryTypographyProps={{
+                      fontWeight: 600,
+                      fontSize: "1rem",
+                    }}
+                  />
+                </Box>
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
       </List>
 
       <Divider />

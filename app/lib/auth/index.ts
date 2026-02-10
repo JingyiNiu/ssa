@@ -5,6 +5,7 @@
 
 import { loginUser, getCurrentUser } from '../api';
 import type { User, LoginParams } from '../api/services/users';
+import { useAuthStore } from '@/app/store/authStore';
 
 // 重新导出简单的 ProtectedRoute
 export { ProtectedRoute } from './ProtectedRoute.simple';
@@ -12,6 +13,13 @@ export { ProtectedRoute } from './ProtectedRoute.simple';
 const AUTH_TOKEN_KEY = 'authToken';
 const USER_DATA_KEY = 'userData';
 const TOKEN_EXPIRY_KEY = 'tokenExpiry';
+
+/**
+ * 获取 authStore 实例（用于非 React 组件）
+ */
+function getAuthStore() {
+  return useAuthStore.getState();
+}
 
 /**
  * 解码 JWT Token 获取 payload
@@ -61,6 +69,7 @@ export function isTokenExpired(token?: string): boolean {
  * 保存认证信息
  */
 export function saveAuth(token: string, user: User): void {
+  // 1. 保存到 localStorage（向后兼容）
   localStorage.setItem(AUTH_TOKEN_KEY, token);
   localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
   
@@ -68,6 +77,9 @@ export function saveAuth(token: string, user: User): void {
   if (expiry) {
     localStorage.setItem(TOKEN_EXPIRY_KEY, expiry.toString());
   }
+  
+  // 2. 更新 Zustand store
+  getAuthStore().setAuth(token, user);
 }
 
 /**
@@ -95,15 +107,33 @@ export function getUser(): User | null {
  * 清除认证信息（登出）
  */
 export function clearAuth(): void {
+  // 1. 清除 localStorage（向后兼容）
   localStorage.removeItem(AUTH_TOKEN_KEY);
   localStorage.removeItem(USER_DATA_KEY);
   localStorage.removeItem(TOKEN_EXPIRY_KEY);
+  
+  // 2. 清除 Zustand store
+  getAuthStore().clearAuth();
 }
 
 /**
  * 检查是否已登录（且 token 未过期）
  */
 export function isAuthenticated(): boolean {
+  // 优先从 store 读取
+  const storeState = getAuthStore();
+  if (storeState.isAuthenticated && storeState.token) {
+    // 双重检查 token 是否真的有效
+    if (!isTokenExpired(storeState.token)) {
+      return true;
+    } else {
+      // Token 已过期，清除认证信息
+      clearAuth();
+      return false;
+    }
+  }
+  
+  // 向后兼容：检查 localStorage
   const token = getToken();
   if (!token) return false;
   return !isTokenExpired(token);
@@ -146,8 +176,11 @@ export async function validateAndRefreshUser(): Promise<User | null> {
     // 验证 token 并获取最新用户信息
     const user = await getCurrentUser(token);
     
-    // 更新用户信息
+    // 更新用户信息到 localStorage（向后兼容）
     localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
+    
+    // 更新 Zustand store
+    getAuthStore().updateUser(user);
     
     return user;
   } catch (error) {
@@ -194,3 +227,8 @@ export function isTokenExpiringSoon(): boolean {
   const remaining = getTokenRemainingTime();
   return remaining > 0 && remaining < 10 * 60 * 1000; // 10 分钟
 }
+
+/**
+ * 导出 authStore hook，方便 React 组件使用
+ */
+export { useAuthStore } from '@/app/store/authStore';

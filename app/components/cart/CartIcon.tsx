@@ -5,12 +5,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useCartStore } from "@/app/store/cartStore";
 import { useState, useEffect } from "react";
 import { CartDrawer } from "./CartDrawer";
+import { IoCart } from "react-icons/io5";
 
 interface CartIconProps {
   color?: string;
 }
 
-export const CartIcon = ({ color = "inherit" }: CartIconProps) => {
+export const CartIcon = ({ color = "primary.main" }: CartIconProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const totalItems = useCartStore((state) => state.getTotalItems());
@@ -44,12 +45,20 @@ export const CartIcon = ({ color = "inherit" }: CartIconProps) => {
         color="error"
         sx={{
           "& .MuiBadge-badge": {
+            fontSize: "0.65rem",
+            height: "16px",
+            minWidth: "16px",
+            padding: "0 4px",
             bgcolor: "primary.main",
             color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            lineHeight: 1,
           },
         }}
       >
-        <ShoppingCartIcon />
+        <IoCart />
       </Badge>
       </IconButton>
       

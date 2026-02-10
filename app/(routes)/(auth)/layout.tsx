@@ -3,7 +3,7 @@
 import { Box } from "@mui/material";
 import { ReactNode, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { isAuthenticated } from "@/app/lib/auth";
+import { useAuthStore } from "@/app/lib/auth";
 
 type ClientLayoutProps = {
   children: ReactNode;
@@ -12,17 +12,26 @@ type ClientLayoutProps = {
 export default function AuthLayout({ children }: ClientLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
     const isLoginOrRegisterPage = pathname === '/login' || pathname === '/register';
     
+    console.log('🔐 AuthLayout check:', {
+      pathname,
+      isLoginOrRegisterPage,
+      isLoggedIn,
+      willRedirect: isLoginOrRegisterPage && isLoggedIn
+    });
+    
     // 如果是登录/注册页面，且用户已登录，则重定向到首页（反向保护）
-    if (isLoginOrRegisterPage && isAuthenticated()) {
+    if (isLoginOrRegisterPage && isLoggedIn) {
       const redirectPath = sessionStorage.getItem('redirectAfterLogin') || '/';
       sessionStorage.removeItem('redirectAfterLogin');
+      console.log('➡️ AuthLayout redirecting to:', redirectPath);
       router.replace(redirectPath);
     }
-  }, [router, pathname]);
+  }, [router, pathname, isLoggedIn]);
 
   return (
     <Box
