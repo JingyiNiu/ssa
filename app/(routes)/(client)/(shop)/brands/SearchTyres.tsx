@@ -9,11 +9,11 @@ import { ActionButton } from "@/app/components/ui/ActionButton";
 
 export const SearchBrands = () => {
   const [searchText, setSearchText] = useState("");
-  const brandConfig = searchConfig.brand;
+  const tyreConfig = searchConfig.tyre;
 
   // 初始化筛选器状态
   const getInitialFilters = () => {
-    return brandConfig.fields.reduce(
+    return tyreConfig.fields.reduce(
       (acc, field) => {
         acc[field.key] = "";
         return acc;
@@ -50,7 +50,7 @@ export const SearchBrands = () => {
               variant="h6"
               sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
             >
-              Filter brands by name
+              Filter tyres by size
             </Typography>
             <Typography
               variant="body2"
@@ -61,12 +61,12 @@ export const SearchBrands = () => {
                 fontSize: "0.8rem",
               }}
             >
-              Search how you know it - try Michelin, Bridgestone, or just Goodyear
+              Search how you know it - try 2254018, 22540, or just 225
             </Typography>
             <Box sx={{ mb: 3 }}>
               <TextField
                 fullWidth
-                placeholder="Filter brands by name..."
+                placeholder="Filter tyres by size..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 variant="outlined"
@@ -86,7 +86,7 @@ export const SearchBrands = () => {
               variant="h6"
               sx={{ mb: 1, fontWeight: 600, color: "#fff" }}
             >
-              Filter products by category
+              Filter tyres by specifications
             </Typography>
             <Typography
               variant="body2"
@@ -97,12 +97,12 @@ export const SearchBrands = () => {
                 fontSize: "0.8rem",
               }}
             >
-              Narrow down your search using category
+              Narrow down your search using technical specs
             </Typography>
             <Box
               sx={{
                 display: "grid",
-                gridTemplateColumns: brandConfig.gridColumns,
+                gridTemplateColumns: tyreConfig.gridColumns,
                 gap: 2,
                 mb: 3,
                 bgcolor: "grey.50",
@@ -112,7 +112,7 @@ export const SearchBrands = () => {
                 border: "1px solid #e0e0e0",
               }}
             >
-              {brandConfig.fields.map((field) => (
+              {tyreConfig.fields.map((field) => (
                 <FilterSelect
                   key={field.key}
                   label={field.label}

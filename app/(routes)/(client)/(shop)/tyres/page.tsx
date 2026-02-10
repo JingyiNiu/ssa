@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { Suspense } from "react";
-import { TyresHero } from "./TyresHero";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { SearchTyres } from "./SearchTyres";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";

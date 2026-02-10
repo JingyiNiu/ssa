@@ -22,13 +22,37 @@ async function fetchProducts(): Promise<Product[]> {
   // return data;
 
   // 临时返回模拟数据
-  return allProducts.filter((product) => product.category === "accessory");
+  return allProducts;
 }
-const page = () => {
+
+// 从每个分类中取出指定数量的产品
+function getProductsByCategory(products: Product[], countPerCategory: number = 3): Product[] {
+  const categories = ['wheel', 'tyre', 'accessory'] as const;
+  const selectedProducts: Product[] = [];
+
+  categories.forEach(category => {
+    const categoryProducts = products
+      .filter(product => product.category === category)
+      .slice(0, countPerCategory);
+    selectedProducts.push(...categoryProducts);
+  });
+
+  return selectedProducts;
+}
+
+const page = async () => {
+  const allProductsList = await fetchProducts();
+  // 每个分类取3个产品
+  const products = getProductsByCategory(allProductsList, 3);
+  
   return (
     <Box>
-      <BrandHero />
-      <BrandList />
+      <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
+        <BrandHero />
+      </Suspense>
+      <PopularCategories products={products} />
+      <SearchBrands />
+      <ProductList products={products} />
       <FindADealer />
     </Box>
   );

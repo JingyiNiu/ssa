@@ -177,4 +177,31 @@ export const searchConfig: Record<SearchTabType, FilterConfig> = {
       },
     ],
   },
+  brand: {
+    gridColumns: {
+      xs: "1fr",
+      sm: "repeat(2, 1fr)",
+      lg: "repeat(2, 1fr)",
+    },
+    fields: [
+      {
+        key: "name",
+        label: "NAME",
+        options: [
+          { value: "michelin", label: "Michelin" },
+          { value: "bridgestone", label: "Bridgestone" },
+          { value: "goodyear", label: "Goodyear" },
+        ],
+      },
+      {
+        key: "category",
+        label: "CATEGORY",
+        options: [
+          { value: "wheel", label: "Wheel" },
+          { value: "tyre", label: "Tyre" },
+          { value: "accessory", label: "Accessory" },
+        ],
+      },
+    ],
+  },
 };
