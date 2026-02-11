@@ -7,13 +7,15 @@ import { SelectChangeEvent } from "@mui/material";
 import {
   allProducts,
   CategoryType,
-} from "@/app/components/layout/product-list/product";
+} from "@/app/components/layout/product-list/mock-product";
 import { SearchHero } from "./SearchHero";
 import { FilterBar, SortOption, PriceRange } from "./FilterBar";
 import { SearchResultsHeader } from "./SearchResultsHeader";
 import { ProductGrid } from "./ProductGrid";
 import { EmptySearchState } from "./EmptySearchState";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
+import { getProductPrice } from "@/app/lib/api";
+import { Category } from "@/app/components/layout/product-list/wc-product";
 
 const SearchContent = () => {
   const searchParams = useSearchParams();
@@ -23,7 +25,7 @@ const SearchContent = () => {
     searchParams.get("q") || searchParams.get("query") || "";
 
   const [selectedCategory, setSelectedCategory] = useState<
-    CategoryType | "all"
+    Category | "all"
   >("all");
   const [sortBy, setSortBy] = useState<SortOption>("relevance");
   const [priceRange, setPriceRange] = useState<PriceRange>("all");
@@ -35,7 +37,7 @@ const SearchContent = () => {
     // 按类别过滤
     if (selectedCategory !== "all") {
       results = results.filter(
-        (product) => product.category === selectedCategory
+        (product) => product.categories.some((category) => category.id === selectedCategory.id)
       );
     }
 
@@ -44,13 +46,13 @@ const SearchContent = () => {
       results = results.filter((product) => {
         switch (priceRange) {
           case "0-50":
-            return product.price < 50;
+            return Number(getProductPrice(product)) < 50;
           case "50-100":
-            return product.price >= 50 && product.price < 100;
+            return Number(getProductPrice(product)) >= 50 && Number(getProductPrice(product)) < 100;
           case "100-200":
-            return product.price >= 100 && product.price < 200;
+            return Number(getProductPrice(product)) >= 100 && Number(getProductPrice(product)) < 200;
           case "200+":
-            return product.price >= 200;
+            return Number(getProductPrice(product)) >= 200;
           default:
             return true;
         }
@@ -60,14 +62,14 @@ const SearchContent = () => {
     // 排序
     switch (sortBy) {
       case "price-asc":
-        results = [...results].sort((a, b) => a.price - b.price);
+        results = [...results].sort((a, b) => Number(getProductPrice(a)) - Number(getProductPrice(b)));
         break;
       case "price-desc":
-        results = [...results].sort((a, b) => b.price - a.price);
+        results = [...results].sort((a, b) => Number(getProductPrice(b)) - Number(getProductPrice(a)));
         break;
       case "rating":
         results = [...results].sort(
-          (a, b) => (b.rating || 0) - (a.rating || 0)
+          (a, b) => (Number(b.average_rating) || 0) - (Number(a.average_rating) || 0)
         );
         break;
       case "name":
@@ -83,9 +85,9 @@ const SearchContent = () => {
   }, [selectedCategory, sortBy, priceRange]);
 
   const handleCategoryChange = (
-    event: SelectChangeEvent<CategoryType | "all">
+    event: SelectChangeEvent<Category | "all">
   ) => {
-    setSelectedCategory(event.target.value as CategoryType | "all");
+    setSelectedCategory(event.target.value as Category | "all");
   };
 
   const handleSortChange = (event: SelectChangeEvent<SortOption>) => {

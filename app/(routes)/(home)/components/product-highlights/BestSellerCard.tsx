@@ -2,14 +2,19 @@
 
 import { Box, Typography, Card, CardContent } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Product } from "../../../../components/layout/product-list/product";
+import { WCProduct } from "../../../../components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { getProductPrice, getProductMainImage } from "@/app/lib/api";
 
 interface BestSellerCardProps {
-  product: Product;
+  product: WCProduct | PublicProduct;
 }
 
 export const BestSellerCard = ({ product }: BestSellerCardProps) => {
   const router = useRouter();
+  
+  const price = getProductPrice(product);
+  const mainImage = getProductMainImage(product);
 
   const handleClick = () => {
     router.push(`/product/${product.id}`);
@@ -52,7 +57,7 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
       >
         <Box
           component="img"
-          src={product.image}
+          src={mainImage}
           alt={product.name}
           sx={{
             maxWidth: "90%",
@@ -84,7 +89,7 @@ export const BestSellerCard = ({ product }: BestSellerCardProps) => {
             fontSize: "0.875rem",
           }}
         >
-          ${product.price.toFixed(2)}
+          ${parseFloat(price).toFixed(2)}
         </Typography>
       </CardContent>
     </Card>

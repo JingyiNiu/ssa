@@ -15,6 +15,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useCartStore } from "@/app/store/cartStore";
 import { useRouter } from "next/navigation";
 import { ActionButton } from "@/app/components/ui/ActionButton";
+import { getProductMainImage, getProductPrice, getProductRegularPrice } from "@/app/lib/api";
 
 interface CartDrawerProps {
   open: boolean;
@@ -89,7 +90,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                   {/* Product Image */}
                   <Box
                     component="img"
-                    src={item.product.image}
+                    src={getProductMainImage(item.product)}
                     alt={item.product.name}
                     sx={{
                       width: 80,
@@ -117,7 +118,7 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                     
                     {/* Price with optional original price */}
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      {item.product.originalPrice && (
+                      {getProductRegularPrice(item.product) && (
                         <Typography
                           variant="caption"
                           sx={{
@@ -125,17 +126,17 @@ export const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                             textDecoration: "line-through",
                           }}
                         >
-                          ${item.product.originalPrice.toFixed(2)}
+                          ${getProductRegularPrice(item.product)}
                         </Typography>
                       )}
                       <Typography
                         variant="body2"
                         sx={{ 
-                          color: item.product.originalPrice ? "error.main" : "primary.main", 
+                          color: getProductRegularPrice(item.product) ? "error.main" : "primary.main", 
                           fontWeight: 600 
                         }}
                       >
-                        ${item.product.price.toFixed(2)}
+                        ${getProductPrice(item.product)}
                       </Typography>
                     </Box>
 

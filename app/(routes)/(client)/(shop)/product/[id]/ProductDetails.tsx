@@ -5,17 +5,16 @@ import { ProductDetails as ProductDetailsType } from "./product";
 import ProductImageGallery from "./ProductImageGallery";
 import ProductInfo from "./ProductInfo";
 import ProductTabs from "./ProductTabs";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 interface ProductDetailsProps {
-  product: ProductDetailsType;
+  product: WCProduct | PublicProduct;
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   // 优先使用 images 数组，如果没有则使用 image 字段
-  const productImages =
-    product.images && product.images.length > 0
-      ? product.images
-      : [product.image];
+  const productImages = product.images;
 
   return (
     <Box className="container mx-auto py-8 px-4">
@@ -28,7 +27,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       >
         {/* 左侧 - 图片展示区 */}
         <ProductImageGallery
-          images={productImages}
+          images={productImages.map((image) => image.src)}
           productName={product.name}
         />
 

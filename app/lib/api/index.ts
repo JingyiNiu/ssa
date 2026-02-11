@@ -17,3 +17,7 @@ export * from './types';
 
 // 导出所有服务
 export * from './services';
+
+// 导出工具函数
+export * from './utils/auth-helpers';
+export * from './utils/product-helpers';

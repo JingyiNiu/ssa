@@ -14,27 +14,27 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import StarIcon from "@mui/icons-material/Star";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useCartStore } from "@/app/store/cartStore";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
 
 interface ProductInfoProps {
-  product: ProductDetails;
+  product: WCProduct | PublicProduct;
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
   const { addItem, getItemQuantity } = useCartStore();
-  const cartQuantity = getItemQuantity(product.id);
+  const cartQuantity = getItemQuantity(product.id.toString());
 
   // 获取最大可用库存
-  const maxStock = product.stock?.available || 0;
+  const maxStock = 1;
 
   // 计算库存百分比
-  const stockPercentage = product.stock
-    ? (product.stock.sold / (product.stock.available + product.stock.sold)) *
-      100
-    : 0;
+  const stockPercentage = 1;
 
   const handleQuantityChange = (type: "increase" | "decrease") => {
-    if (type === "increase" && quantity < maxStock) {
+    if (type === "increase" && quantity < Number(maxStock)) {
       setQuantity((prev) => prev + 1);
     } else if (type === "decrease" && quantity > 1) {
       setQuantity((prev) => prev - 1);
@@ -55,21 +55,20 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       {/* 评分和评论 */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
         <Rating
-          value={product.rating || 0}
+          value={parseFloat(product.average_rating) || 0}
           readOnly
           precision={0.1}
           icon={<StarIcon sx={{ color: "#ffc107" }} />}
           emptyIcon={<StarIcon sx={{ color: "#e0e0e0" }} />}
         />
         <Typography variant="body2" color="text.secondary">
-          ({product.reviews?.length || 0} customer{" "}
-          {product.reviews?.length === 1 ? "review" : "reviews"})
+          1
         </Typography>
       </Box>
 
       {/* 价格 */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-        {product.originalPrice && (
+        {getProductRegularPrice(product) && (
           <Typography
             variant="h6"
             sx={{
@@ -77,31 +76,23 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
               color: "text.secondary",
             }}
           >
-            ${product.originalPrice.toFixed(2)}
+            ${getProductRegularPrice(product)}
           </Typography>
         )}
         <Typography variant="h4" sx={{ color: "#d32f2f", fontWeight: "bold" }}>
-          ${product.price.toFixed(2)}
+          ${getProductPrice(product)}
         </Typography>
       </Box>
 
       {/* 产品特点 */}
-      {product.features && product.features.length > 0 && (
+      {product.short_description && (
         <Box sx={{ mb: 3 }}>
-          {product.features.map((feature, index) => (
-            <Box
-              key={index}
-              sx={{ display: "flex", alignItems: "start", mb: 1 }}
-            >
-              <Typography sx={{ color: "#d32f2f", mr: 1 }}>•</Typography>
-              <Typography variant="body2">{feature}</Typography>
-            </Box>
-          ))}
+          <Typography variant="body2">{product.short_description}</Typography>
         </Box>
       )}
 
       {/* 库存信息 */}
-      {product.stock && (
+      {1 && (
         <Box
           sx={{
             bgcolor: "#f5f5f5",
@@ -125,7 +116,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                {product.stock.available + product.stock.sold}
+                1
               </Box>
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -134,7 +125,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                {product.stock.sold}
+                1
               </Box>
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -143,17 +134,17 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                {product.stock.available}
+                1
               </Box>
             </Typography>
           </Box>
 
           <Typography variant="body2" sx={{ mb: 1, color: "#d32f2f" }}>
-            Hurry! only {product.stock.available} left in stock
+            Hurry! only 1 left in stock
           </Typography>
           <LinearProgress
             variant="determinate"
-            value={stockPercentage}
+            value={1}
             sx={{
               height: 8,
               borderRadius: 1,
@@ -169,13 +160,14 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       {/* 数量选择器和按钮 */}
       <Box>
         {/* 数量提示 */}
-        {maxStock > 0 && (
+        {Number(maxStock) > 0 && (
           <Typography
             variant="caption"
             color="text.secondary"
             sx={{ mb: 1, display: "block" }}
           >
-            Max quantity: {maxStock} {maxStock === 1 ? "item" : "items"}
+            Max quantity: {Number(maxStock)}{" "}
+            {Number(maxStock) === 1 ? "item" : "items"}
           </Typography>
         )}
 
@@ -212,19 +204,19 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             <IconButton
               size="small"
               onClick={() => handleQuantityChange("increase")}
-              disabled={quantity >= maxStock}
+              disabled={quantity >= Number(maxStock)}
             >
               <AddIcon />
             </IconButton>
           </Box>
 
           {/* 添加到购物车按钮 */}
-          <ActionButton 
-            sx={{ flexGrow: 1 }} 
-            disabled={maxStock === 0}
+          <ActionButton
+            sx={{ flexGrow: 1 }}
+            disabled={Number(maxStock) === 0}
             onClick={handleAddToCart}
           >
-            {maxStock === 0 ? "Out of Stock" : "Add To Cart"}
+            {Number(maxStock) === 0 ? "Out of Stock" : "Add To Cart"}
           </ActionButton>
         </Box>
       </Box>

@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  Link,
 } from "@mui/material";
 import { FaRegUser } from "react-icons/fa";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -63,7 +64,7 @@ export const HeaderActions = () => {
       <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}>
         {/* Cart Icon - 仅在已登录且 hydration 完成后显示 */}
         {isHydrated && isLoggedIn && (
-          <Tooltip title="购物车" arrow>
+          <Tooltip title="Cart" arrow>
             <Box
               sx={{
                 display: "flex",
@@ -90,17 +91,13 @@ export const HeaderActions = () => {
             {isLoggedIn ? (
               <HeaderIconButton
                 icon={<FaRegUser size={20} />}
-                tooltip="账户"
+                tooltip="Account"
                 onClick={() => router.push("/account")}
                 ariaLabel="Account"
               />
             ) : (
-              <HeaderIconButton
-                icon={<MdLogin size={20} />}
-                tooltip="登录"
-                onClick={() => router.push("/login")}
-                ariaLabel="Login"
-              />
+              <Link href="/login" style={{ textDecoration: 'none' }}>Login</Link>
+
             )}
           </>
         )}
@@ -109,7 +106,7 @@ export const HeaderActions = () => {
         {isHydrated && isLoggedIn && (
           <HeaderIconButton
             icon={<MdLogout size={20} />}
-            tooltip="登出"
+            tooltip="Logout"
             onClick={handleLogoutClick}
             ariaLabel="Logout"
           />

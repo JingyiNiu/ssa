@@ -10,10 +10,20 @@ import {
 } from "@mui/material";
 import { Star, StarBorder, StarHalf } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { Product } from "./product";
+import { WCProduct } from "./wc-product";
+import { PublicProduct } from "./public-product";
+import {
+  getProductPrice,
+  getProductRegularPrice,
+  getProductSalePrice,
+  getProductMainImage,
+  isProductOnSale,
+  isWCProduct,
+  isPublicProduct,
+} from "@/app/lib/api";
 
 interface ProductCardProps {
-  product: Product;
+  product: WCProduct | PublicProduct;
 }
 
 // 评分星星组件
@@ -41,11 +51,21 @@ const RatingStars = ({ rating = 0 }: { rating?: number }) => {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
-  const totalStock = product.stock
-    ? product.stock.available + product.stock.sold
+  
+  // 使用辅助函数获取价格
+  const price = getProductPrice(product);
+  const regularPrice = getProductRegularPrice(product);
+  const salePrice = getProductSalePrice(product);
+  const onSale = isProductOnSale(product);
+  const mainImage = getProductMainImage(product);
+  
+  // 库存信息（只有 WCProduct 可能有自定义 stock 字段）
+  const hasStockInfo = isWCProduct(product) && (product as any).stock;
+  const totalStock = hasStockInfo
+    ? (product as any).stock.available + (product as any).stock.sold
     : 0;
-  const soldPercentage = product.stock
-    ? (product.stock.sold / totalStock) * 100
+  const soldPercentage = hasStockInfo
+    ? ((product as any).stock.sold / totalStock) * 100
     : 0;
 
   const handleClick = () => {
@@ -88,26 +108,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         }}
         data-testid="popular-product-image"
       >
-        {/* 品牌标签 - 左上角 */}
-        {product.brand && (
+        {/* 品牌标签 - 左上角（只在有 brand 字段的产品上显示）*/}
+        {(product as any).brand && (
           <Box
             sx={{
               position: "absolute",
               top: 8,
               left: 0,
-              bgcolor: product.brand.image ? "transparent" : "primary.main",
+              bgcolor: (product as any).brand.image ? "transparent" : "primary.main",
               color: "white",
-              px: product.brand.image ? 0 : 1.5,
-              pb: product.brand.image ? 0 : 0.5,
+              px: (product as any).brand.image ? 0 : 1.5,
+              pb: (product as any).brand.image ? 0 : 0.5,
               zIndex: 1,
             }}
             data-testid="popular-product-brand"
           >
-            {product.brand.image ? (
+            {(product as any).brand.image ? (
               <Box
                 component="img"
-                src={product.brand.image}
-                alt={product.brand.name}
+                src={(product as any).brand.image}
+                alt={(product as any).brand.name}
                 sx={{
                   height: 32,
                   width: "auto",
@@ -129,7 +149,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                   letterSpacing: "0.5px",
                 }}
               >
-                {product.brand.name}
+                {(product as any).brand.name}
               </Typography>
             )}
           </Box>
@@ -137,7 +157,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
         <Box
           component="img"
-          src={product.image}
+          src={mainImage}
           alt={product.name}
           data-product-image
           sx={{
@@ -154,8 +174,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <CardContent
         sx={{ flex: 1, textAlign: "center", py: 1, bgcolor: "secondary.light" }}
       >
-        {/* 库存信息条 */}
-        {product.stock && (
+        {/* 库存信息条 - 只在 WCProduct 且有 stock 字段时显示 */}
+        {hasStockInfo && (
           <Box sx={{ p: 1.5, pb: 0, mb: 2 }}>
             <Box
               sx={{
@@ -166,10 +186,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               }}
             >
               <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                Available: <strong>{product.stock.available}</strong>
+                Available: <strong>{(product as any).stock.available}</strong>
               </Typography>
               <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                Already Sold: <strong>{product.stock.sold}</strong>
+                Already Sold: <strong>{(product as any).stock.sold}</strong>
               </Typography>
             </Box>
             <LinearProgress
@@ -189,7 +209,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
 
         {/* 产品描述 */}
-        {product.description && (
+        {(product.description || product.short_description) && (
           <Typography
             variant="caption"
             sx={{
@@ -205,7 +225,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               minHeight: "2.1em", // 2行的高度
             }}
           >
-            {product.description}
+            {product.short_description || product.description}
           </Typography>
         )}
 
@@ -228,7 +248,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </Typography>
 
         {/* 评分星星 */}
-        {product.rating !== undefined && (
+        {isWCProduct(product) && (product as any).rating !== undefined && (
           <Box
             sx={{
               display: "flex",
@@ -236,11 +256,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               mb: 1.5,
             }}
           >
-            <RatingStars rating={product.rating} />
+            <RatingStars rating={(product as any).rating} />
+          </Box>
+        )}
+        {isPublicProduct(product) && product.average_rating && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              mb: 1.5,
+            }}
+          >
+            <RatingStars rating={parseFloat(product.average_rating)} />
           </Box>
         )}
 
-        {/* 价格 */}
+        {/* 价格 - 使用辅助函数统一处理 */}
         <Box
           sx={{
             display: "flex",
@@ -249,7 +280,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             gap: 1,
           }}
         >
-          {product.originalPrice && (
+          {onSale && regularPrice && parseFloat(regularPrice) > parseFloat(price) && (
             <Typography
               variant="body2"
               sx={{
@@ -258,18 +289,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 fontSize: "0.875rem",
               }}
             >
-              ${product.originalPrice.toFixed(2)}
+              ${parseFloat(regularPrice).toFixed(2)}
             </Typography>
           )}
           <Typography
             variant="h6"
             sx={{
               fontWeight: 700,
-              color: product.originalPrice ? "primary.main" : "#333",
+              color: onSale ? "primary.main" : "#333",
               fontSize: "1.125rem",
             }}
           >
-            ${product.price.toFixed(2)}
+            ${parseFloat(price).toFixed(2)}
           </Typography>
         </Box>
       </CardContent>

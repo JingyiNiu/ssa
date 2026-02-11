@@ -2,38 +2,10 @@
  * 产品相关 API 服务
  */
 
+import { WCProduct } from '@/app/components/layout/product-list/wc-product';
 import { apiClient } from '../client';
 import { API_ENDPOINTS } from '../config';
-
-/**
- * WooCommerce 产品接口
- */
-export interface WCProduct {
-  id: number;
-  name: string;
-  slug: string;
-  sku: string;
-  price: string;
-  regular_price: string;
-  sale_price: string;
-  description: string;
-  short_description: string;
-  images: Array<{
-    id: number;
-    src: string;
-    name: string;
-    alt: string;
-  }>;
-  categories: Array<{
-    id: number;
-    name: string;
-    slug: string;
-  }>;
-  stock_status: 'instock' | 'outofstock' | 'onbackorder';
-  stock_quantity: number | null;
-  calculated_price?: string; // 用户实际价格
-  [key: string]: any;
-}
+import type { PublicProduct } from '@/app/components/layout/product-list/public-product';
 
 /**
  * 产品查询参数
@@ -84,8 +56,8 @@ export async function getProductBySku(
  */
 export async function getPublicProducts(
   params?: ProductQueryParams
-): Promise<any[]> {
-  return apiClient.get<any[]>(API_ENDPOINTS.store.products, {
+): Promise<PublicProduct[]> {
+  return apiClient.get<PublicProduct[]>(API_ENDPOINTS.store.products, {
     params: params as Record<string, string | number | boolean | undefined | null>,
   });
 }
@@ -104,4 +76,56 @@ export async function verifyCartPrices(
     include: productIds.join(','),
     per_page: 100,
   });
+}
+
+/**
+ * 智能获取产品列表 - 自动根据登录状态选择 API
+ * - 已登录：使用 /wc/v3/products (包含用户价格) → 返回 WCProduct[]
+ * - 未登录：使用 /wc/store/v1/products (公开价格) → 返回 PublicProduct[]
+ * 
+ * @param token - JWT token (可选)，如果提供则使用认证 API
+ * @param params - 查询参数
+ * @returns 产品列表（类型取决于是否登录）
+ */
+export async function getProductsAuto(
+  token?: string | null,
+  params?: ProductQueryParams
+): Promise<WCProduct[] | PublicProduct[]> {
+  if (token) {
+    // 已登录：使用 WooCommerce REST API v3 (包含用户价格)
+    console.log('🔐 Using authenticated API: /wc/v3/products');
+    return getProducts(token, params);
+  } else {
+    // 未登录：使用 WooCommerce Store API v1 (公开价格)
+    console.log('🌐 Using public API: /wc/store/v1/products');
+    return getPublicProducts(params);
+  }
+}
+
+/**
+ * 获取单个产品 (通过 ID) - 自动根据登录状态选择 API
+ */
+export async function getProductByIdAuto(
+  productId: number,
+  token?: string | null
+): Promise<WCProduct | PublicProduct | null> {
+  const products = await getProductsAuto(token, { 
+    include: String(productId),
+    per_page: 1 
+  });
+  return products.length > 0 ? products[0] : null;
+}
+
+/**
+ * 通过 SKU 查询产品 - 自动根据登录状态选择 API
+ */
+export async function getProductBySkuAuto(
+  sku: string,
+  token?: string | null
+): Promise<WCProduct | PublicProduct | null> {
+  const products = await getProductsAuto(token, { 
+    sku, 
+    per_page: 1 
+  });
+  return products.length > 0 ? products[0] : null;
 }

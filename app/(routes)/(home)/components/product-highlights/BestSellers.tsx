@@ -3,12 +3,13 @@
 import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Product } from "../../../../components/layout/product-list/product";
+import { WCProduct } from "../../../../components/layout/product-list/wc-product";
 import { BestSellerCard } from "./BestSellerCard";
 import { useState, useEffect } from "react";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 interface BestSellersProps {
-  products: Product[];
+  products: (WCProduct | PublicProduct)[];
 }
 
 export const BestSellers = ({ products }: BestSellersProps) => {

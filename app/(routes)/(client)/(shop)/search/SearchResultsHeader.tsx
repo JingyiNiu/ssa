@@ -1,13 +1,13 @@
 "use client";
 
 import { Box, Typography, Chip, Divider } from "@mui/material";
-import { categories, CategoryType } from "@/app/components/layout/product-list/product";
+import { Category } from "@/app/components/layout/product-list/wc-product";
 import { PriceRange } from "./FilterBar";
 
 interface SearchResultsHeaderProps {
   resultCount: number;
   searchQuery: string;
-  selectedCategory: CategoryType | "all";
+  selectedCategory: Category | "all";
   onCategoryRemove: () => void;
   priceRange: PriceRange;
   onPriceRangeRemove: () => void;
@@ -53,7 +53,7 @@ export const SearchResultsHeader = ({
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
           {selectedCategory !== "all" && (
             <Chip
-              label={categories.find((c) => c.value === selectedCategory)?.label}
+              label={selectedCategory.name}
               size="small"
               onDelete={onCategoryRemove}
               sx={{ bgcolor: "primary.light" }}

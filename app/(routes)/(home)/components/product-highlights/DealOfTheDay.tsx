@@ -5,16 +5,18 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
-import { Product } from "../../../../components/layout/product-list/product";
+import { WCProduct } from "../../../../components/layout/product-list/wc-product";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useCartStore } from "@/app/store/cartStore";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
 
 interface DealOfTheDayProps {
-  products: Product[];
+  products: (WCProduct | PublicProduct)[];
 }
 
 export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
-  const deals: Product[] = products; // 直接使用传入的产品（已从每个 category 选择）
+  const deals = products; // 直接使用传入的产品
   const { addItem } = useCartStore();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -128,7 +130,7 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
           >
             <Box
               component="img"
-              src={currentDeal.image}
+              src={currentDeal.images && currentDeal.images.length > 0 ? currentDeal.images[0].src : ''}
               alt={currentDeal.name}
               sx={{
                 maxWidth: "80%",
@@ -160,7 +162,7 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
               mb: 2,
             }}
           >
-            {currentDeal.originalPrice && (
+            {currentDeal.on_sale && (
               <Typography
                 variant="body2"
                 sx={{
@@ -169,7 +171,7 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
                   fontWeight: 400,
                 }}
               >
-                ${currentDeal.originalPrice.toFixed(2)}
+                ${getProductRegularPrice(currentDeal)}
               </Typography>
             )}
             <Typography
@@ -179,7 +181,7 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
                 color: "primary.main",
               }}
             >
-              ${currentDeal.price.toFixed(2)}
+              ${getProductPrice(currentDeal)}
             </Typography>
           </Box>
         </Box>
