@@ -4,21 +4,23 @@ import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import { WheelsHero } from "./WheelsHero";
 import { SearchWheels } from "./SearchWheels";
 import { allProducts } from "@/app/components/layout/product-list/mock-product";
-import { WCProduct } from "@/app/components/layout/product-list/wc-product";
-import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { getProductsAuto } from "@/app/lib/api";
+import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
+import { ProductList } from "@/app/components/layout/product-list/ProductList";
 
-// 模拟 API 调用获取产品数据
-async function fetchProducts(): Promise<(WCProduct | PublicProduct)[]> {
-  // 预留 API 调用接口
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
-  // if (!response.ok) {
-  //   throw new Error('Failed to fetch products');
-  // }
-  // const data: Product[] = await response.json();
-  // return data;
-
-  // 临时返回模拟数据
-  return allProducts;
+async function fetchProducts() {
+  try {
+    // 🌐 Server Component 使用公开 API（传 null）
+    const products = await getProductsAuto(null, { 
+      per_page: 50 
+    });
+    
+    console.log('✅ Server: 成功获取产品', products);
+    return products;
+  } catch (error) {
+    // 失败时返回模拟数据
+    return allProducts;
+  }
 }
 
 const WheelPage = async () => {
@@ -30,11 +32,11 @@ const WheelPage = async () => {
       <Suspense fallback={<Box sx={{ height: 500 }} />}>
         <WheelsHero />
       </Suspense>
-      {/* <PopularCategories products={products} /> */}
+      <PopularCategories products={products} />
       <Suspense fallback={<Box sx={{ height: 200 }} />}>
         <SearchWheels />
       </Suspense>
-      {/* <ProductList products={products} /> */}
+      <ProductList products={products} />
       <FindADealer />
     </Box>
   );
