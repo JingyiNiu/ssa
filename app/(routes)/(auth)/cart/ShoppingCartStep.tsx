@@ -18,21 +18,26 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useCartStore } from "@/app/store/cartStore";
+import {
+  getProductMainImage,
+  getProductPrice,
+  getProductRegularPrice,
+} from "@/app/lib/api";
 
 interface ShoppingCartStepProps {
   onNext: () => void;
 }
 
 const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
-  const { 
-    items, 
-    removeItem, 
-    incrementQuantity, 
-    decrementQuantity, 
+  const {
+    items,
+    removeItem,
+    incrementQuantity,
+    decrementQuantity,
     getSubtotal,
     getTax,
     getShipping,
-    getTotal
+    getTotal,
   } = useCartStore();
 
   // 计算总计
@@ -83,7 +88,7 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                       >
                         <Box
                           component="img"
-                          src={item.product.image}
+                          src={getProductMainImage(item.product)}
                           alt={item.product.name}
                           sx={{
                             width: 80,
@@ -98,8 +103,15 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                       </Box>
                     </TableCell>
                     <TableCell align="center">
-                      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.5 }}>
-                        {item.product.originalPrice && (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          gap: 0.5,
+                        }}
+                      >
+                        {getProductRegularPrice(item.product) && (
                           <Typography
                             variant="caption"
                             sx={{
@@ -107,17 +119,19 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                               textDecoration: "line-through",
                             }}
                           >
-                            ${item.product.originalPrice.toFixed(2)}
+                            ${getProductRegularPrice(item.product)}
                           </Typography>
                         )}
-                        <Typography 
-                          variant="body1" 
-                          sx={{ 
+                        <Typography
+                          variant="body1"
+                          sx={{
                             fontWeight: 600,
-                            color: item.product.originalPrice ? "error.main" : "text.primary"
+                            color: getProductRegularPrice(item.product)
+                              ? "error.main"
+                              : "text.primary",
                           }}
                         >
-                          ${item.product.price.toFixed(2)}
+                          ${getProductPrice(item.product)}
                         </Typography>
                       </Box>
                     </TableCell>
@@ -130,7 +144,7 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                           borderRadius: 1,
                         }}
                       >
-                        <IconButton 
+                        <IconButton
                           size="small"
                           onClick={() => decrementQuantity(item.product.id)}
                         >
@@ -141,7 +155,7 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                         >
                           {item.quantity}
                         </Typography>
-                        <IconButton 
+                        <IconButton
                           size="small"
                           onClick={() => incrementQuantity(item.product.id)}
                         >
@@ -154,12 +168,16 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                         variant="body1"
                         sx={{ fontWeight: 600, color: "#d32f2f" }}
                       >
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        $
+                        {(
+                          parseFloat(getProductPrice(item.product)) *
+                          Number(item.quantity)
+                        ).toFixed(2)}
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
-                      <IconButton 
-                        color="error" 
+                      <IconButton
+                        color="error"
                         size="small"
                         onClick={() => removeItem(item.product.id)}
                       >
@@ -250,8 +268,8 @@ const ShoppingCartStep = ({ onNext }: ShoppingCartStepProps) => {
                     ${total.toFixed(2)}
                   </Typography>
                 </Box>
-                <ActionButton 
-                  fullWidth 
+                <ActionButton
+                  fullWidth
                   onClick={onNext}
                   disabled={items.length === 0}
                 >

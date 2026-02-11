@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Product } from "@/app/components/layout/product-list/product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { getProductPrice } from "../lib/api";
 
 export interface CartItem {
-  product: Product;
+  product: WCProduct | PublicProduct;
   quantity: number;
 }
 
@@ -17,15 +19,15 @@ interface CartStore {
   
   // === 商品操作方法 ===
   // 添加商品到购物车
-  addItem: (product: Product, quantity?: number) => void;
+  addItem: (product: WCProduct | PublicProduct, quantity?: number) => void;
   // 移除商品
-  removeItem: (productId: string) => void;
+  removeItem: (productId: number) => void;
   // 更新商品数量
-  updateQuantity: (productId: string, quantity: number) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
   // 增加数量
-  incrementQuantity: (productId: string) => void;
+  incrementQuantity: (productId: number) => void;
   // 减少数量
-  decrementQuantity: (productId: string) => void;
+  decrementQuantity: (productId: number) => void;
   // 清空购物车
   clearCart: () => void;
   
@@ -139,14 +141,14 @@ export const useCartStore = create<CartStore>()(
       },
 
       getItemQuantity: (productId) => {
-        const item = get().items.find((item) => item.product.id === productId);
+        const item = get().items.find((item) => item.product.id === Number(productId));
         return item ? item.quantity : 0;
       },
 
       // === 价格计算方法 ===
       getSubtotal: () => {
         return get().items.reduce(
-          (total, item) => total + item.product.price * item.quantity,
+          (total, item) => total + parseFloat(getProductPrice(item.product)) * Number(item.quantity),
           0
         );
       },

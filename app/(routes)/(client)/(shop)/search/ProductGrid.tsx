@@ -2,10 +2,11 @@
 
 import { Box } from "@mui/material";
 import { ProductCard } from "@/app/components/layout/product-list/ProductCard";
-import { Product } from "@/app/components/layout/product-list/product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 interface ProductGridProps {
-  products: Product[];
+  products: (WCProduct | PublicProduct)[];
 }
 
 export const ProductGrid = ({ products }: ProductGridProps) => {

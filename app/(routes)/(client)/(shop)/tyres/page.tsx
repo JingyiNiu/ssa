@@ -1,14 +1,14 @@
 import { Box } from "@mui/material";
 import { Suspense } from "react";
-import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { SearchTyres } from "./SearchTyres";
-import { ProductList } from "@/app/components/layout/product-list/ProductList";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
-import { allProducts, Product } from "@/app/components/layout/product-list/product";
+import { allProducts, Product } from "@/app/components/layout/product-list/mock-product";
 import { TyresHeroWithBrand } from "./TyresHeroWithBrand";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 // 模拟 API 调用获取产品数据
-async function fetchProducts(): Promise<Product[]> {
+async function fetchProducts(): Promise<(WCProduct | PublicProduct)[]> {
   // 预留 API 调用接口
   // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
   // if (!response.ok) {
@@ -18,7 +18,7 @@ async function fetchProducts(): Promise<Product[]> {
   // return data;
 
   // 临时返回模拟数据
-  return allProducts.filter((product) => product.category === "tyre");
+  return allProducts
 }
 
 const TyresPage = async () => {
@@ -29,9 +29,9 @@ const TyresPage = async () => {
       <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
         <TyresHeroWithBrand />
       </Suspense>
-      <PopularCategories products={products} />
+      {/* <PopularCategories products={products} /> */}
       <SearchTyres />
-      <ProductList products={products} />
+      {/* <ProductList products={products} /> */}
       <FindADealer />
     </Box>
   );

@@ -1,58 +1,56 @@
 import { Box } from "@mui/material";
 import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
-import { PopularCategories } from "../../components/layout/popular-categories/PopularCategories";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";
 import { PartnerLogosSection } from "./components/partner-logos/PartnerLogosSection";
 import { ValuePropositionSection } from "./components/value-proposition/ValuePropositionSection";
 import { ShopByBrandsSection } from "./components/shop-by-brands/ShopByBrandsSection";
-import { ProductHighlightsSection } from "./components/product-highlights/ProductHighlightsSection";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
-import {
-  allProducts,
-  Product,
-} from "@/app/components/layout/product-list/product";
+import { getProductsAuto } from '@/app/lib/api';
+import { ProductsProvider } from "./components/ProductsProvider";
+import { HomeContent } from "./components/HomeContent";
+import { allProducts } from "@/app/components/layout/product-list/mock-product";
 
-// 模拟 API 调用获取产品数据
-async function fetchProducts(): Promise<Product[]> {
-  // 预留 API 调用接口
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
-  // if (!response.ok) {
-  //   throw new Error('Failed to fetch products');
-  // }
-  // const data: Product[] = await response.json();
-  // return data;
-
-  // 临时返回模拟数据
-  return allProducts;
+/**
+ * 从 API 获取产品数据（服务端预加载）
+ * Server Component 只能获取公开价格
+ * 如果用户已登录，ProductsProvider 会在客户端重新加载用户价格
+ */
+async function fetchProducts() {
+  try {
+    // 🌐 Server Component 使用公开 API（传 null）
+    const products = await getProductsAuto(null, { 
+      per_page: 50 
+    });
+    
+    console.log('✅ Server: 成功获取产品', products);
+    return products;
+  } catch (error) {
+    // 失败时返回模拟数据
+    return allProducts;
+  }
 }
 
 const Home = async () => {
-  // 在 Server Component 中调用 API 获取产品数据
-  const products = await fetchProducts();
-
-  // Deal of the Day - 选择有折扣的产品
-  const dealOfTheDayProducts = products.filter((p) => p.originalPrice && p.originalPrice > p.price);
-
-  // Best Sellers - 选择评分最高或销量最高的产品
-  const bestSellersProducts = products
-    .filter((p) => p.stock && p.stock.sold > 50) // 销量 > 50
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0)) // 按评分排序
-    .slice(0, 18);
+  // 🎯 服务端预加载产品（SEO 友好）
+  const initialProducts = await fetchProducts();
 
   return (
     <Box>
+      {/* 不需要产品数据的部分 - 直接渲染 */}
       <HeroSection />
       <SearchSection />
-      <PopularCategories products={products} />
+      
+      {/* 需要产品数据的部分 - 用 Provider 包装 */}
+      <ProductsProvider initialProducts={initialProducts}>
+        <HomeContent />
+      </ProductsProvider>
+      
+      {/* 不需要产品数据的部分 - 直接渲染 */}
       <PromoBannersSection />
       <PartnerLogosSection />
       <ValuePropositionSection />
       <ShopByBrandsSection />
-      <ProductHighlightsSection
-        dealOfTheDayProducts={dealOfTheDayProducts}
-        bestSellersProducts={bestSellersProducts}
-      />
       <FindADealer />
     </Box>
   );

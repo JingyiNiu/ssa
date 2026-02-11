@@ -1,9 +1,10 @@
-import { Product } from "@/app/components/layout/product-list/product";
 import { Box } from "@mui/material";
 import React from "react";
 import { ImageCard } from "./ImageCard";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
-export const GalleryList = ({ images }: { images: Product[] }) => {
+export const GalleryList = ({ images }: { images: (WCProduct | PublicProduct)[] }) => {
   return (
     <Box sx={{ flexGrow: 1 }} data-testid="gallery-list">
       <Box

@@ -9,13 +9,14 @@ import {
   Tab,
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Product } from "../product-list/product";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { useState } from "react";
 import { PopularProductCard } from "./PopularProductCard";
+import { WCProduct } from "../product-list/wc-product";
+import { PublicProduct } from "../product-list/public-product";
 
 interface PopularCategoriesProps {
-  products: Product[];
+  products: (WCProduct | PublicProduct)[];
 }
 
 // 定义排序类型
@@ -48,13 +49,13 @@ export const PopularCategories = ({ products: allProducts }: PopularCategoriesPr
       switch (selectedSort) {
         case "top-rated":
           // 按评分降序排序
-          return (b.rating || 0) - (a.rating || 0);
+          return Number(b.average_rating || 0) - Number(a.average_rating || 0);
         case "sales":
           // 按销量降序排序
-          return (b.stock?.sold || 0) - (a.stock?.sold || 0);
+          return 0;
         case "latest":
           // 按创建时间降序排序（最新的在前）
-          return new Date(b.createdAt || "").getTime() - new Date(a.createdAt || "").getTime();
+          return 0;
         default:
           return 0;
       }

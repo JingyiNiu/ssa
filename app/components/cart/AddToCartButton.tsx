@@ -5,10 +5,11 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useCartStore } from "@/app/store/cartStore";
-import { Product } from "@/app/components/layout/product-list/product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 interface AddToCartButtonProps {
-  product: Product;
+  product: WCProduct | PublicProduct;
   variant?: "button" | "icon";
   size?: "small" | "medium" | "large";
   quantity?: number;
@@ -28,7 +29,7 @@ export const AddToCartButton = ({
 }: AddToCartButtonProps) => {
   const { addItem, incrementQuantity, decrementQuantity, getItemQuantity } =
     useCartStore();
-  const cartQuantity = getItemQuantity(product.id);
+  const cartQuantity = getItemQuantity(product.id.toString());
 
   const handleAddToCart = () => {
     addItem(product, addQuantity);
@@ -36,12 +37,10 @@ export const AddToCartButton = ({
 
   const handleIncrement = (e: React.MouseEvent) => {
     e.stopPropagation();
-    incrementQuantity(product.id);
   };
 
   const handleDecrement = (e: React.MouseEvent) => {
     e.stopPropagation();
-    decrementQuantity(product.id);
   };
 
   // 如果购物车中已有该商品，显示数量控制器

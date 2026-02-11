@@ -2,14 +2,28 @@
 
 import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Product } from "../product-list/product";
+import { WCProduct } from "../product-list/wc-product";
+import { PublicProduct } from "../product-list/public-product";
+import { 
+  getProductPrice, 
+  getProductRegularPrice, 
+  getProductSalePrice, 
+  getProductMainImage,
+  isProductOnSale,
+} from "@/app/lib/api";
 
 interface PopularCardProps {
-  product: Product;
+  product: WCProduct | PublicProduct;
 }
 
 export const PopularProductCard = ({ product }: PopularCardProps) => {
   const router = useRouter();
+  
+  const price = getProductPrice(product);
+  const regularPrice = getProductRegularPrice(product);
+  const salePrice = getProductSalePrice(product);
+  const onSale = isProductOnSale(product);
+  const mainImage = getProductMainImage(product);
 
   const handleClick = () => {
     router.push(`/product/${product.id}`);
@@ -47,7 +61,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
       >
         <Box
           component="img"
-          src={product.image}
+          src={mainImage || "/images/pics/image-placeholder.png"}
           alt={product.name}
           sx={{
             maxWidth: "100%",
@@ -82,7 +96,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
             gap: 1,
           }}
         >
-          {product.originalPrice && (
+          {onSale && parseFloat(regularPrice) > parseFloat(price) && (
             <Typography
               variant="body2"
               sx={{
@@ -91,18 +105,18 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
                 fontSize: "0.875rem",
               }}
             >
-              ${product.originalPrice.toFixed(2)}
+              ${parseFloat(regularPrice).toFixed(2)}
             </Typography>
           )}
           <Typography
             variant="body1"
             sx={{
               fontWeight: 600,
-              color: product.originalPrice ? "primary.main" : "#333",
+              color: onSale ? "primary.main" : "#333",
               fontSize: "0.875rem",
             }}
           >
-            ${product.price.toFixed(2)}
+            ${parseFloat(onSale ? salePrice : price).toFixed(2)}
           </Typography>
         </Box>
       </CardContent>

@@ -3,9 +3,10 @@
 import { Box } from "@mui/material";
 import { ProductCard } from "./ProductCard";
 import { useState } from "react";
-import { allProducts, Product } from "./product";
+import { WCProduct } from "./wc-product";
+import { PublicProduct } from "./public-product";
 
-export const ProductList = ({ products }: { products: Product[] }) => {
+export const ProductList = ({ products }: { products: (WCProduct | PublicProduct)[] }) => {
   return (
     <Box
       className="container mx-auto"

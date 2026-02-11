@@ -11,9 +11,8 @@ import {
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import {
-  categories,
-  CategoryType,
-} from "@/app/components/layout/product-list/product";
+  Category,
+} from "@/app/components/layout/product-list/wc-product";
 
 export type SortOption =
   | "relevance"
@@ -25,8 +24,8 @@ export type PriceRange = "all" | "0-50" | "50-100" | "100-200" | "200+";
 
 interface FilterBarProps {
   searchQuery?: string;
-  selectedCategory: CategoryType | "all";
-  onCategoryChange: (event: SelectChangeEvent<CategoryType | "all">) => void;
+  selectedCategory: Category | "all";
+  onCategoryChange: (event: SelectChangeEvent<Category | "all">) => void;
   priceRange: PriceRange;
   onPriceRangeChange: (event: SelectChangeEvent) => void;
   sortBy: SortOption;
@@ -98,11 +97,6 @@ export const FilterBar = ({
             }}
           >
             <MenuItem value="all">All Categories</MenuItem>
-            {categories.map((cat) => (
-              <MenuItem key={cat.value} value={cat.value}>
-                {cat.label}
-              </MenuItem>
-            ))}
           </Select>
         </FormControl>
 

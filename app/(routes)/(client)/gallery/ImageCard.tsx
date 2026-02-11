@@ -1,6 +1,7 @@
 "use client";
 
-import { Product } from "@/app/components/layout/product-list/product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 import {
   Box,
   CardContent,
@@ -12,9 +13,10 @@ import {
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import { getProductMainImage } from "@/app/lib/api";
 
 interface ImageCardProps {
-  product: Product;
+  product: WCProduct | PublicProduct;
 }
 
 export const ImageCard = ({ product }: ImageCardProps) => {
@@ -57,7 +59,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
         >
           <CardMedia
             component="img"
-            image={product.image}
+            image={getProductMainImage(product)}
             alt={product.name}
             sx={{
               position: "absolute",
@@ -120,7 +122,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
               textTransform: "capitalize",
             }}
           >
-            {product.category}
+            {product.categories.map((category) => category.name).join(', ')}
           </Typography>
         </CardContent>
       </Box>
@@ -168,7 +170,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
           {/* 大图显示 */}
           <Box
             component="img"
-            src={product.image}
+            src={getProductMainImage(product)}
             alt={product.name}
             sx={{
               maxWidth: "90vw",
@@ -193,7 +195,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
               {product.name}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-              {product.description || product.category}
+              {product.description || product.short_description}
             </Typography>
           </Box>
         </Box>

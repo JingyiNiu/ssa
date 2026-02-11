@@ -18,6 +18,7 @@ import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useState } from "react";
 import CheckoutDetailsForm from "./CheckoutDetailsForm";
 import { useCartStore } from "@/app/store/cartStore";
+import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
 
 interface CheckoutDetailsStepProps {
   onNext: () => void;
@@ -27,13 +28,7 @@ interface CheckoutDetailsStepProps {
 const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
   const [paymentMethod, setPaymentMethod] = useState("check");
   const [shipToDifferent, setShipToDifferent] = useState(false);
-  const { 
-    items, 
-    getSubtotal, 
-    getTax, 
-    getShipping, 
-    getTotal 
-  } = useCartStore();
+  const { items, getSubtotal, getTax, getShipping, getTotal } = useCartStore();
 
   // 计算金额
   const subtotal = getSubtotal();
@@ -117,11 +112,17 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                     }}
                   >
                     <Box sx={{ flex: 1 }}>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mb: 0.5 }}
+                      >
                         {item.product.name} × {item.quantity}
                       </Typography>
-                      {item.product.originalPrice && (
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      {getProductRegularPrice(item.product) && (
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           <Typography
                             variant="caption"
                             sx={{
@@ -129,7 +130,7 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                               textDecoration: "line-through",
                             }}
                           >
-                            ${item.product.originalPrice.toFixed(2)} each
+                            ${getProductRegularPrice(item.product)} each
                           </Typography>
                           <Typography
                             variant="caption"
@@ -138,19 +139,25 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                               fontWeight: 600,
                             }}
                           >
-                            ${item.product.price.toFixed(2)} each
+                            ${getProductPrice(item.product)} each
                           </Typography>
                         </Box>
                       )}
                     </Box>
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
+                    <Typography
+                      variant="body2"
+                      sx={{
                         fontWeight: 600,
-                        color: item.product.originalPrice ? "error.main" : "text.primary"
+                        color: getProductRegularPrice(item.product)
+                          ? "error.main"
+                          : "text.primary",
                       }}
                     >
-                      ${(item.product.price * item.quantity).toFixed(2)}
+                      $
+                      {(
+                        parseFloat(getProductPrice(item.product)) *
+                        Number(item.quantity)
+                      ).toFixed(2)}
                     </Typography>
                   </Box>
                 ))}
@@ -188,10 +195,7 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                 <Typography variant="body2" sx={{ fontWeight: 600 }}>
                   GST (15%)
                 </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ fontWeight: 600 }}
-                >
+                <Typography variant="body2" sx={{ fontWeight: 600 }}>
                   ${tax.toFixed(2)}
                 </Typography>
               </Box>
@@ -211,13 +215,19 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
                 </Typography>
                 <Typography variant="body2">
                   {shipping === 0 ? (
-                    <Box component="span" sx={{ color: "success.main", fontWeight: 600 }}>
+                    <Box
+                      component="span"
+                      sx={{ color: "success.main", fontWeight: 600 }}
+                    >
                       FREE
                     </Box>
                   ) : (
                     <>
                       Flat rate:{" "}
-                      <Box component="span" sx={{ color: "#d32f2f", fontWeight: 600 }}>
+                      <Box
+                        component="span"
+                        sx={{ color: "#d32f2f", fontWeight: 600 }}
+                      >
                         ${shipping.toFixed(2)}
                       </Box>
                     </>
@@ -352,14 +362,14 @@ const CheckoutDetailsStep = ({ onNext, onBack }: CheckoutDetailsStepProps) => {
               </Typography>
 
               {/* Place Order 按钮 */}
-              <ActionButton 
-                fullWidth 
+              <ActionButton
+                fullWidth
                 type="submit"
                 disabled={items.length === 0}
               >
                 Place Order
               </ActionButton>
-              
+
               {items.length === 0 && (
                 <Typography
                   variant="caption"

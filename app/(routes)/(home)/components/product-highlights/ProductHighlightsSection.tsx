@@ -1,14 +1,18 @@
 import { Box } from "@mui/material";
 import { DealOfTheDay } from "./DealOfTheDay";
 import { BestSellers } from "./BestSellers";
-import { Product } from "@/app/components/layout/product-list/product";
+import { WCProduct } from "@/app/components/layout/product-list/wc-product";
+import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 
 interface ProductHighlightsSectionProps {
-  dealOfTheDayProducts: Product[];
-  bestSellersProducts: Product[];
+  dealOfTheDayProducts: (WCProduct | PublicProduct)[];
+  bestSellersProducts: (WCProduct | PublicProduct)[];
 }
 
-export const ProductHighlightsSection = ({ dealOfTheDayProducts, bestSellersProducts }: ProductHighlightsSectionProps) => {
+export const ProductHighlightsSection = ({
+  dealOfTheDayProducts,
+  bestSellersProducts,
+}: ProductHighlightsSectionProps) => {
   return (
     <Box sx={{ mb: 10 }} data-testid="product-highlights-section">
       <Box className="container mx-auto">

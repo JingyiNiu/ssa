@@ -1,4 +1,4 @@
-import { Product } from "@/app/components/layout/product-list/product";
+import { Product } from "@/app/components/layout/product-list/mock-product";
 
 export interface ProductDetails extends Product {
   images: string[];
