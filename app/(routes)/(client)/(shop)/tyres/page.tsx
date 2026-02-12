@@ -5,7 +5,6 @@ import { SearchTyres } from "./SearchTyres";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import {
   allProducts,
-  Product,
 } from "@/app/components/layout/product-list/mock-product";
 import { TyresHeroWithBrand } from "./TyresHeroWithBrand";
 import { getProductsAuto } from "@/app/lib/api";

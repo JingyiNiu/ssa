@@ -66,22 +66,60 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 
       {/* Description Tab */}
       <TabPanel value={value} index={0}>
-        <Typography
-          variant="body1"
-          sx={{ lineHeight: 1.8, color: "text.secondary" }}
-        >
-          {product.description || "No description available."}
-        </Typography>
+        {product.description ? (
+          <Box
+            sx={{
+              lineHeight: 1.8,
+              color: "text.secondary",
+              '& p': { mb: 2 },
+              '& h1, & h2, & h3, & h4, & h5, & h6': { 
+                fontWeight: 600, 
+                mt: 2, 
+                mb: 1,
+                color: 'text.primary',
+              },
+              '& ul, & ol': { pl: 3, mb: 2 },
+              '& li': { mb: 0.5 },
+            }}
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
+        ) : (
+          <Typography
+            variant="body1"
+            sx={{ lineHeight: 1.8, color: "text.secondary" }}
+          >
+            No description available.
+          </Typography>
+        )}
       </TabPanel>
 
       {/* Specification Tab */}
       <TabPanel value={value} index={1}>
-        <Typography
-          variant="body1"
-          sx={{ lineHeight: 1.8, color: "text.secondary" }}
-        >
-          {product.short_description || "No specifications available."}
-        </Typography>
+        {product.short_description ? (
+          <Box
+            sx={{
+              lineHeight: 1.8,
+              color: "text.secondary",
+              '& p': { mb: 2 },
+              '& h1, & h2, & h3, & h4, & h5, & h6': { 
+                fontWeight: 600, 
+                mt: 2, 
+                mb: 1,
+                color: 'text.primary',
+              },
+              '& ul, & ol': { pl: 3, mb: 2 },
+              '& li': { mb: 0.5 },
+            }}
+            dangerouslySetInnerHTML={{ __html: product.short_description }}
+          />
+        ) : (
+          <Typography
+            variant="body1"
+            sx={{ lineHeight: 1.8, color: "text.secondary" }}
+          >
+            No specifications available.
+          </Typography>
+        )}
       </TabPanel>
 
       {/* Reviews Tab */}

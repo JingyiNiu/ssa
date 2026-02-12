@@ -16,7 +16,11 @@ import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useCartStore } from "@/app/store/cartStore";
 import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 import { WCProduct } from "@/app/components/layout/product-list/wc-product";
-import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
+import {
+  getProductPrice,
+  getProductRegularPrice,
+  isWCProduct,
+} from "@/app/lib/api";
 
 interface ProductInfoProps {
   product: WCProduct | PublicProduct;
@@ -26,6 +30,18 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
   const { addItem, getItemQuantity } = useCartStore();
   const cartQuantity = getItemQuantity(product.id.toString());
+
+  const hasStockInfo =
+    isWCProduct(product) && product.stock_quantity && product.total_sales;
+
+  const totalStock = isWCProduct(product)
+    ? (product.stock_quantity || 0) + product.total_sales
+    : 1;
+
+  const sold = isWCProduct(product) ? product.total_sales : 1;
+
+  const available = isWCProduct(product) ? product.stock_quantity || 0 : 1;
+  const soldPercentage = hasStockInfo ? (sold / totalStock) * 100 : 0;
 
   // 获取最大可用库存
   const maxStock = 1;
@@ -62,7 +78,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           emptyIcon={<StarIcon sx={{ color: "#e0e0e0" }} />}
         />
         <Typography variant="body2" color="text.secondary">
-          1
+          {isWCProduct(product) ? product.rating_count : product.review_count}
         </Typography>
       </Box>
 
@@ -86,13 +102,22 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
       {/* 产品特点 */}
       {product.short_description && (
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="body2">{product.short_description}</Typography>
-        </Box>
+        <Box
+          sx={{
+            mb: 3,
+            "& p": {
+              margin: 0,
+              fontSize: "0.875rem",
+              lineHeight: 1.6,
+              color: "text.secondary",
+            },
+          }}
+          dangerouslySetInnerHTML={{ __html: product.short_description }}
+        />
       )}
 
       {/* 库存信息 */}
-      {1 && (
+      {hasStockInfo && (
         <Box
           sx={{
             bgcolor: "#f5f5f5",
@@ -111,40 +136,42 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           {/* 库存数量信息 */}
           <Box sx={{ display: "flex", gap: 3, mb: 1 }}>
             <Typography variant="body2" color="text.secondary">
-              Total Stock:{" "}
+              Total Stock:
               <Box
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                1
+                {totalStock}
               </Box>
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Sold:{" "}
+              Sold:
               <Box
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                1
+                {sold}
               </Box>
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Available:{" "}
+              Available:
               <Box
                 component="span"
                 sx={{ fontWeight: 600, color: "text.primary" }}
               >
-                1
+                {available}
               </Box>
             </Typography>
           </Box>
 
-          <Typography variant="body2" sx={{ mb: 1, color: "#d32f2f" }}>
-            Hurry! only 1 left in stock
-          </Typography>
+          {available < 10 && (
+            <Typography variant="body2" sx={{ mb: 1, color: "#d32f2f" }}>
+              Hurry! only {available} left in stock
+            </Typography>
+          )}
           <LinearProgress
             variant="determinate"
-            value={1}
+            value={soldPercentage}
             sx={{
               height: 8,
               borderRadius: 1,

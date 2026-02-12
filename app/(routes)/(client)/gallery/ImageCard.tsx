@@ -194,9 +194,19 @@ export const ImageCard = ({ product }: ImageCardProps) => {
             <Typography variant="h6" sx={{ fontWeight: 600 }}>
               {product.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-              {product.description || product.short_description}
-            </Typography>
+            {(product.description || product.short_description) && (
+              <Box
+                sx={{
+                  mt: 1,
+                  color: "text.secondary",
+                  fontSize: "0.875rem",
+                  '& p': { mb: 1 },
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: product.description || product.short_description || '',
+                }}
+              />
+            )}
           </Box>
         </Box>
       </Modal>

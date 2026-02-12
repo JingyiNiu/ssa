@@ -3,9 +3,14 @@ import { Box } from "@mui/material";
 import ProductHero from "./ProductHero";
 import ProductDetails from "./ProductDetails";
 import { ProductDetails as ProductDetailsType } from "./product";
-import { allProducts, brands } from "@/app/components/layout/product-list/mock-product";
+import {
+  allProducts,
+  brands,
+} from "@/app/components/layout/product-list/mock-product";
 import { WCProduct } from "@/app/components/layout/product-list/wc-product";
 import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { cookies } from "next/headers";
+import { getProductsAuto } from "@/app/lib/api";
 
 type ProductPageProps = {
   params: Promise<{
@@ -14,17 +19,30 @@ type ProductPageProps = {
 };
 
 // TODO: 后端完成后替换为真实的 API 调用
-async function fetchProductById(id: string): Promise<WCProduct | PublicProduct> {
-  // 预留 API 调用接口
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`);
-  // if (!response.ok) {
-  //   throw new Error('Failed to fetch product');
-  // }
-  // const data: Product = await response.json();
-  // return data;
+async function fetchProductById(id: string) {
+  try {
+    // 🔐 从 cookie 读取 token（服务端）
+    const cookieStore = await cookies();
+    const token = cookieStore.get("auth-token")?.value || null;
 
-  // 临时模拟数据
-  return allProducts[0];
+    console.log(
+      "[TyresPage] Fetching products with token:",
+      token ? "Yes (logged in)" : "No (public)"
+    );
+
+    // 🌐 根据 token 调用对应的 API
+    const products = await getProductsAuto(token, {
+      per_page: 50,
+      slug: id,
+    });
+
+    console.log("✅ Server: 成功获取产品", products);
+    return { products, token };
+  } catch (error) {
+    console.error("[TyresPage] Failed to fetch products:", error);
+    // 失败时返回模拟数据
+    return { products: allProducts, token: null };
+  }
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
@@ -36,7 +54,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   return (
     <Box data-testid="product-page">
       <ProductHero />
-      <ProductDetails product={product} />
+      <ProductDetails product={product.products[0]} />
       <FindADealer />
     </Box>
   );
