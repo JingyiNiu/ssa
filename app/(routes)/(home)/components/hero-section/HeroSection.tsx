@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import { useState, useEffect, useRef } from "react";
 import { HeroSlide, HeroSlideData } from "./HeroSlide";
 import { CarouselArrow } from "./CarouselArrow";
-import { SlideOverlay } from "../../../../components/ui/SlideOverlay";
 
 const heroSlides: HeroSlideData[] = [
   {
@@ -21,6 +20,8 @@ const heroSlides: HeroSlideData[] = [
 ];
 
 export const HeroSection = () => {
+  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
   // 创建扩展的幻灯片数组：最后一张 + 原始数组 + 第一张
   const extendedSlides = [
     heroSlides[heroSlides.length - 1],

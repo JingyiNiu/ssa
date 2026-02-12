@@ -38,7 +38,6 @@ async function fetchProducts() {
 }
 
 const HomePage = async () => {
-  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
   // 🎯 服务端预加载产品（SEO 友好）
   const { products: initialProducts, token: serverToken } =
     await fetchProducts();
