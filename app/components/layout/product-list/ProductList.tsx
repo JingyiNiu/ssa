@@ -2,11 +2,11 @@
 
 import { Box } from "@mui/material";
 import { ProductCard } from "./ProductCard";
-import { useState } from "react";
-import { WCProduct } from "./wc-product";
-import { PublicProduct } from "./public-product";
+import { useProducts } from "@/app/(routes)/(home)/components/ProductsProvider";
 
-export const ProductList = ({ products }: { products: (WCProduct | PublicProduct)[] }) => {
+export const ProductList = () => {
+  const { products } = useProducts();
+
   return (
     <Box
       className="container mx-auto"

@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";
@@ -6,12 +5,11 @@ import { PartnerLogosSection } from "./components/partner-logos/PartnerLogosSect
 import { ValuePropositionSection } from "./components/value-proposition/ValuePropositionSection";
 import { ShopByBrandsSection } from "./components/shop-by-brands/ShopByBrandsSection";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
-import { getProductsAuto, isProductOnSale, isWCProduct } from "@/app/lib/api";
+import { getProductsAuto } from "@/app/lib/api";
 import { ProductsProvider } from "./components/ProductsProvider";
 import { allProducts } from "@/app/components/layout/product-list/mock-product";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { ProductHighlightsSection } from "./components/product-highlights/ProductHighlightsSection";
-import { HomeContent } from "./components/HomeContent";
 
 async function fetchProducts() {
   try {
@@ -35,7 +33,13 @@ const HomePage = async () => {
   return (
     <ProductsProvider initialProducts={initialProducts}>
       <HeroSection />
-      <HomeContent />
+      <SearchSection />
+      <PopularCategories />
+      <PromoBannersSection />
+      <PartnerLogosSection />
+      <ValuePropositionSection />
+      <ShopByBrandsSection />
+      <ProductHighlightsSection />
       <FindADealer />
     </ProductsProvider>
   );

@@ -7,6 +7,7 @@ import { AccessoriesHero } from "./AccessoriesHero";
 import { SearchAccessories } from "./SearchAccessories";
 import { allProducts } from "@/app/components/layout/product-list/mock-product";
 import { getProductsAuto } from "@/app/lib/api";
+import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
 
 async function fetchProducts() {
   try {
@@ -24,18 +25,18 @@ async function fetchProducts() {
 }
 
 const AccessoriesPage = async () => {
-  const products = await fetchProducts();
+  const initialProducts = await fetchProducts();
 
   return (
-    <Box>
+    <ProductsProvider initialProducts={initialProducts}>
       <AccessoriesHero />
-      <PopularCategories products={products} />
+      <PopularCategories />
       <Suspense fallback={<Box sx={{ height: 200 }} />}>
         <SearchAccessories />
       </Suspense>
-      <ProductList products={products} />
+      <ProductList />
       <FindADealer />
-    </Box>
+    </ProductsProvider>
   );
 };
 

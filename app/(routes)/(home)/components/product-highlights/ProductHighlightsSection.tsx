@@ -1,18 +1,20 @@
+"use client";
+
 import { Box } from "@mui/material";
 import { DealOfTheDay } from "./DealOfTheDay";
 import { BestSellers } from "./BestSellers";
-import { WCProduct } from "@/app/components/layout/product-list/wc-product";
-import { PublicProduct } from "@/app/components/layout/product-list/public-product";
+import { useProducts } from "../ProductsProvider";
+import { isProductOnSale } from "@/app/lib/api";
 
-interface ProductHighlightsSectionProps {
-  dealOfTheDayProducts: (WCProduct | PublicProduct)[];
-  bestSellersProducts: (WCProduct | PublicProduct)[];
-}
+export const ProductHighlightsSection = () => {
+  const { products } = useProducts();
 
-export const ProductHighlightsSection = ({
-  dealOfTheDayProducts,
-  bestSellersProducts,
-}: ProductHighlightsSectionProps) => {
+  // Deal of the Day - 选择有折扣的产品
+  const dealOfTheDayProducts = products.filter((p: any) => isProductOnSale(p));
+
+  // Best Sellers - 前 18 个产品
+  const bestSellersProducts = products.slice(0, 18);
+
   return (
     <Box sx={{ mb: 10 }} data-testid="product-highlights-section">
       <Box className="container mx-auto">

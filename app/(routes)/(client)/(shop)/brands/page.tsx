@@ -10,6 +10,7 @@ import {
   Product,
 } from "@/app/components/layout/product-list/mock-product";
 import { getProductsAuto } from "@/app/lib/api";
+import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
 
 async function fetchProducts() {
   try {
@@ -27,18 +28,18 @@ async function fetchProducts() {
 }
 
 const page = async () => {
-  const products = await fetchProducts();
+  const initialProducts = await fetchProducts();
 
   return (
-    <Box>
+    <ProductsProvider initialProducts={initialProducts}>
       <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
         <BrandHero />
       </Suspense>
-      <PopularCategories products={products} />
+      <PopularCategories />
       <SearchBrands />
-      <ProductList products={products} />
+      <ProductList />
       <FindADealer />
-    </Box>
+    </ProductsProvider>
   );
 };
 

@@ -12,13 +12,8 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { useState } from "react";
 import { PopularProductCard } from "./PopularProductCard";
-import { WCProduct } from "../product-list/wc-product";
-import { PublicProduct } from "../product-list/public-product";
 import { isWCProduct, isPublicProduct } from "@/app/lib/api";
-
-interface PopularCategoriesProps {
-  products: (WCProduct | PublicProduct)[];
-}
+import { useProducts } from "@/app/(routes)/(home)/components/ProductsProvider";
 
 // 定义排序类型
 type SortType = "top-rated" | "sales" | "latest";
@@ -34,7 +29,8 @@ const sortOptions: SortOption[] = [
   { value: "latest", label: "Latest Products" },
 ];
 
-export const PopularCategories = ({ products: allProducts }: PopularCategoriesProps) => {
+export const PopularCategories = () => {
+  const { products: allProducts } = useProducts();
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down("lg"));
 

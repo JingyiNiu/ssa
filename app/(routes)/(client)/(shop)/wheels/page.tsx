@@ -28,17 +28,16 @@ const WheelPage = async () => {
   // 在 Server Component 中调用 API 获取产品数据
   const initialProducts = await fetchProducts();
 
-
   return (
     <ProductsProvider initialProducts={initialProducts}>
       <Suspense fallback={<Box sx={{ height: 500 }} />}>
         <WheelsHero />
       </Suspense>
-      <PopularCategories products={initialProducts} />
+      <PopularCategories />
       <Suspense fallback={<Box sx={{ height: 200 }} />}>
         <SearchWheels />
       </Suspense>
-      <ProductList products={initialProducts} />
+      <ProductList />
       <FindADealer />
     </ProductsProvider>
   );

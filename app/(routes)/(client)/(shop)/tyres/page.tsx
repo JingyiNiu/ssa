@@ -10,6 +10,7 @@ import { TyresHeroWithBrand } from "./TyresHeroWithBrand";
 import { getProductsAuto } from "@/app/lib/api";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
+import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
 
 async function fetchProducts() {
   try {
@@ -27,18 +28,18 @@ async function fetchProducts() {
 }
 
 const TyresPage = async () => {
-  const products = await fetchProducts();
+  const initialProducts = await fetchProducts();
 
   return (
-    <Box>
+    <ProductsProvider initialProducts={initialProducts}>
       <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
         <TyresHeroWithBrand />
       </Suspense>
-      <PopularCategories products={products} />
+      <PopularCategories />
       <SearchTyres />
-      <ProductList products={products} />
+      <ProductList />
       <FindADealer />
-    </Box>
+    </ProductsProvider>
   );
 };
 
