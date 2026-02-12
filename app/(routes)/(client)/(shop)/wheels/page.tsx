@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
@@ -7,38 +8,46 @@ import { allProducts } from "@/app/components/layout/product-list/mock-product";
 import { getProductsAuto } from "@/app/lib/api";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
+import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
 
 async function fetchProducts() {
   try {
-    // 🌐 Server Component 使用公开 API（传 null）
-    const products = await getProductsAuto(null, { 
+    // 🔐 从 cookie 读取 token（服务端）
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth-token')?.value || null;
+
+    console.log('[WheelPage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+
+    // 🌐 根据 token 调用对应的 API
+    const products = await getProductsAuto(token, { 
       per_page: 50 
     });
     
-    console.log('✅ Server: 成功获取产品', products);
-    return products;
+    console.log('[WheelPage] Successfully fetched products', products);
+    return { products, token };
   } catch (error) {
+    console.error('[WheelPage] Failed to fetch products:', error);
     // 失败时返回模拟数据
-    return allProducts;
+    return { products: allProducts, token: null };
   }
 }
 
 const WheelPage = async () => {
   // 在 Server Component 中调用 API 获取产品数据
-  const products = await fetchProducts();
+  const { products: initialProducts, token: serverToken } = await fetchProducts();
 
   return (
-    <Box>
+    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
       <Suspense fallback={<Box sx={{ height: 500 }} />}>
         <WheelsHero />
       </Suspense>
-      <PopularCategories products={products} />
+      <PopularCategories />
       <Suspense fallback={<Box sx={{ height: 200 }} />}>
         <SearchWheels />
       </Suspense>
-      <ProductList products={products} />
+      <ProductList />
       <FindADealer />
-    </Box>
+    </ProductsProvider>
   );
 };
 

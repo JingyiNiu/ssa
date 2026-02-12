@@ -51,25 +51,25 @@ const RatingStars = ({ rating = 0 }: { rating?: number }) => {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
-  
+
   // 使用辅助函数获取价格
   const price = getProductPrice(product);
   const regularPrice = getProductRegularPrice(product);
   const salePrice = getProductSalePrice(product);
   const onSale = isProductOnSale(product);
   const mainImage = getProductMainImage(product);
-  
+
   // 库存信息（只有 WCProduct 可能有自定义 stock 字段）
-  const hasStockInfo = isWCProduct(product) && (product as any).stock;
-  const totalStock = hasStockInfo
-    ? (product as any).stock.available + (product as any).stock.sold
-    : 0;
+  const hasStockInfo =
+    isWCProduct(product) && product.stock_quantity && product.total_sales;
   const soldPercentage = hasStockInfo
-    ? ((product as any).stock.sold / totalStock) * 100
+    ? (product.total_sales /
+        ((product.stock_quantity || 0) + product.total_sales)) *
+      100
     : 0;
 
   const handleClick = () => {
-    router.push(`/product/${product.id}`);
+    router.push(`/product/${product.slug}`);
   };
 
   return (
@@ -109,51 +109,56 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         data-testid="popular-product-image"
       >
         {/* 品牌标签 - 左上角（只在有 brand 字段的产品上显示）*/}
-        {(product as any).brand && (
-          <Box
-            sx={{
-              position: "absolute",
-              top: 8,
-              left: 0,
-              bgcolor: (product as any).brand.image ? "transparent" : "primary.main",
-              color: "white",
-              px: (product as any).brand.image ? 0 : 1.5,
-              pb: (product as any).brand.image ? 0 : 0.5,
-              zIndex: 1,
-            }}
-            data-testid="popular-product-brand"
-          >
-            {(product as any).brand.image ? (
-              <Box
-                component="img"
-                src={(product as any).brand.image}
-                alt={(product as any).brand.name}
-                sx={{
-                  height: 32,
-                  width: "auto",
-                  objectFit: "contain",
-                  bgcolor: "primary.main",
-                  py: 0.5,
-                  px: 1,
-                  minWidth: 100,
-                  borderRadius: 0.5,
-                }}
-              />
-            ) : (
-              <Typography
-                variant="caption"
-                sx={{
-                  fontSize: "0.7rem",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                {(product as any).brand.name}
-              </Typography>
-            )}
-          </Box>
-        )}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 8,
+            left: 0,
+            bgcolor:
+              (product as any).brand && (product as any).brand.image
+                ? "transparent"
+                : "primary.main",
+            color: "white",
+            px:
+              (product as any).brand && (product as any).brand.image ? 0 : 1.5,
+            pb:
+              (product as any).brand && (product as any).brand.image ? 0 : 0.5,
+            zIndex: 1,
+          }}
+          data-testid="popular-product-brand"
+        >
+          {(product as any).brand && (product as any).brand.image ? (
+            <Box
+              component="img"
+              src={(product as any).brand.image}
+              alt={(product as any).brand.name}
+              sx={{
+                height: 32,
+                width: "auto",
+                objectFit: "contain",
+                bgcolor: "primary.main",
+                py: 0.5,
+                px: 1,
+                minWidth: 100,
+                borderRadius: 0.5,
+              }}
+            />
+          ) : (
+            <Typography
+              variant="caption"
+              sx={{
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {(product as any).brand && (product as any).brand.name
+                ? (product as any).brand.name
+                : "N/A"}
+            </Typography>
+          )}
+        </Box>
 
         <Box
           component="img"
@@ -186,10 +191,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               }}
             >
               <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                Available: <strong>{(product as any).stock.available}</strong>
+                Available: <strong>{(product as any).stock_quantity}</strong>
               </Typography>
               <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                Already Sold: <strong>{(product as any).stock.sold}</strong>
+                Already Sold: <strong>{(product as any).total_sales}</strong>
               </Typography>
             </Box>
             <LinearProgress
@@ -209,25 +214,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
 
         {/* 产品描述 */}
-        {(product.description || product.short_description) && (
-          <Typography
-            variant="caption"
-            sx={{
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              color: "text.secondary",
-              mb: 1,
-              fontSize: "0.75rem",
-              lineHeight: 1.4,
-              minHeight: "2.1em", // 2行的高度
-            }}
-          >
-            {product.short_description || product.description}
-          </Typography>
-        )}
+        <Typography
+          variant="caption"
+          sx={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            color: "text.secondary",
+            my: 1,
+            fontSize: "0.75rem",
+            lineHeight: 1,
+          }}
+        >
+          SKU: {product.sku || "N/A"}
+        </Typography>
 
         {/* 产品名称 */}
         <Typography
@@ -248,28 +250,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </Typography>
 
         {/* 评分星星 */}
-        {isWCProduct(product) && (product as any).rating !== undefined && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              mb: 1.5,
-            }}
-          >
-            <RatingStars rating={(product as any).rating} />
-          </Box>
-        )}
-        {isPublicProduct(product) && product.average_rating && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              mb: 1.5,
-            }}
-          >
-            <RatingStars rating={parseFloat(product.average_rating)} />
-          </Box>
-        )}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mb: 1.5,
+          }}
+        >
+          <RatingStars rating={parseFloat(product.average_rating)} />
+        </Box>
 
         {/* 价格 - 使用辅助函数统一处理 */}
         <Box
@@ -280,18 +269,20 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             gap: 1,
           }}
         >
-          {onSale && regularPrice && parseFloat(regularPrice) > parseFloat(price) && (
-            <Typography
-              variant="body2"
-              sx={{
-                color: "#999",
-                textDecoration: "line-through",
-                fontSize: "0.875rem",
-              }}
-            >
-              ${parseFloat(regularPrice).toFixed(2)}
-            </Typography>
-          )}
+          {onSale &&
+            regularPrice &&
+            parseFloat(regularPrice) > parseFloat(price) && (
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "#999",
+                  textDecoration: "line-through",
+                  fontSize: "0.875rem",
+                }}
+              >
+                ${parseFloat(regularPrice).toFixed(2)}
+              </Typography>
+            )}
           <Typography
             variant="h6"
             sx={{

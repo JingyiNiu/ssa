@@ -14,7 +14,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
   const router = useRouter();
   
   const handleClick = () => {
-    router.push(`/product/${banner.productId}`);
+    router.push(`/product/${banner.slug}`);
   };
   return (
     <Box

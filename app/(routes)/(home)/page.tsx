@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { cookies } from "next/headers";
 import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";
@@ -6,54 +6,51 @@ import { PartnerLogosSection } from "./components/partner-logos/PartnerLogosSect
 import { ValuePropositionSection } from "./components/value-proposition/ValuePropositionSection";
 import { ShopByBrandsSection } from "./components/shop-by-brands/ShopByBrandsSection";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
-import { getProductsAuto } from '@/app/lib/api';
+import { getProductsAuto } from "@/app/lib/api";
 import { ProductsProvider } from "./components/ProductsProvider";
-import { HomeContent } from "./components/HomeContent";
 import { allProducts } from "@/app/components/layout/product-list/mock-product";
+import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
+import { ProductHighlightsSection } from "./components/product-highlights/ProductHighlightsSection";
 
-/**
- * 从 API 获取产品数据（服务端预加载）
- * Server Component 只能获取公开价格
- * 如果用户已登录，ProductsProvider 会在客户端重新加载用户价格
- */
 async function fetchProducts() {
   try {
-    // 🌐 Server Component 使用公开 API（传 null）
-    const products = await getProductsAuto(null, { 
-      per_page: 50 
+    // 🔐 从 cookie 读取 token（服务端）
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth-token')?.value || null;
+
+    console.log('[HomePage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+
+    // 🌐 根据 token 调用对应的 API
+    const products = await getProductsAuto(token, {
+      per_page: 50,
     });
-    
-    console.log('✅ Server: 成功获取产品', products);
-    return products;
+
+    console.log("[HomePage] Successfully fetched products", products);
+    return { products, token };
   } catch (error) {
+    console.error('[HomePage] Failed to fetch products:', error);
     // 失败时返回模拟数据
-    return allProducts;
+    return { products: allProducts, token: null };
   }
 }
 
-const Home = async () => {
+const HomePage = async () => {
   // 🎯 服务端预加载产品（SEO 友好）
-  const initialProducts = await fetchProducts();
+  const { products: initialProducts, token: serverToken } = await fetchProducts();
 
   return (
-    <Box>
-      {/* 不需要产品数据的部分 - 直接渲染 */}
+    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
       <HeroSection />
       <SearchSection />
-      
-      {/* 需要产品数据的部分 - 用 Provider 包装 */}
-      <ProductsProvider initialProducts={initialProducts}>
-        <HomeContent />
-      </ProductsProvider>
-      
-      {/* 不需要产品数据的部分 - 直接渲染 */}
+      <PopularCategories />
       <PromoBannersSection />
       <PartnerLogosSection />
       <ValuePropositionSection />
       <ShopByBrandsSection />
+      <ProductHighlightsSection />
       <FindADealer />
-    </Box>
+    </ProductsProvider>
   );
 };
 
-export default Home;
+export default HomePage;

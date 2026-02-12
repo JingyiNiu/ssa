@@ -1,18 +1,16 @@
 /**
  * 认证管理模块
  * 处理 token 存储、验证、过期检查等
+ * 注意：现在只使用 Cookie 存储，不再使用 localStorage
  */
 
 import { loginUser, getCurrentUser } from '../api';
 import type { User, LoginParams } from '../api/services/users';
 import { useAuthStore } from '@/app/store/authStore';
+import { getTokenFromCookie } from '../cookies';
 
 // 重新导出简单的 ProtectedRoute
 export { ProtectedRoute } from './ProtectedRoute.simple';
-
-const AUTH_TOKEN_KEY = 'authToken';
-const USER_DATA_KEY = 'userData';
-const TOKEN_EXPIRY_KEY = 'tokenExpiry';
 
 /**
  * 获取 authStore 实例（用于非 React 组件）
@@ -67,53 +65,49 @@ export function isTokenExpired(token?: string): boolean {
 
 /**
  * 保存认证信息
+ * 注意：现在只保存到 Cookie（通过 Zustand store）
  */
 export function saveAuth(token: string, user: User): void {
-  // 1. 保存到 localStorage（向后兼容）
-  localStorage.setItem(AUTH_TOKEN_KEY, token);
-  localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
-  
-  const expiry = getTokenExpiry(token);
-  if (expiry) {
-    localStorage.setItem(TOKEN_EXPIRY_KEY, expiry.toString());
-  }
-  
-  // 2. 更新 Zustand store
+  // 更新 Zustand store（会自动保存到 cookie）
   getAuthStore().setAuth(token, user);
+  console.log('✅ Auth saved (cookie only)');
 }
 
 /**
  * 获取 token
+ * 注意：现在从 Cookie 读取
  */
 export function getToken(): string | null {
-  return localStorage.getItem(AUTH_TOKEN_KEY);
+  // 优先从 store 获取（客户端已经 hydrated）
+  const store = getAuthStore();
+  if (store.isHydrated && store.token) {
+    return store.token;
+  }
+  
+  // 客户端：从 cookie 读取
+  if (typeof window !== 'undefined') {
+    return getTokenFromCookie();
+  }
+  
+  return null;
 }
 
 /**
  * 获取用户信息
+ * 注意：现在从 Zustand store 读取
  */
 export function getUser(): User | null {
-  const userStr = localStorage.getItem(USER_DATA_KEY);
-  if (!userStr) return null;
-  
-  try {
-    return JSON.parse(userStr);
-  } catch {
-    return null;
-  }
+  return getAuthStore().user;
 }
 
 /**
  * 清除认证信息（登出）
+ * 注意：现在只清除 Cookie
  */
 export function clearAuth(): void {
-  // 1. 清除 localStorage（向后兼容）
-  localStorage.removeItem(AUTH_TOKEN_KEY);
-  localStorage.removeItem(USER_DATA_KEY);
-  localStorage.removeItem(TOKEN_EXPIRY_KEY);
-  
-  // 2. 清除 Zustand store
+  // 清除 Zustand store（会自动删除 cookie）
   getAuthStore().clearAuth();
+  console.log('✅ Auth cleared (cookie only)');
 }
 
 /**
@@ -175,9 +169,6 @@ export async function validateAndRefreshUser(): Promise<User | null> {
   try {
     // 验证 token 并获取最新用户信息
     const user = await getCurrentUser(token);
-    
-    // 更新用户信息到 localStorage（向后兼容）
-    localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
     
     // 更新 Zustand store
     getAuthStore().updateUser(user);

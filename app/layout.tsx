@@ -5,6 +5,7 @@ import ThemeProvider from "./components/ThemeProvider"
 import { BackToTop } from "./components/layout/footer/BackToTop"
 import { Navbar } from "./components/layout/nav/Navbar"
 import { Footer } from "./components/layout/footer/Footer"
+import { AuthInitializer } from "./components/AuthInitializer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <ThemeProvider>
+          <AuthInitializer />
           <Navbar />
           <main className="flex-1">
             {children}

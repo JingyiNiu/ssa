@@ -4,12 +4,13 @@ import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { WCProduct } from "../product-list/wc-product";
 import { PublicProduct } from "../product-list/public-product";
-import { 
-  getProductPrice, 
-  getProductRegularPrice, 
-  getProductSalePrice, 
+import {
+  getProductPrice,
+  getProductRegularPrice,
+  getProductSalePrice,
   getProductMainImage,
   isProductOnSale,
+  isWCProduct,
 } from "@/app/lib/api";
 
 interface PopularCardProps {
@@ -18,7 +19,8 @@ interface PopularCardProps {
 
 export const PopularProductCard = ({ product }: PopularCardProps) => {
   const router = useRouter();
-  
+
+  const isWCProductType = isWCProduct(product);
   const price = getProductPrice(product);
   const regularPrice = getProductRegularPrice(product);
   const salePrice = getProductSalePrice(product);
@@ -26,7 +28,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
   const mainImage = getProductMainImage(product);
 
   const handleClick = () => {
-    router.push(`/product/${product.id}`);
+    router.push(`/product/${product.slug}`);
   };
 
   return (
