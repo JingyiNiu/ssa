@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { HeroSection } from "./components/hero-section/HeroSection";
 import { SearchSection } from "./components/search-section/SearchSection";
 import { PromoBannersSection } from "./components/promotion-banner/PromoBannersSection";
@@ -13,25 +14,32 @@ import { ProductHighlightsSection } from "./components/product-highlights/Produc
 
 async function fetchProducts() {
   try {
-    // 🌐 Server Component 使用公开 API（传 null）
-    const products = await getProductsAuto(null, {
+    // 🔐 从 cookie 读取 token（服务端）
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth-token')?.value || null;
+
+    console.log('[HomePage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+
+    // 🌐 根据 token 调用对应的 API
+    const products = await getProductsAuto(token, {
       per_page: 50,
     });
 
     console.log("[HomePage] Successfully fetched products", products);
-    return products;
+    return { products, token };
   } catch (error) {
+    console.error('[HomePage] Failed to fetch products:', error);
     // 失败时返回模拟数据
-    return allProducts;
+    return { products: allProducts, token: null };
   }
 }
 
 const HomePage = async () => {
   // 🎯 服务端预加载产品（SEO 友好）
-  const initialProducts = await fetchProducts();
+  const { products: initialProducts, token: serverToken } = await fetchProducts();
 
   return (
-    <ProductsProvider initialProducts={initialProducts}>
+    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
       <HeroSection />
       <SearchSection />
       <PopularCategories />

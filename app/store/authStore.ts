@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import type { User } from "@/app/lib/api/services/users";
+import { setTokenCookie, removeTokenCookie, getTokenFromCookie } from "@/app/lib/cookies";
 
 interface AuthStore {
   // 状态
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  isHydrated: boolean; // 是否已从 localStorage 恢复完成
+  isHydrated: boolean;
 
   // 方法
   setAuth: (token: string, user: User) => void;
@@ -16,95 +16,88 @@ interface AuthStore {
   initialize: () => void;
 }
 
-export const useAuthStore = create<AuthStore>()(
-  persist(
-    (set, get) => ({
-      // === 初始状态 ===
-      user: null,
+export const useAuthStore = create<AuthStore>()((set, get) => ({
+  // === 初始状态 ===
+  user: null,
+  token: null,
+  isAuthenticated: false,
+  isHydrated: false,
+
+  // === 设置认证信息（登录） ===
+  setAuth: (token: string, user: User) => {
+    console.log('✅ authStore.setAuth() called', {
+      username: user.username,
+      tokenPreview: `${token.substring(0, 20)}...`,
+    });
+    
+    // 保存到 cookie（唯一数据源）
+    setTokenCookie(token);
+    
+    set({
+      token,
+      user,
+      isAuthenticated: true,
+    });
+  },
+
+  // === 清除认证信息（登出） ===
+  clearAuth: () => {
+    console.log('🚪 authStore.clearAuth() called');
+    
+    // 删除 cookie
+    removeTokenCookie();
+    
+    set({
       token: null,
+      user: null,
       isAuthenticated: false,
-      isHydrated: false,
+    });
+  },
 
-      // === 设置认证信息（登录） ===
-      setAuth: (token: string, user: User) => {
-        console.log('✅ authStore.setAuth() called', {
-          username: user.username,
-          tokenPreview: `${token.substring(0, 20)}...`,
-        });
-        set({
-          token,
-          user,
-          isAuthenticated: true,
-        });
-      },
+  // === 更新用户信息 ===
+  updateUser: (user: User) => {
+    set({ user });
+  },
 
-      // === 清除认证信息（登出） ===
-      clearAuth: () => {
-        console.log('🚪 authStore.clearAuth() called');
-        set({
-          token: null,
-          user: null,
-          isAuthenticated: false,
-        });
-      },
-
-      // === 更新用户信息 ===
-      updateUser: (user: User) => {
-        set({ user });
-      },
-
-      // === 初始化（检查 token 是否有效） ===
-      initialize: () => {
-        const { token, user } = get();
-        console.log('🔄 authStore.initialize() called', {
-          hasToken: !!token,
-          hasUser: !!user,
-          tokenPreview: token ? `${token.substring(0, 20)}...` : null,
-        });
+  // === 初始化（从 cookie 读取 token） ===
+  initialize: () => {
+    console.log('🔄 authStore.initialize() - reading from cookie');
+    
+    // 🍪 从 cookie 读取 token（唯一数据源）
+    const token = getTokenFromCookie();
+    
+    if (token) {
+      console.log('✅ Token found in cookie', {
+        tokenPreview: `${token.substring(0, 20)}...`,
+      });
+      
+      // 简单的 token 过期检查
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const isExpired = payload.exp && payload.exp * 1000 < Date.now();
         
-        if (token) {
-          // 简单的 token 过期检查
-          try {
-            const payload = JSON.parse(atob(token.split('.')[1]));
-            const isExpired = payload.exp && payload.exp * 1000 < Date.now();
-            
-            if (isExpired) {
-              console.log('❌ Token expired, clearing auth');
-              // Token 已过期，清除认证信息
-              get().clearAuth();
-            } else {
-              console.log('✅ Token valid, setting isAuthenticated = true');
-              // Token 有效，设置为已认证状态
-              set({ isAuthenticated: true });
-            }
-          } catch (error) {
-            // Token 解析失败，清除认证信息
-            console.error('❌ Failed to parse token:', error);
-            get().clearAuth();
-          }
+        if (isExpired) {
+          console.log('❌ Token expired, clearing auth');
+          get().clearAuth();
         } else {
-          console.log('⚠️ No token found in store');
+          console.log('✅ Token valid, restoring auth state');
+          set({
+            token,
+            isAuthenticated: true,
+            // user 需要额外获取，这里先设为 null
+            user: null,
+          });
         }
-        
-        // 标记为已完成 hydration
-        set({ isHydrated: true });
-        console.log('✅ authStore hydration complete');
-      },
-    }),
-    {
-      name: "auth-storage", // localStorage key
-      // 在恢复状态后自动初始化（验证 token）
-      onRehydrateStorage: () => {
-        console.log('💾 authStore rehydrating from localStorage...');
-        return (state) => {
-          if (state) {
-            console.log('💾 authStore rehydrated, calling initialize()');
-            state.initialize();
-          } else {
-            console.log('⚠️ authStore rehydration failed - no state');
-          }
-        };
-      },
+      } catch (error) {
+        console.error('❌ Failed to parse token:', error);
+        get().clearAuth();
+      }
+    } else {
+      console.log('⚠️ No token found in cookie');
     }
-  )
-);
+    
+    // 标记为已完成 hydration
+    set({ isHydrated: true });
+    console.log('✅ authStore hydration complete');
+  },
+}));

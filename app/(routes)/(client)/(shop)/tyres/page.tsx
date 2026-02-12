@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
 import { SearchTyres } from "./SearchTyres";
@@ -14,24 +15,31 @@ import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvi
 
 async function fetchProducts() {
   try {
-    // 🌐 Server Component 使用公开 API（传 null）
-    const products = await getProductsAuto(null, {
+    // 🔐 从 cookie 读取 token（服务端）
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth-token')?.value || null;
+
+    console.log('[TyresPage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+
+    // 🌐 根据 token 调用对应的 API
+    const products = await getProductsAuto(token, {
       per_page: 50,
     });
 
     console.log("✅ Server: 成功获取产品", products);
-    return products;
+    return { products, token };
   } catch (error) {
+    console.error('[TyresPage] Failed to fetch products:', error);
     // 失败时返回模拟数据
-    return allProducts;
+    return { products: allProducts, token: null };
   }
 }
 
 const TyresPage = async () => {
-  const initialProducts = await fetchProducts();
+  const { products: initialProducts, token: serverToken } = await fetchProducts();
 
   return (
-    <ProductsProvider initialProducts={initialProducts}>
+    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
       <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
         <TyresHeroWithBrand />
       </Suspense>
