@@ -47,22 +47,25 @@ export const PopularCategories = () => {
         case "top-rated":
           // 按评分降序排序（两种类型都有 average_rating）
           return Number(b.average_rating || 0) - Number(a.average_rating || 0);
-        
+
         case "sales":
           // 按销量降序排序
-          const aSales = isWCProduct(a) 
-            ? (a.total_sales || 0) 
-            : (a.review_count || 0); // PublicProduct 使用 review_count 作为近似
-          const bSales = isWCProduct(b) 
-            ? (b.total_sales || 0) 
-            : (b.review_count || 0);
+          const aSales = isWCProduct(a)
+            ? a.total_sales || 0
+            : a.review_count || 0; // PublicProduct 使用 review_count 作为近似
+          const bSales = isWCProduct(b)
+            ? b.total_sales || 0
+            : b.review_count || 0;
           return bSales - aSales;
-        
+
         case "latest":
           // 按创建时间降序排序（最新的在前）
           if (isWCProduct(a) && isWCProduct(b)) {
             // WCProduct: 按 date_created 排序
-            return new Date(b.date_created).getTime() - new Date(a.date_created).getTime();
+            return (
+              new Date(b.date_modified).getTime() -
+              new Date(a.date_modified).getTime()
+            );
           } else if (isPublicProduct(a) && isPublicProduct(b)) {
             // PublicProduct: 按 id 排序（id 越大越新）
             return b.id - a.id;
@@ -72,7 +75,7 @@ export const PopularCategories = () => {
             if (isWCProduct(b)) return 1;
             return 0;
           }
-        
+
         default:
           return 0;
       }

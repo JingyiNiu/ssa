@@ -180,7 +180,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         sx={{ flex: 1, textAlign: "center", py: 1, bgcolor: "secondary.light" }}
       >
         {/* 库存信息条 - 只在 WCProduct 且有 stock 字段时显示 */}
-        {hasStockInfo && (
+        {hasStockInfo ? (
           <Box sx={{ p: 1.5, pb: 0, mb: 2 }}>
             <Box
               sx={{
@@ -211,25 +211,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               }}
             />
           </Box>
-        )}
-
-        {/* 产品描述 */}
-        <Typography
-          variant="caption"
-          sx={{
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            color: "text.secondary",
-            my: 1,
-            fontSize: "0.75rem",
-            lineHeight: 1,
-          }}
-        >
-          SKU: {product.sku || "N/A"}
-        </Typography>
+        ) : null}
 
         {/* 产品名称 */}
         <Typography
@@ -247,6 +229,24 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           }}
         >
           {product.name}
+        </Typography>
+
+        {/* 产品SKU */}
+        <Typography
+          variant="caption"
+          sx={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            color: "text.secondary",
+            my: 1,
+            fontSize: "0.75rem",
+            lineHeight: 1,
+          }}
+        >
+          SKU: {product.sku || "N/A"}
         </Typography>
 
         {/* 评分星星 */}

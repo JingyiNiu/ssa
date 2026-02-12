@@ -20,7 +20,6 @@ interface PopularCardProps {
 export const PopularProductCard = ({ product }: PopularCardProps) => {
   const router = useRouter();
 
-  const isWCProductType = isWCProduct(product);
   const price = getProductPrice(product);
   const regularPrice = getProductRegularPrice(product);
   const salePrice = getProductSalePrice(product);
@@ -40,6 +39,8 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
         border: "1px solid #e0e0e0",
         boxShadow: "none",
         borderRadius: 0,
+        display: "flex",
+        flexDirection: "column",
         "&:hover": {
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           transform: "translateY(-4px)",
@@ -76,8 +77,9 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
       </CardMedia>
 
       <CardContent
-        sx={{ textAlign: "center", py: 2, bgcolor: "secondary.light" }}
+        sx={{ flex: 1, textAlign: "center", py: 2, bgcolor: "secondary.light" }}
       >
+        {/* 产品名称 */}
         <Typography
           variant="body1"
           sx={{
@@ -90,6 +92,19 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           {product.name}
         </Typography>
 
+        {/* 产品SKU */}
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.secondary",
+            mb: 1,
+            fontSize: "0.75rem",
+          }}
+        >
+          SKU: {product.sku || "N/A"}
+        </Typography>
+
+        {/* 价格 */}
         <Box
           sx={{
             display: "flex",

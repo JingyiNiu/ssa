@@ -71,7 +71,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
               padding: 2,
             }}
           />
-          
+
           {/* 悬停时显示的查看大图图标 */}
           <Box
             className="zoom-overlay"
@@ -122,7 +122,7 @@ export const ImageCard = ({ product }: ImageCardProps) => {
               textTransform: "capitalize",
             }}
           >
-            {product.categories.map((category) => category.name).join(', ')}
+            {product.categories.map((category) => category.name).join(", ")}
           </Typography>
         </CardContent>
       </Box>
@@ -141,7 +141,8 @@ export const ImageCard = ({ product }: ImageCardProps) => {
           sx={{
             position: "relative",
             maxWidth: "90vw",
-            maxHeight: "90vh",
+            maxHeight: "70vh",
+            overflow: "auto",
             outline: "none",
             display: "flex",
             flexDirection: "column",
@@ -194,19 +195,9 @@ export const ImageCard = ({ product }: ImageCardProps) => {
             <Typography variant="h6" sx={{ fontWeight: 600 }}>
               {product.name}
             </Typography>
-            {(product.description || product.short_description) && (
-              <Box
-                sx={{
-                  mt: 1,
-                  color: "text.secondary",
-                  fontSize: "0.875rem",
-                  '& p': { mb: 1 },
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: product.description || product.short_description || '',
-                }}
-              />
-            )}
+            <Typography variant="body1" sx={{ color: "text.secondary" }}>
+              SKU: {product.sku}
+            </Typography>
           </Box>
         </Box>
       </Modal>
