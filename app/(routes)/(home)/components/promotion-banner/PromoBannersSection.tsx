@@ -1,12 +1,19 @@
+"use client";
+
 import { Box } from "@mui/material";
 import { Banner } from "./banner";
 import { PromoBanner } from "./PromoBanner";
+import { useProducts } from "../ProductsProvider";
 
 export const PromoBannersSection = () => {
+  const { products } = useProducts();
+  const promotionProducts = products.slice(0, 2);
+  
   const banners: Banner[] = [
     {
-      id: 1,
-      productId: "3f9a1c2e-6b4f-4a6e-9d8a-1b2c3d4e5f60",
+      id: promotionProducts[0].id,
+      slug: promotionProducts[0].slug,
+      productId: promotionProducts[0].id,
       title: "100% Approved",
       subtitle: "by customers",
       description:
@@ -15,8 +22,9 @@ export const PromoBannersSection = () => {
       backgroundImage: "/images/pics/hero-slide.png",
     },
     {
-      id: 2,
-      productId: "a7c2e9b4-1d53-4f88-8c0a-9e6d2b7a4c11",
+      id: promotionProducts[1].id,
+      slug: promotionProducts[1].slug,
+      productId: promotionProducts[1].id,
       title: "Get 20% off",
       subtitle: "your first order when you join our newsletter",
       description:

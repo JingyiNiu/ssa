@@ -28,7 +28,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
   const mainImage = getProductMainImage(product);
 
   const handleClick = () => {
-    router.push(`/product/${product.id}`);
+    router.push(`/product/${product.slug}`);
   };
 
   return (

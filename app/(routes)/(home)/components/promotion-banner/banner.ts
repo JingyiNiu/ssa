@@ -1,6 +1,7 @@
 export interface Banner {
   id: number;
-  productId: string;
+  slug: string;
+  productId: number;
   title: string;
   subtitle: string;
   description: string;
