@@ -16,9 +16,12 @@ async function fetchProducts() {
   try {
     // 🔐 从 cookie 读取 token（服务端）
     const cookieStore = await cookies();
-    const token = cookieStore.get('auth-token')?.value || null;
+    const token = cookieStore.get("auth-token")?.value || null;
 
-    console.log('[HomePage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+    console.log(
+      "[HomePage] Fetching products with token:",
+      token ? "Yes (logged in)" : "No (public)"
+    );
 
     // 🌐 根据 token 调用对应的 API
     const products = await getProductsAuto(token, {
@@ -28,18 +31,23 @@ async function fetchProducts() {
     console.log("[HomePage] Successfully fetched products", products);
     return { products, token };
   } catch (error) {
-    console.error('[HomePage] Failed to fetch products:', error);
+    console.error("[HomePage] Failed to fetch products:", error);
     // 失败时返回模拟数据
     return { products: allProducts, token: null };
   }
 }
 
 const HomePage = async () => {
+  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
   // 🎯 服务端预加载产品（SEO 友好）
-  const { products: initialProducts, token: serverToken } = await fetchProducts();
+  const { products: initialProducts, token: serverToken } =
+    await fetchProducts();
 
   return (
-    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
+    <ProductsProvider
+      initialProducts={initialProducts}
+      serverToken={serverToken}
+    >
       <HeroSection />
       <SearchSection />
       <PopularCategories />
