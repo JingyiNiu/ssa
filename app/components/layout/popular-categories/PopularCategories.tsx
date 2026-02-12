@@ -14,6 +14,7 @@ import { useState } from "react";
 import { PopularProductCard } from "./PopularProductCard";
 import { WCProduct } from "../product-list/wc-product";
 import { PublicProduct } from "../product-list/public-product";
+import { isWCProduct, isPublicProduct } from "@/app/lib/api";
 
 interface PopularCategoriesProps {
   products: (WCProduct | PublicProduct)[];
@@ -48,14 +49,34 @@ export const PopularCategories = ({ products: allProducts }: PopularCategoriesPr
     .sort((a, b) => {
       switch (selectedSort) {
         case "top-rated":
-          // 按评分降序排序
+          // 按评分降序排序（两种类型都有 average_rating）
           return Number(b.average_rating || 0) - Number(a.average_rating || 0);
+        
         case "sales":
           // 按销量降序排序
-          return 0;
+          const aSales = isWCProduct(a) 
+            ? (a.total_sales || 0) 
+            : (a.review_count || 0); // PublicProduct 使用 review_count 作为近似
+          const bSales = isWCProduct(b) 
+            ? (b.total_sales || 0) 
+            : (b.review_count || 0);
+          return bSales - aSales;
+        
         case "latest":
           // 按创建时间降序排序（最新的在前）
-          return 0;
+          if (isWCProduct(a) && isWCProduct(b)) {
+            // WCProduct: 按 date_created 排序
+            return new Date(b.date_created).getTime() - new Date(a.date_created).getTime();
+          } else if (isPublicProduct(a) && isPublicProduct(b)) {
+            // PublicProduct: 按 id 排序（id 越大越新）
+            return b.id - a.id;
+          } else {
+            // 混合类型：WCProduct 优先（假设是最新的用户数据）
+            if (isWCProduct(a)) return -1;
+            if (isWCProduct(b)) return 1;
+            return 0;
+          }
+        
         default:
           return 0;
       }

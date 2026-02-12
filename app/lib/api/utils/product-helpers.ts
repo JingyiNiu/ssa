@@ -21,11 +21,21 @@ export function isWCProduct(product: any): product is WCProduct {
 }
 
 /**
+ * 将 PublicProduct 的价格从"分"转换为"元"
+ * PublicProduct API 返回的价格单位是分（如 10000 = 100元）
+ */
+function convertPublicProductPrice(priceInCents: string): string {
+  const cents = parseFloat(priceInCents);
+  if (isNaN(cents)) return '0';
+  return (cents / 100).toFixed(2);
+}
+
+/**
  * 获取产品价格（统一接口）
  */
 export function getProductPrice(product: WCProduct | PublicProduct): string {
   if (isPublicProduct(product)) {
-    return product.prices.price;
+    return convertPublicProductPrice(product.prices.price);
   }
   // WCProduct: 优先使用 calculated_price（用户价格）
   return product.calculated_price || product.price;
@@ -36,7 +46,7 @@ export function getProductPrice(product: WCProduct | PublicProduct): string {
  */
 export function getProductRegularPrice(product: WCProduct | PublicProduct): string {
   if (isPublicProduct(product)) {
-    return product.prices.regular_price;
+    return convertPublicProductPrice(product.prices.regular_price);
   }
   return product.regular_price;
 }
@@ -46,9 +56,9 @@ export function getProductRegularPrice(product: WCProduct | PublicProduct): stri
  */
 export function getProductSalePrice(product: WCProduct | PublicProduct): string {
   if (isPublicProduct(product)) {
-    return product.prices.sale_price;
+    return convertPublicProductPrice(product.prices.sale_price);
   }
-  return product.sale_price;
+  return product.calculated_price||product.sale_price;
 }
 
 /**
@@ -58,8 +68,8 @@ export function isProductOnSale(product: WCProduct | PublicProduct): boolean {
   if (isPublicProduct(product)) {
     return product.on_sale;
   }
-  // WCProduct: 判断 sale_price 是否存在且不为空
-  return !!product.sale_price && parseFloat(product.sale_price) > 0;
+  // WCProduct: 判断 price_source 是否为 "special" 或者 sale_price 是否存在且不为空
+  return product.price_source === 'special' || (!!product.sale_price && parseFloat(product.sale_price) > 0);
 }
 
 /**
