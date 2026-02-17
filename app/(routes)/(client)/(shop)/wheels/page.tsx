@@ -21,7 +21,7 @@ async function fetchProducts() {
     // 🌐 根据 token 调用对应的 API
     const products = await getProductsAuto(token, { 
       per_page: 50,
-      category: "wheel",
+      // category: "wheel",
     });
     
     console.log('[WheelPage] Successfully fetched products', products);
