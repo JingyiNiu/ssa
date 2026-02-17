@@ -1,8 +1,10 @@
 import { Box, Typography, Button } from "@mui/material";
-import { FaCar } from "react-icons/fa";
 import { GiCarWheel, GiTyre } from "react-icons/gi";
+import { MdBrandingWatermark } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
+import { FaTags, FaToolbox } from "react-icons/fa";
 
-export type SearchTabType = "wheel" | "tyre" | "vehicle" | "brand" | "accessories";
+export type SearchTabType = "wheel" | "tyre" | "brand" | "accessories";
 
 type SearchTabsProps = {
   activeTab: SearchTabType;
@@ -17,7 +19,8 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
   }[] = [
     { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL", type: "wheel" },
     { icon: <GiTyre size={24} />, label: "SEARCH TYRE", type: "tyre" },
-    { icon: <FaCar size={24} />, label: "SEARCH BY VEHICLE", type: "vehicle" },
+    { icon: <FaTags size={22} />, label: "SEARCH BRAND", type: "brand" },
+    { icon: <FaToolbox size={22} />, label: "ACCESSORIES", type: "accessories" },
   ];
 
   return (

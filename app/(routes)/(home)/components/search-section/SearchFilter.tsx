@@ -44,6 +44,7 @@ export const SearchFilter = forwardRef<
   // 根据配置动态渲染筛选器
   const renderFilters = () => {
     if (!currentConfig) return null;
+
     return currentConfig.fields.map((field) => (
       <FilterSelect
         key={field.key}
@@ -74,40 +75,6 @@ export const SearchFilter = forwardRef<
           gap: 0,
           columnGap: 3,
           rowGap: 2,
-          "& > *": {
-            position: "relative",
-            // 默认有 divider
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              right: "-12px",
-              top: "10%",
-              height: "80%",
-              width: "1px",
-              backgroundColor: "grey.200",
-            },
-
-            // xs：1 列 → 全部不显示
-            "@media (max-width:599px)": {
-              "&::after": {
-                display: "none",
-              },
-            },
-
-            // sm：2 列 → 每 2 个去掉
-            "@media (min-width:600px) and (max-width:1199px)": {
-              "&:nth-of-type(2n)::after": {
-                display: "none",
-              },
-            },
-
-            // lg：4 列 → 每 4 个去掉
-            "@media (min-width:1200px)": {
-              "&:nth-of-(4n)::after": {
-                display: "none",
-              },
-            },
-          },
         }}
       >
         {renderFilters()}
