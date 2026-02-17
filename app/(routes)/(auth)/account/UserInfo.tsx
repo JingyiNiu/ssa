@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 const UserInfo = () => {
   const { user, clearAuth } = useAuthStore();
   const router = useRouter();
+  console.log(user);
 
   // 获取显示名称
   const displayName = user?.name || user?.username || "Guest";
