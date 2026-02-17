@@ -96,8 +96,9 @@ export const HeaderActions = () => {
                 ariaLabel="Account"
               />
             ) : (
-              <Link href="/login" style={{ textDecoration: 'none' }}>Login</Link>
-
+              <Link href="/login" style={{ textDecoration: "none" }}>
+                Login
+              </Link>
             )}
           </>
         )}
@@ -118,7 +119,7 @@ export const HeaderActions = () => {
         sx={{ display: { xs: "flex", md: "none" } }}
         data-testid="mobile-menu-button"
       >
-        <CartIcon/>
+        <CartIcon />
         <IconButton
           onClick={() => toggleMobileMenu(true)}
           aria-label="Menu"
@@ -154,6 +155,8 @@ export const HeaderActions = () => {
 
       {/* 退出确认对话框 */}
       <Dialog
+        maxWidth="xs"
+        fullWidth
         open={logoutDialogOpen}
         onClose={handleLogoutCancel}
         aria-labelledby="logout-dialog-title"
@@ -167,17 +170,31 @@ export const HeaderActions = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleLogoutCancel} color="primary">
-            Cancel
-          </Button>
-          <Button
-            onClick={handleLogoutConfirm}
-            color="primary"
-            variant="contained"
-            autoFocus
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              width: "100%",
+            }}
           >
-            Confirm
-          </Button>
+            <Button
+              onClick={handleLogoutConfirm}
+              color="primary"
+              variant="contained"
+              autoFocus
+              sx={{ width: "100%" }}
+            >
+              Logout
+            </Button>
+            <Button
+              onClick={handleLogoutCancel}
+              variant="outlined"
+              sx={{ width: "100%" }}
+            >
+              Cancel
+            </Button>
+          </Box>
         </DialogActions>
       </Dialog>
 

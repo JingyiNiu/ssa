@@ -88,10 +88,9 @@ export const useAuthStore = create<AuthStore>()((set, get) => ({
         console.error('❌ Failed to parse token:', error);
         get().clearAuth();
       }
-    } else {
-      console.log('⚠️ No token found in cookie');
     }
-    
+    // 未登录时无 token 为正常情况，不打印日志
+
     // 标记为已完成 hydration
     set({ isHydrated: true });
   },
