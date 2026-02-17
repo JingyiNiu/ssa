@@ -21,68 +21,6 @@ type FilterConfig = {
 
 // 统一的筛选器配置
 export const searchConfig: Record<SearchTabType, FilterConfig> = {
-  vehicle: {
-    gridColumns: {
-      xs: "1fr",
-      sm: "repeat(2, 1fr)",
-      lg: "repeat(6, 1fr)",
-    },
-    fields: [
-      {
-        key: "make",
-        label: "MAKE",
-        options: [
-          { value: "toyota", label: "Toyota" },
-          { value: "honda", label: "Honda" },
-          { value: "ford", label: "Ford" },
-        ],
-      },
-      {
-        key: "model",
-        label: "MODEL",
-        options: [
-          { value: "camry", label: "Camry" },
-          { value: "accord", label: "Accord" },
-          { value: "f150", label: "F-150" },
-        ],
-      },
-      {
-        key: "year",
-        label: "YEAR",
-        options: [
-          { value: "2023", label: "2023" },
-          { value: "2022", label: "2022" },
-          { value: "2021", label: "2021" },
-        ],
-      },
-      {
-        key: "trim",
-        label: "TRIM",
-        options: [
-          { value: "base", label: "Base" },
-          { value: "sport", label: "Sport" },
-          { value: "luxury", label: "Luxury" },
-        ],
-      },
-      {
-        key: "diameter",
-        label: "DIAMETER",
-        options: [
-          { value: "16", label: '16"' },
-          { value: "17", label: '17"' },
-          { value: "18", label: '18"' },
-        ],
-      },
-      {
-        key: "stock",
-        label: "STOCK",
-        options: [
-          { value: "instock", label: "In Stock" },
-          { value: "outofstock", label: "Out of Stock" },
-        ],
-      },
-    ],
-  },
   wheel: {
     gridColumns: {
       xs: "1fr",
@@ -207,9 +145,30 @@ export const searchConfig: Record<SearchTabType, FilterConfig> = {
   accessories: {
     gridColumns: {
       xs: "1fr",
-      sm: "1fr",
-      lg: "1fr",
+      sm: "repeat(2, 1fr)",
+      lg: "repeat(2, 1fr)",
     },
-    fields: [], // accessories 没有筛选器
+    fields: [
+      {
+        key: "category",
+        label: "CATEGORY",
+        options: [
+          { value: "floor-mats", label: "Floor Mats" },
+          { value: "roof-rack", label: "Roof Rack" },
+          { value: "brake-pads", label: "Brake Pads" },
+          { value: "lighting", label: "Lighting" },
+        ],
+      },
+      {
+        key: "priceRange",
+        label: "PRICE RANGE",
+        options: [
+          { value: "0-100", label: "$0 – $100" },
+          { value: "100-300", label: "$100 – $300" },
+          { value: "300-500", label: "$300 – $500" },
+          { value: ">500", label: "over $500" },
+        ],
+      },
+    ],
   },
 };

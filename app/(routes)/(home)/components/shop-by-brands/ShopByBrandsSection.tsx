@@ -1,61 +1,25 @@
 "use client";
 
-import { Box, Typography, Card, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { Brand } from "./brand";
 import { BrandCard } from "./BrandCard";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { brandItems } from "@/app/(routes)/(client)/(shop)/brands/brand";
 
 export const ShopByBrandsSection = () => {
-  const brands: Brand[] = [
-    {
-      id: 1,
-      name: "Brand 1",
-      logo: "/images/logo/logo2.png",
-    },
-    {
-      id: 2,
-      name: "Brand 2",
-      logo: "/images/logo/logo3.png",
-    },
-    {
-      id: 3,
-      name: "Brand 3",
-      logo: "/images/logo/logo2.png",
-    },
-    {
-      id: 4,
-      name: "Brand 4",
-      logo: "/images/logo/logo3.png",
-    },
-    {
-      id: 5,
-      name: "Brand 5",
-      logo: "/images/logo/logo2.png",
-    },
-    {
-      id: 6,
-      name: "Brand 6",
-      logo: "/images/logo/logo3.png",
-    },
-    {
-      id: 7,
-      name: "Brand 7",
-      logo: "/images/logo/logo2.png",
-    },
-    {
-      id: 8,
-      name: "Brand 8",
-      logo: "/images/logo/logo3.png",
-    },
-  ];
+  const brands: Brand[] = brandItems.map((item, index) => ({
+    id: index + 1,
+    name: item.label,
+    logo: item.logo ?? "",
+  }));
 
   const [currentPage, setCurrentPage] = useState(0);
-  
+
   // 初始值设为 4，避免 hydration 不匹配
   const [itemsPerPage, setItemsPerPage] = useState(4);
-  
+
   React.useEffect(() => {
     // 设置初始的每页显示数量
     const updateItemsPerPage = () => {
@@ -65,14 +29,14 @@ export const ShopByBrandsSection = () => {
         setItemsPerPage(4);
       }
     };
-    
+
     updateItemsPerPage();
-    
+
     const handleResize = () => {
       updateItemsPerPage();
       setCurrentPage(0); // 重置到第一页
     };
-    
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -124,14 +88,9 @@ export const ShopByBrandsSection = () => {
           {/* 品牌网格 */}
           <Box
             sx={{
-              display: "flex",
+              display: "grid",
+              gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
               gap: { xs: 2, md: 3 },
-              justifyContent: "center",
-              alignItems: "stretch",
-              "& > *": {
-                flex: 1,
-                minWidth: 0,
-              },
             }}
           >
             {displayedBrands.map((brand) => (

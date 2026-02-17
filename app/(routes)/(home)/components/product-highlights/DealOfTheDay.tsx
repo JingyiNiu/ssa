@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography, Button, IconButton } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -10,6 +10,8 @@ import { ActionButton } from "@/app/components/ui/ActionButton";
 import { useCartStore } from "@/app/store/cartStore";
 import { PublicProduct } from "@/app/components/layout/product-list/public-product";
 import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
+import { useAuthStore } from "@/app/store/authStore";
+import { LoginToAddToCartPrompt } from "@/app/components/common/LoginToAddToCartPrompt";
 
 interface DealOfTheDayProps {
   products: (WCProduct | PublicProduct)[];
@@ -18,6 +20,7 @@ interface DealOfTheDayProps {
 export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
   const deals = products; // 直接使用传入的产品
   const { addItem } = useCartStore();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
@@ -187,13 +190,17 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
         </Box>
       </Box>
 
-      <ActionButton 
-        endIcon={<ArrowForwardIcon />} 
-        fullWidth
-        onClick={handleAddToCart}
-      >
-        Add To Cart
-      </ActionButton>
+      {isAuthenticated ? (
+        <ActionButton
+          endIcon={<ArrowForwardIcon />}
+          fullWidth
+          onClick={handleAddToCart}
+        >
+          Add To Cart
+        </ActionButton>
+      ) : (
+        <LoginToAddToCartPrompt />
+      )}
     </Box>
   );
 };

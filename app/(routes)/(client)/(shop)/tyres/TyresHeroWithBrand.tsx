@@ -22,7 +22,7 @@ export const TyresHeroWithBrand = () => {
       // 如果 URL 没有参数，设置第一个品牌并更新 URL
       const firstBrand = brandItems[0].value;
       setSelectedBrand(firstBrand);
-      
+
       const params = new URLSearchParams(searchParams.toString());
       params.set("brand", firstBrand);
       router.replace(`/tyres?${params.toString()}`);
@@ -80,7 +80,7 @@ export const TyresHeroWithBrand = () => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: {"xs": "center", "md": "flex-end"},
+            justifyContent: { xs: "center", md: "flex-end" },
             alignItems: "center",
             width: "100%",
           }}
@@ -106,14 +106,14 @@ export const TyresHeroWithBrand = () => {
                 elevation={selectedBrand === brand.value ? 8 : 2}
                 sx={{
                   px: 1,
-                  py: 4,
+                  py: 3,
                   cursor: "pointer",
                   borderRadius: 0,
                   boxShadow: 0,
                   backgroundColor:
                     selectedBrand === brand.value ? "primary.main" : "white",
                   "&:hover": {
-                    backgroundColor: "grey.400",
+                    backgroundColor: "grey.100",
                   },
                 }}
               >
@@ -132,12 +132,10 @@ export const TyresHeroWithBrand = () => {
                       src={brand.logo}
                       alt={brand.label}
                       sx={{
-                        width: 40,
-                        objectFit: "contain",
-                        filter:
-                          selectedBrand === brand.value ? "none" : "invert(1)",
-                        opacity: selectedBrand === brand.value ? 1 : 0.5,
-                        transition: "filter 0.3s ease",
+                        width: "100%",
+                        maxWidth: 100,
+                        opacity: selectedBrand === brand.value ? 1 : 0.4,
+                        transition: "opacity 0.3s ease",
                       }}
                     />
                   )}
@@ -150,7 +148,7 @@ export const TyresHeroWithBrand = () => {
                       color:
                         selectedBrand === brand.value
                           ? "white"
-                          : "text.primary",
+                          : "grey.300",
                     }}
                   >
                     {brand.label}

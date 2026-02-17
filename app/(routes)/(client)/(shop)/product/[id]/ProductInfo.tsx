@@ -21,6 +21,8 @@ import {
   getProductRegularPrice,
   isWCProduct,
 } from "@/app/lib/api";
+import { useAuthStore } from "@/app/store/authStore";
+import { LoginToAddToCartPrompt } from "@/app/components/common/LoginToAddToCartPrompt";
 
 interface ProductInfoProps {
   product: WCProduct | PublicProduct;
@@ -30,6 +32,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
   const { addItem, getItemQuantity } = useCartStore();
   const cartQuantity = getItemQuantity(product.id.toString());
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
   const hasStockInfo =
     isWCProduct(product) && product.stock_quantity && product.total_sales;
@@ -188,67 +191,72 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       )}
 
       {/* 数量选择器和按钮 */}
-      <Box>
-        {/* 数量提示 */}
-        {Number(maxStock) > 0 && (
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ mb: 1, display: "block" }}
-          >
-            Max quantity: {Number(maxStock)}{" "}
-            {Number(maxStock) === 1 ? "item" : "items"}
-          </Typography>
+      <Box sx={{ mb: 2 }}>
+        {isAuthenticated ? (
+          <>
+            {/* 数量提示 */}
+            {Number(maxStock) > 0 && (
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ mb: 1, display: "block" }}
+              >
+                Max quantity: {Number(maxStock)}{" "}
+                {Number(maxStock) === 1 ? "item" : "items"}
+              </Typography>
+            )}
+
+            {/* 选择数量添加到购物车 */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                gap: 2,
+              }}
+            >
+              {/* 数量选择器 */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: 1,
+                }}
+              >
+                <IconButton
+                  size="small"
+                  onClick={() => handleQuantityChange("decrease")}
+                  disabled={quantity <= 1}
+                >
+                  <RemoveIcon />
+                </IconButton>
+                <Typography
+                  sx={{ px: 2, flexGrow: 1, minWidth: 40, textAlign: "center" }}
+                >
+                  {quantity}
+                </Typography>
+                <IconButton
+                  size="small"
+                  onClick={() => handleQuantityChange("increase")}
+                  disabled={quantity >= Number(maxStock)}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Box>
+
+              {/* 添加到购物车按钮 */}
+              <ActionButton
+                sx={{ flexGrow: 1 }}
+                disabled={Number(maxStock) === 0}
+                onClick={handleAddToCart}
+              >
+                {Number(maxStock) === 0 ? "Out of Stock" : "Add To Cart"}
+              </ActionButton>
+            </Box>
+          </>
+        ) : (
+          <LoginToAddToCartPrompt sx={{ py: 2 }} />
         )}
-
-        {/* 选择数量添加到购物车 */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 2,
-            mb: 2,
-          }}
-        >
-          {/* 数量选择器 */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid #e0e0e0",
-              borderRadius: 1,
-            }}
-          >
-            <IconButton
-              size="small"
-              onClick={() => handleQuantityChange("decrease")}
-              disabled={quantity <= 1}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <Typography
-              sx={{ px: 2, flexGrow: 1, minWidth: 40, textAlign: "center" }}
-            >
-              {quantity}
-            </Typography>
-            <IconButton
-              size="small"
-              onClick={() => handleQuantityChange("increase")}
-              disabled={quantity >= Number(maxStock)}
-            >
-              <AddIcon />
-            </IconButton>
-          </Box>
-
-          {/* 添加到购物车按钮 */}
-          <ActionButton
-            sx={{ flexGrow: 1 }}
-            disabled={Number(maxStock) === 0}
-            onClick={handleAddToCart}
-          >
-            {Number(maxStock) === 0 ? "Out of Stock" : "Add To Cart"}
-          </ActionButton>
-        </Box>
       </Box>
     </Box>
   );

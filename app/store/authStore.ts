@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { User } from "@/app/lib/api/services/users";
 import { setTokenCookie, removeTokenCookie, getTokenFromCookie } from "@/app/lib/cookies";
+import { getCurrentUser } from "@/app/lib/api";
 
 interface AuthStore {
   // 状态
@@ -13,7 +14,7 @@ interface AuthStore {
   setAuth: (token: string, user: User) => void;
   clearAuth: () => void;
   updateUser: (user: User) => void;
-  initialize: () => void;
+  initialize: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStore>()((set, get) => ({
@@ -59,40 +60,36 @@ export const useAuthStore = create<AuthStore>()((set, get) => ({
     set({ user });
   },
 
-  // === 初始化（从 cookie 读取 token） ===
-  initialize: () => {
+  // === 初始化（从 cookie 读取 token，有 token 时拉取用户信息） ===
+  initialize: async () => {
     console.log('🔄 authStore.initialize() - reading from cookie');
-    
-    // 🍪 从 cookie 读取 token（唯一数据源）
+
     const token = getTokenFromCookie();
-    
+
     if (token) {
-      // 简单的 token 过期检查
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const isExpired = payload.exp && payload.exp * 1000 < Date.now();
-        
+
         if (isExpired) {
           console.log('❌ Token expired, clearing auth');
           get().clearAuth();
         } else {
-          console.log('✅ Token valid, restoring auth state');
-          set({
-            token,
-            isAuthenticated: true,
-            // user 需要额外获取，这里先设为 null
-            user: null,
-          });
+          set({ token, isAuthenticated: true, user: null });
+          try {
+            const user = await getCurrentUser(token);
+            set({ user });
+          } catch (err) {
+            console.error('❌ Failed to fetch user on init:', err);
+            get().clearAuth();
+          }
         }
       } catch (error) {
         console.error('❌ Failed to parse token:', error);
         get().clearAuth();
       }
-    } else {
-      console.log('⚠️ No token found in cookie');
     }
-    
-    // 标记为已完成 hydration
+
     set({ isHydrated: true });
   },
 }));
