@@ -67,10 +67,6 @@ export const useAuthStore = create<AuthStore>()((set, get) => ({
     const token = getTokenFromCookie();
     
     if (token) {
-      console.log('✅ Token found in cookie', {
-        tokenPreview: `${token.substring(0, 20)}...`,
-      });
-      
       // 简单的 token 过期检查
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
@@ -98,6 +94,5 @@ export const useAuthStore = create<AuthStore>()((set, get) => ({
     
     // 标记为已完成 hydration
     set({ isHydrated: true });
-    console.log('✅ authStore hydration complete');
   },
 }));

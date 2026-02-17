@@ -204,4 +204,12 @@ export const searchConfig: Record<SearchTabType, FilterConfig> = {
       },
     ],
   },
+  accessories: {
+    gridColumns: {
+      xs: "1fr",
+      sm: "1fr",
+      lg: "1fr",
+    },
+    fields: [], // accessories 没有筛选器
+  },
 };

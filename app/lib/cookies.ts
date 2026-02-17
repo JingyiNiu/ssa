@@ -46,12 +46,12 @@ export function getTokenFromCookie(): string | null {
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split('=');
     if (name === COOKIE_NAME) {
-      console.log('🍪 Token found in cookie (client)', {
+      console.log('🍪 Token found in cookie', {
         tokenPreview: value ? `${value.substring(0, 20)}...` : null,
       });
       return value;
     }
   }
-  console.log('🍪 No token in cookie (client)');
+  console.log('🍪 No token in cookie');
   return null;
 }

@@ -5,21 +5,24 @@ import { PopularCategories } from "@/app/components/layout/popular-categories/Po
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import { BrandHero } from "./BrandHero";
-import { SearchBrands } from "./SearchBrands";
 import {
   allProducts,
   Product,
 } from "@/app/components/layout/product-list/mock-product";
 import { getProductsAuto } from "@/app/lib/api";
 import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
+import { ProductSearch } from "@/app/components/common/ProductSearch";
 
 async function fetchProducts() {
   try {
     // 🔐 从 cookie 读取 token（服务端）
     const cookieStore = await cookies();
-    const token = cookieStore.get('auth-token')?.value || null;
+    const token = cookieStore.get("auth-token")?.value || null;
 
-    console.log('[BrandsPage] Fetching products with token:', token ? 'Yes (logged in)' : 'No (public)');
+    console.log(
+      "[BrandsPage] Fetching products with token:",
+      token ? "Yes (logged in)" : "No (public)"
+    );
 
     // 🌐 根据 token 调用对应的 API
     const products = await getProductsAuto(token, {
@@ -29,22 +32,26 @@ async function fetchProducts() {
     console.log("✅ Server: 成功获取产品", products);
     return { products, token };
   } catch (error) {
-    console.error('[BrandsPage] Failed to fetch products:', error);
+    console.error("[BrandsPage] Failed to fetch products:", error);
     // 失败时返回模拟数据
     return { products: allProducts, token: null };
   }
 }
 
 const page = async () => {
-  const { products: initialProducts, token: serverToken } = await fetchProducts();
+  const { products: initialProducts, token: serverToken } =
+    await fetchProducts();
 
   return (
-    <ProductsProvider initialProducts={initialProducts} serverToken={serverToken}>
+    <ProductsProvider
+      initialProducts={initialProducts}
+      serverToken={serverToken}
+    >
       <Suspense fallback={<Box sx={{ height: { xs: 700, sm: 600 } }} />}>
         <BrandHero />
       </Suspense>
       <PopularCategories />
-      <SearchBrands />
+      <ProductSearch type="brand" />
       <ProductList />
       <FindADealer />
     </ProductsProvider>

@@ -2,7 +2,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { FaCar } from "react-icons/fa";
 import { GiCarWheel, GiTyre } from "react-icons/gi";
 
-export type SearchTabType = "wheel" | "tyre" | "vehicle" | "brand";
+export type SearchTabType = "wheel" | "tyre" | "vehicle" | "brand" | "accessories";
 
 type SearchTabsProps = {
   activeTab: SearchTabType;

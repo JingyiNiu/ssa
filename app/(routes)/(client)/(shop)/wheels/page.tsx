@@ -3,12 +3,12 @@ import { Box } from "@mui/material";
 import { Suspense } from "react";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import { WheelsHero } from "./WheelsHero";
-import { SearchWheels } from "./SearchWheels";
 import { allProducts } from "@/app/components/layout/product-list/mock-product";
 import { getProductsAuto } from "@/app/lib/api";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
 import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
+import { ProductSearch } from "@/app/components/common/ProductSearch";
 
 async function fetchProducts() {
   try {
@@ -42,9 +42,7 @@ const WheelPage = async () => {
         <WheelsHero />
       </Suspense>
       <PopularCategories />
-      <Suspense fallback={<Box sx={{ height: 200 }} />}>
-        <SearchWheels />
-      </Suspense>
+      <ProductSearch type="wheel" />
       <ProductList />
       <FindADealer />
     </ProductsProvider>

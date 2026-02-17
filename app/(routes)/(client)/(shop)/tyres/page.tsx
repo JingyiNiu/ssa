@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
-import { SearchTyres } from "./SearchTyres";
 import FindADealer from "@/app/components/layout/find-a-dealer/FindADealer";
 import {
   allProducts,
@@ -11,6 +10,7 @@ import { getProductsAuto } from "@/app/lib/api";
 import { PopularCategories } from "@/app/components/layout/popular-categories/PopularCategories";
 import { ProductList } from "@/app/components/layout/product-list/ProductList";
 import { ProductsProvider } from "@/app/(routes)/(home)/components/ProductsProvider";
+import { ProductSearch } from "@/app/components/common/ProductSearch";
 
 async function fetchProducts() {
   try {
@@ -43,7 +43,7 @@ const TyresPage = async () => {
         <TyresHeroWithBrand />
       </Suspense>
       <PopularCategories />
-      <SearchTyres />
+      <ProductSearch type="tyre" />
       <ProductList />
       <FindADealer />
     </ProductsProvider>
