@@ -136,20 +136,26 @@ export const PopularCategories = () => {
             onChange={handleSortChange}
             sx={{
               minHeight: "auto",
+              "& .MuiTabs-flexContainer": {
+                gap: 1,
+              },
               "& .MuiTab-root": {
                 minHeight: "auto",
-                py: 1,
-                px: 2,
+                py: 1.5,
+                px: 4,
                 fontSize: "qrem",
                 fontWeight: 600,
                 textTransform: "none",
-                color: "text.secondary",
+                bgcolor: "secondary.light",
+                color: "text.primary",
+                borderRadius: 2,
                 "&.Mui-selected": {
-                  color: "primary.main",
+                  bgcolor: "primary.main",
+                  color: "primary.contrastText",
                 },
               },
               "& .MuiTabs-indicator": {
-                height: 2,
+                height: 0,
               },
             }}
           >

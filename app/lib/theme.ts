@@ -48,12 +48,32 @@ export const theme = createTheme({
   },
   typography: {
     fontSize: 16,
+    // 与 layout 中 Google Fonts CDN 引入的字体一致，fallback 保证未加载时显示
     fontFamily: [
-      "Inter",
+      "Google Sans",
+      "Montserrat",
+      "Poppins",
       "Roboto",
       '"Helvetica Neue"',
       "Arial",
       "sans-serif",
-    ].join(","),
+    ].join(", "),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontFamily: [
+            "Google Sans",
+            "Montserrat",
+            "Poppins",
+            "Roboto",
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+          ].join(", "),
+        },
+      },
+    },
   },
 });
