@@ -37,7 +37,7 @@ export const ValuePropositionSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(255,255,255,0.8)",
+          background: "rgba(0,0,0,0.7)",
           zIndex: 1,
         },
       }}
@@ -78,6 +78,7 @@ export const ValuePropositionSection = () => {
             mb: 4,
             maxWidth: "800px",
             mx: "auto",
+            color: "#fff",
           }}
         >
           We are dedicated to serving New Zealand's tyre retailers with the
@@ -96,8 +97,12 @@ export const ValuePropositionSection = () => {
             flexWrap: "wrap",
           }}
         >
-          <OutlineButton onClick={() => router.push("/about")}>Learn More</OutlineButton>
-          <OutlineButton onClick={() => router.push("/brands")}>Our Brands</OutlineButton>
+          <OutlineButton onClick={() => router.push("/about")}>
+            Learn More
+          </OutlineButton>
+          <OutlineButton onClick={() => router.push("/brands")}>
+            Our Brands
+          </OutlineButton>
         </Box>
       </Box>
     </Box>

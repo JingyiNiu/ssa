@@ -3,9 +3,10 @@ import React from "react";
 
 interface SectionTitleProps {
   title: string;
+  color?: string;
 }
 
-const SectionTitle = ({ title }: SectionTitleProps) => {
+const SectionTitle = ({ title, color = "#333" }: SectionTitleProps) => {
   return (
     <Typography
       variant="h2"
@@ -13,7 +14,7 @@ const SectionTitle = ({ title }: SectionTitleProps) => {
         my: 4,
         fontWeight: 600,
         fontSize: { xs: "1.5rem", md: "2rem" },
-        color: "#333",
+        color: color,
       }}
       data-testid="section-title"
     >

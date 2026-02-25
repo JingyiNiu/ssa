@@ -1,32 +1,26 @@
 "use client";
 
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import SectionTitle from "@/app/components/ui/SectionTitle";
 import { stores } from "./dealers";
 import DealerCard from "./DealerCard";
+import { DealerMap } from "./DealerMap";
 
 const FindADealer = () => {
   const [expandedDealer, setExpandedDealer] = useState<number | null>(0);
 
-  // 处理店铺点击
   const handleDealerClick = (index: number) => {
     setExpandedDealer(expandedDealer === index ? null : index);
   };
 
-  // 为每个店铺生成地图 URL
-  const getMapUrl = (address: string) => {
-    const encodedAddress = encodeURIComponent(address);
-    return `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY"}&q=${encodedAddress}`;
-  };
-
   return (
     <Box
-      sx={{ bgcolor: "secondary.light", pt: 4, pb: 8 }}
+      sx={{ bgcolor: "#000", pt: 4, pb: 8 }}
       data-testid="find-a-dealer"
     >
-      <Box className="container mx-auto" sx={{ mb: 4, px: 2 }}>
-        <SectionTitle title="Find a Dealer" />
+      <Box className="" sx={{ mb: 4, px: 4 }}>
+        <SectionTitle title="Find a Dealer" color="#fff" />
 
         <Box
           sx={{
@@ -42,7 +36,7 @@ const FindADealer = () => {
               flex: { xs: "1", md: "0 0 40%" },
               maxHeight: "400px",
               overflowY: "auto",
-              bgcolor: "background.paper",
+              bgcolor: "#000",
             }}
             data-testid="dealer-list"
           >
@@ -78,14 +72,9 @@ const FindADealer = () => {
               }}
             >
               {expandedDealer !== null ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={getMapUrl(stores[expandedDealer].address)}
+                <DealerMap
+                  address={stores[expandedDealer].address}
+                  height="400px"
                 />
               ) : (
                 <Box

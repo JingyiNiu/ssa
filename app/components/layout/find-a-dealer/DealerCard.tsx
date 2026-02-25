@@ -42,14 +42,14 @@ const DealerCard = ({
           sx={{
             fontWeight: 600,
             fontSize: "1rem",
-            color: "text.primary",
+            color: "#fff",
           }}
         >
           {store.name}
         </Typography>
         <ChevronRightIcon
           sx={{
-            color: "text.secondary",
+            color: "#fff",
             fontSize: 24,
           }}
         />
@@ -62,7 +62,7 @@ const DealerCard = ({
           <Typography
             variant="body2"
             sx={{
-              color: "text.secondary",
+              color: "grey",
               mb: 1,
               lineHeight: 1.6,
             }}
@@ -74,7 +74,7 @@ const DealerCard = ({
           <Typography
             variant="body2"
             sx={{
-              color: "text.secondary",
+              color: "grey",
               mb: 1,
               lineHeight: 1.6,
             }}
@@ -87,7 +87,7 @@ const DealerCard = ({
           <Typography
             variant="body2"
             sx={{
-              color: "text.secondary",
+              color: "grey",
               lineHeight: 1.6,
             }}
           >

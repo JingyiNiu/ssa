@@ -14,8 +14,8 @@ export const OutlineButton = ({
       variant="outlined"
       sx={{
         position: "relative",
-        color: "primary.main",
-        borderColor: "prmary",
+        color: "#fff",
+        borderColor: "#fff",
         px: 4,
         py: 1.5,
         fontWeight: 600,

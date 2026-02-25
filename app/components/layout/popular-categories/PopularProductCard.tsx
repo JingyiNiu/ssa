@@ -54,11 +54,10 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
       <CardMedia
         component="div"
         sx={{
-          height: 180,
+          height: 300,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: 2,
           perspective: "1000px",
         }}
       >
@@ -67,8 +66,8 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           src={mainImage || "/images/pics/image-placeholder.png"}
           alt={product.name}
           sx={{
-            maxWidth: "100%",
-            maxHeight: "100%",
+            maxWidth: "80%",
+            maxHeight: "80%",
             objectFit: "contain",
             transition: "transform 0.6s ease-in-out",
             transformStyle: "preserve-3d",
@@ -77,7 +76,12 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
       </CardMedia>
 
       <CardContent
-        sx={{ flex: 1, textAlign: "center", py: 2, bgcolor: "secondary.light" }}
+        sx={{
+          flex: 1,
+          textAlign: "center",
+          py: 4,
+          bgcolor: "secondary.light",
+        }}
       >
         {/* 产品名称 */}
         <Typography
@@ -111,6 +115,7 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
             justifyContent: "center",
             alignItems: "center",
             gap: 1,
+            mb: 1,
           }}
         >
           {onSale && parseFloat(regularPrice) > parseFloat(price) && (

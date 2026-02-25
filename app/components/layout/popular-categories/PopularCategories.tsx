@@ -247,7 +247,7 @@ export const PopularCategories = () => {
                   md: "repeat(2, 1fr)",
                   lg: "repeat(4, 1fr)",
                 },
-                gap: 2,
+                gap: 3,
               }}
             >
               {displayedProducts.map((product) => (

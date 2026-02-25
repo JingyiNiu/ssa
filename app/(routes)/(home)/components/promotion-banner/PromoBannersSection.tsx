@@ -8,29 +8,29 @@ import { useProducts } from "../ProductsProvider";
 export const PromoBannersSection = () => {
   const { products } = useProducts();
   const promotionProducts = products.slice(0, 2);
-  
+
   const banners: Banner[] = [
     {
       id: promotionProducts[0].id,
       slug: promotionProducts[0].slug,
       productId: promotionProducts[0].id,
-      title: "100% Approved",
-      subtitle: "by customers",
+      title: "Premium Alloy Wheels",
+      subtitle: "Engineered for Performance",
       description:
-        "Sed in justo sit amet mauris mattis vulputate. Nunc tristique libero sit amet tristique tempus. ",
+        "Lightweight yet durable alloy wheels designed to improve handling, enhance braking response, and elevate your vehicle’s style.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/hero-slide.png",
+      backgroundImage: "/images/pics/value-proposition.png",
     },
     {
       id: promotionProducts[1].id,
       slug: promotionProducts[1].slug,
       productId: promotionProducts[1].id,
-      title: "Get 20% off",
-      subtitle: "your first order when you join our newsletter",
+      title: "High-Performance Tyres",
+      subtitle: "Superior Grip & Safety",
       description:
-        "Aliquam ac finibus justo, id venenatis nulla. Cras nec egestas ante. Etiam consequat lacus vitae lorem faucibus scelerisque. Nunc purus neque.",
+        "Advanced tread design and long-lasting compounds deliver exceptional traction, smoother rides, and confidence in all road conditions.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/hero-slide.png",
+      backgroundImage: "/images/pics/value-proposition.png",
     },
   ];
 
