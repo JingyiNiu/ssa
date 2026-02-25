@@ -49,7 +49,7 @@ export function DealerMap({ address, height = "400px" }: DealerMapProps) {
         geocoder.geocode({ address }, (results: google.maps.GeocoderResult[] | null, status: google.maps.GeocoderStatus) => {
           if (cancelled) return;
           if (status !== "OK" || !results?.[0] || !containerRef.current) {
-            setError("Could not find location");
+            setError(String(status || "UNKNOWN_ERROR"));
             return;
           }
 
