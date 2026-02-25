@@ -60,10 +60,11 @@ export const SearchFilter = forwardRef<
     <Box
       sx={{
         bgcolor: "white",
-        borderRadius: 1,
+        borderRadius: 2,
+        border: "1px solid #eee",
         py: 1,
         px: { xs: 2, md: 4, lg: 10 },
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        boxShadow: "0 30px 60px 40px rgba(0,0,0,0.05)",
         mb: 3,
       }}
       data-testid="search-filter"

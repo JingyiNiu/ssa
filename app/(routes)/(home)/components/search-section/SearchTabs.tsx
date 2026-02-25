@@ -20,7 +20,11 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
     { icon: <GiCarWheel size={24} />, label: "SEARCH WHEEL", type: "wheel" },
     { icon: <GiTyre size={24} />, label: "SEARCH TYRE", type: "tyre" },
     { icon: <FaTags size={22} />, label: "SEARCH BRAND", type: "brand" },
-    { icon: <FaToolbox size={22} />, label: "ACCESSORIES", type: "accessories" },
+    {
+      icon: <FaToolbox size={22} />,
+      label: "ACCESSORIES",
+      type: "accessories",
+    },
   ];
 
   return (
@@ -46,19 +50,20 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
               onClick={() => onTabChange(tab.type)}
               sx={{
                 flex: 1,
-                backgroundColor: isActive ? "primary.main" : "#fff",
-                color: isActive ? "#fff" : "primary.main",
+                backgroundColor: isActive ? "primary.main" : "#000",
+                color: isActive ? "#fff" : "#fff",
                 py: 3,
                 display: "flex",
                 flexDirection: "column",
                 gap: 1,
                 borderRadius: 0,
                 textTransform: "none",
+                borderTop: "1px solid #333",
                 ...(index < tabs.length - 1 && {
-                  borderRight: "1px solid #e0e0e0",
+                  borderRight: "1px solid #333",
                 }),
                 "&:hover": {
-                  backgroundColor: isActive ? "primary.dark" : "#f0f0f0",
+                  backgroundColor: isActive ? "primary.dark" : "#333",
                 },
               }}
               data-testid={`search-control-button-${tab.type}`}
