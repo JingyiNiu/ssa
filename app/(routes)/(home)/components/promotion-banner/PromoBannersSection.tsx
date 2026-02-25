@@ -41,7 +41,7 @@ export const PromoBannersSection = () => {
           sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", lg: "repeat(2, 1fr)" },
-            gap: 3,
+            gap: 4,
           }}
         >
           {banners.map((banner) => (

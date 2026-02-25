@@ -47,7 +47,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
           right: 0,
           bottom: 0,
           background:
-            "linear-gradient(to right, rgba(255,255,255,1), rgba( 255,255,255,0.3))",
+            "linear-gradient(to right, rgba(0,0,0,3), rgba( 0,0,0,0.3))",
           zIndex: 1,
         },
       }}
@@ -66,7 +66,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="h3"
           sx={{
-            color: "primary.main",
+            color: "#fff",
             fontWeight: 700,
             fontSize: "2rem",
             lineHeight: 1.2,
@@ -79,7 +79,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="h6"
           sx={{
-            color: "text.primary",
+            color: "#fff",
             fontWeight: 600,
             fontSize: "1rem",
             lineHeight: 1.3,
@@ -92,7 +92,7 @@ export const PromoBanner = ({ banner }: PromoBannerProps) => {
         <Typography
           variant="body2"
           sx={{
-            color: "text.primary",
+            color: "#fff",
             fontSize: "0.875rem",
             lineHeight: 1.6,
             mb: 3,

@@ -9,8 +9,7 @@ export const SlideOverlay = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        // backgroundColor: "rgba(31, 36, 59,0.8)",
-        backgroundColor: "rgba(255,255,255,0.8)",
+        backgroundColor: "rgba(0,0,0,0.7)",
         pointerEvents: "none",
         zIndex: 1,
       }}

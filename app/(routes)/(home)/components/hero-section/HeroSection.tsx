@@ -8,14 +8,15 @@ import { CarouselArrow } from "./CarouselArrow";
 const heroSlides: HeroSlideData[] = [
   {
     backgroundImage: "/images/pics/banner.png",
-    title: "New Top Product\nHigh Quality",
+    title: "Performance You Can Feel\nGrip You Can Trust",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna",
+      "Upgrade your ride with premium tyres and alloy wheels engineered for safety, durability, and ultimate road control.",
   },
   {
     backgroundImage: "/images/pics/value-proposition.png",
-    title: "Premium Selection\nBest Value",
-    description: "Aliquam ullamcorper imperdiet tortor eu gravida. ",
+    title: "Style Meets Strength\nDrive with Confidence",
+    description:
+      "Discover high-quality wheels and tyres designed to enhance performance, improve handling, and elevate your vehicle’s look.",
   },
 ];
 

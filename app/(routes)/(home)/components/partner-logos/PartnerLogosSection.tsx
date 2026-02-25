@@ -40,7 +40,6 @@ export const PartnerLogosSection = () => {
   return (
     <Box data-testid="partner-logos-section" sx={{ mb: 4, overflow: "hidden" }}>
       <Box className="container mx-auto">
-        <SectionTitle title="Our Partners" />
         <Box
           sx={{
             display: "grid",

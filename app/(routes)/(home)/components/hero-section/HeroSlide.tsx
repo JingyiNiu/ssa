@@ -30,9 +30,8 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
       }}
       data-testid="hero-slide"
     >
-      {/* 遮罩 */}
       <SlideOverlay />
-
+      
       {/* Content */}
       {isActive && (
         <Box
@@ -51,7 +50,7 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
             sx={{
               fontSize: { xs: "2rem", md: "4rem" },
               fontWeight: 900,
-              color: "primary.main",
+              color: "#fff",
               mb: 4,
               whiteSpace: "pre-line",
               animation: "slideDown 0.7s ease-out 0.2s both",
@@ -76,7 +75,7 @@ export const HeroSlide = ({ data, isActive }: HeroSlideProps) => {
               fontWeight: 500,
               maxWidth: 600,
               mx: "auto",
-              color: "text.primary",
+              color: "#fff",
               animation: "fadeInUp 0.8s ease-out 0.7s both",
               "@keyframes fadeInUp": {
                 "0%": {
