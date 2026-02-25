@@ -7,7 +7,7 @@ const ProductHero = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: 200,
+        height: 300,
       }}
       data-testid="hero-section"
     >

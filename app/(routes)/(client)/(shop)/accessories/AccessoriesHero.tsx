@@ -9,7 +9,7 @@ export const AccessoriesHero = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: 400,
+        height: 300,
       }}
       data-testid="hero-section"
     >

@@ -45,7 +45,7 @@ export const TyresHeroWithBrand = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: { xs: 700, sm: 600 },
+        height: 300,
       }}
       data-testid="hero-section"
     >
@@ -65,115 +65,6 @@ export const TyresHeroWithBrand = () => {
         }}
         data-testid="hero-slides-container"
       />
-
-      {/* Content Container */}
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 10,
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-        className="container mx-auto"
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: { xs: "center", md: "flex-end" },
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          {/* 品牌网格 */}
-          <Box
-            sx={{
-              display: "grid",
-              width: "fit-content",
-              p: 1,
-              gridTemplateColumns: {
-                xs: "repeat(3, 1fr)",
-                sm: "repeat(4, 1fr)",
-              },
-              backgroundColor: "grey.300",
-              gap: 1,
-            }}
-          >
-            {brandItems.map((brand) => (
-              <Paper
-                key={brand.value}
-                onClick={() => handleBrandClick(brand.value)}
-                elevation={selectedBrand === brand.value ? 8 : 2}
-                sx={{
-                  px: 1,
-                  py: 3,
-                  cursor: "pointer",
-                  borderRadius: 0,
-                  boxShadow: 0,
-                  backgroundColor:
-                    selectedBrand === brand.value ? "primary.main" : "white",
-                  "&:hover": {
-                    backgroundColor: "grey.100",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 1,
-                  }}
-                >
-                  {brand.logo && (
-                    <Box
-                      component="img"
-                      src={brand.logo}
-                      alt={brand.label}
-                      sx={{
-                        width: "100%",
-                        maxWidth: 100,
-                        opacity: selectedBrand === brand.value ? 1 : 0.4,
-                        transition: "opacity 0.3s ease",
-                      }}
-                    />
-                  )}
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      fontSize: "0.875rem",
-                      textAlign: "center",
-                      color:
-                        selectedBrand === brand.value
-                          ? "white"
-                          : "grey.300",
-                    }}
-                  >
-                    {brand.label}
-                  </Typography>
-                  {brand.description && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontSize: "0.75rem",
-                        textAlign: "center",
-                        color:
-                          selectedBrand === brand.value
-                            ? "rgba(255,255,255,0.8)"
-                            : "text.secondary",
-                      }}
-                    >
-                      {brand.description}
-                    </Typography>
-                  )}
-                </Box>
-              </Paper>
-            ))}
-          </Box>
-        </Box>
-      </Box>
     </Box>
   );
 };

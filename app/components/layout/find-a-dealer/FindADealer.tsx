@@ -15,10 +15,7 @@ const FindADealer = () => {
   };
 
   return (
-    <Box
-      sx={{ bgcolor: "#000", pt: 4, pb: 8 }}
-      data-testid="find-a-dealer"
-    >
+    <Box sx={{ bgcolor: "#000", pt: 4, pb: 8 }} data-testid="find-a-dealer">
       <Box className="" sx={{ mb: 4, px: 4 }}>
         <SectionTitle title="Find a Dealer" color="#fff" />
 
@@ -35,6 +32,7 @@ const FindADealer = () => {
             sx={{
               flex: { xs: "1", md: "0 0 40%" },
               maxHeight: "400px",
+              maxWidth: "500px",
               overflowY: "auto",
               bgcolor: "#000",
             }}
@@ -59,7 +57,7 @@ const FindADealer = () => {
           {/* 右侧：地图 */}
           <Box
             sx={{
-              flex: { xs: "1", md: "0 0 57%" },
+              flex: 1,
             }}
             data-testid="dealer-map"
           >

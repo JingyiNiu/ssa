@@ -98,7 +98,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <CardMedia
         component="div"
         sx={{
-          height: 180,
+          height: 300,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -181,7 +181,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       >
         {/* 库存信息条 - 只在 WCProduct 且有 stock 字段时显示 */}
         {hasStockInfo ? (
-          <Box sx={{ p: 1.5, pb: 0, mb: 2 }}>
+          <Box sx={{ py: 1.5, pb: 0, mb: 2 }}>
             <Box
               sx={{
                 display: "flex",
@@ -190,18 +190,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 fontSize: "0.75rem",
               }}
             >
-              <Typography variant="caption" sx={{ color: "text.secondary" }}>
+              <Typography variant="caption" sx={{ color: "text.primary" }}>
                 Available: <strong>{(product as any).stock_quantity}</strong>
-              </Typography>
-              <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                Already Sold: <strong>{(product as any).total_sales}</strong>
               </Typography>
             </Box>
             <LinearProgress
               variant="determinate"
               value={soldPercentage}
               sx={{
-                height: 6,
+                height: 12,
                 borderRadius: 3,
                 bgcolor: "#e0e0e0",
                 "& .MuiLinearProgress-bar": {
@@ -212,24 +209,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             />
           </Box>
         ) : null}
-
-        {/* 产品名称 */}
-        <Typography
-          variant="body1"
-          sx={{
-            fontWeight: 600,
-            color: "#333",
-            mb: 1,
-            fontSize: "0.9rem",
-            minHeight: "2.5em",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          {product.name}
-        </Typography>
 
         {/* 产品SKU */}
         <Typography
@@ -247,6 +226,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           }}
         >
           SKU: {product.sku || "N/A"}
+        </Typography>
+
+        {/* 产品名称 */}
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: "#333",
+            fontSize: "1rem",
+            minHeight: "2.5em",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {product.name}
         </Typography>
 
         {/* 评分星星 */}

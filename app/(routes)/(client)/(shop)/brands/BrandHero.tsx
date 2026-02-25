@@ -95,7 +95,7 @@ export const BrandHero = () => {
                 xs: "repeat(3, 1fr)",
                 sm: "repeat(4, 1fr)",
               },
-              backgroundColor: "grey.300",
+              backgroundColor: "secondary.dark",
               gap: 1,
             }}
           >
@@ -113,7 +113,7 @@ export const BrandHero = () => {
                   backgroundColor:
                     selectedBrand === brand.value ? "primary.main" : "white",
                   "&:hover": {
-                    backgroundColor: "grey.100",
+                    backgroundColor: "secondary.light",
                   },
                 }}
               >
@@ -134,7 +134,6 @@ export const BrandHero = () => {
                       sx={{
                         width: "100%",
                         maxWidth: 100,
-                        opacity: selectedBrand === brand.value ? 1 : 0.4,
                         transition: "opacity 0.3s ease",
                       }}
                     />
@@ -146,7 +145,7 @@ export const BrandHero = () => {
                       fontSize: "0.875rem",
                       textAlign: "center",
                       color:
-                        selectedBrand === brand.value ? "white" : "grey.300",
+                        selectedBrand === brand.value ? "white" : "grey.700",
                     }}
                   >
                     {brand.label}

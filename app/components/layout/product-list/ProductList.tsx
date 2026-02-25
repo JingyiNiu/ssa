@@ -18,9 +18,9 @@ export const ProductList = () => {
           display: "grid",
           gridTemplateColumns: {
             md: "repeat(2, 1fr)",
-            lg: "repeat(4, 1fr)",
+            lg: "repeat(3, 1fr)",
           },
-          gap: 2,
+          gap: 4,
         }}
       >
         {products.map((product) => (

@@ -66,8 +66,8 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           src={mainImage || "/images/pics/image-placeholder.png"}
           alt={product.name}
           sx={{
-            maxWidth: "80%",
-            maxHeight: "80%",
+            maxWidth: "70%",
+            maxHeight: "70%",
             objectFit: "contain",
             transition: "transform 0.6s ease-in-out",
             transformStyle: "preserve-3d",
