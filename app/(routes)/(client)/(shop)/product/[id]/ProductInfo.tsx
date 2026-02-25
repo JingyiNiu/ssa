@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Typography,
-  Rating,
-  LinearProgress,
-  IconButton,
-} from "@mui/material";
-import { ProductDetails } from "./product";
+import { Box, Typography, Rating, IconButton } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -23,6 +16,7 @@ import {
 } from "@/app/lib/api";
 import { useAuthStore } from "@/app/store/authStore";
 import { LoginToAddToCartPrompt } from "@/app/components/common/LoginToAddToCartPrompt";
+import { StockStatus } from "./StockStatus";
 
 interface ProductInfoProps {
   product: WCProduct | PublicProduct;
@@ -46,8 +40,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const available = isWCProduct(product) ? product.stock_quantity || 0 : 1;
   const soldPercentage = hasStockInfo ? (sold / totalStock) * 100 : 0;
 
-  // 获取最大可用库存
-  const maxStock = 1;
+  // 最大可选数量：有库存信息时用可用库存，否则为 1
+  const maxStock = hasStockInfo ? available : 1;
 
   // 计算库存百分比
   const stockPercentage = 1;
@@ -122,91 +116,32 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         />
       )}
 
-      {/* 库存信息 */}
-      {hasStockInfo && (
-        <Box
-          sx={{
-            bgcolor: "#f5f5f5",
-            p: 2,
-            borderRadius: 2,
-            mb: 3,
-          }}
-        >
-          <Typography
-            variant="body2"
-            sx={{ fontWeight: "bold", mb: 1, color: "text.secondary" }}
-          >
-            Stock Status
-          </Typography>
-
-          {/* 库存数量信息 */}
-          <Box sx={{ display: "flex", gap: 3, mb: 1 }}>
-            <Typography variant="body2" color="text.secondary">
-              Total Stock:
-              <Box
-                component="span"
-                sx={{ fontWeight: 600, color: "text.primary" }}
-              >
-                {totalStock}
-              </Box>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Sold:
-              <Box
-                component="span"
-                sx={{ fontWeight: 600, color: "text.primary" }}
-              >
-                {sold}
-              </Box>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Available:
-              <Box
-                component="span"
-                sx={{ fontWeight: 600, color: "text.primary" }}
-              >
-                {available}
-              </Box>
-            </Typography>
-          </Box>
-
-          {available < 10 && (
-            <Typography variant="body2" sx={{ mb: 1, color: "#d32f2f" }}>
-              Hurry! only {available} left in stock
-            </Typography>
-          )}
-          <LinearProgress
-            variant="determinate"
-            value={soldPercentage}
-            sx={{
-              height: 8,
-              borderRadius: 1,
-              bgcolor: "#e0e0e0",
-              "& .MuiLinearProgress-bar": {
-                bgcolor: "#d32f2f",
-              },
-            }}
-          />
-        </Box>
+      {/* 库存信息（表格 + 数量选择器） */}
+      {hasStockInfo && isAuthenticated && (
+        <StockStatus
+          product={product}
+          totalStock={totalStock}
+          sold={sold}
+          available={available}
+          soldPercentage={soldPercentage}
+          maxStock={maxStock}
+          quantity={quantity}
+          onQuantityChange={handleQuantityChange}
+        />
       )}
 
-      {/* 数量选择器和按钮 */}
+      {/* 添加到购物车 */}
       <Box sx={{ mb: 2 }}>
         {isAuthenticated ? (
-          <>
-            {/* 数量提示 */}
-            {Number(maxStock) > 0 && (
-              <Typography
-                variant="caption"
-                color="text.secondary"
-                sx={{ mb: 1, display: "block" }}
-              >
-                Max quantity: {Number(maxStock)}{" "}
-                {Number(maxStock) === 1 ? "item" : "items"}
-              </Typography>
-            )}
-
-            {/* 选择数量添加到购物车 */}
+          hasStockInfo ? (
+            <ActionButton
+              fullWidth
+              disabled={Number(maxStock) === 0}
+              onClick={handleAddToCart}
+            >
+              {Number(maxStock) === 0 ? "Out of Stock" : "Add To Cart"}
+            </ActionButton>
+          ) : (
             <Box
               sx={{
                 display: "flex",
@@ -214,7 +149,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 gap: 2,
               }}
             >
-              {/* 数量选择器 */}
               <Box
                 sx={{
                   display: "flex",
@@ -243,8 +177,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   <AddIcon />
                 </IconButton>
               </Box>
-
-              {/* 添加到购物车按钮 */}
               <ActionButton
                 sx={{ flexGrow: 1 }}
                 disabled={Number(maxStock) === 0}
@@ -253,7 +185,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 {Number(maxStock) === 0 ? "Out of Stock" : "Add To Cart"}
               </ActionButton>
             </Box>
-          </>
+          )
         ) : (
           <LoginToAddToCartPrompt sx={{ py: 2 }} />
         )}

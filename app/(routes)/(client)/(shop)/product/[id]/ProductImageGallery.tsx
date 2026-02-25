@@ -24,10 +24,8 @@ const ProductImageGallery = ({ images, productName }: ProductImageGalleryProps) 
           width: "100%",
           height: { xs: 300, sm: 400, md: 500 },
           border: "1px solid #e0e0e0",
-          borderRadius: 2,
           overflow: "hidden",
           mb: 2,
-          bgcolor: "#f5f5f5",
           cursor: "pointer",
           transition: "all 0.3s ease",
           "&:hover": {
@@ -59,7 +57,6 @@ const ProductImageGallery = ({ images, productName }: ProductImageGalleryProps) 
                 selectedImage === imageUrl
                   ? "2px solid #d32f2f"
                   : "1px solid #e0e0e0",
-              borderRadius: 1,
               overflow: "hidden",
               cursor: "pointer",
               bgcolor: "#f5f5f5",
