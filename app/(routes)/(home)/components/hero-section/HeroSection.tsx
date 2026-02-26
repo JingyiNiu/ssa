@@ -87,6 +87,20 @@ export const HeroSection = () => {
     }
   }, [currentIndex]);
 
+  // 自动切换：每 5 秒下一张
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isAnimating.current) return;
+      isAnimating.current = true;
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + 1);
+      setTimeout(() => {
+        isAnimating.current = false;
+      }, 800);
+    }, 8 * 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   // 获取真实的幻灯片索引（用于激活状态）
   const getRealIndex = (index: number) => {
     if (index === 0) return heroSlides.length - 1;
