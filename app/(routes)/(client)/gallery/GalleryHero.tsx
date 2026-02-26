@@ -18,7 +18,7 @@ export const GalleryHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/wheels3.png)",
+          backgroundImage: "url(/images/pics/wheel3.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
