@@ -12,11 +12,7 @@ type OrderRow = {
 };
 
 const COLUMNS: DataTableColumn<OrderRow>[] = [
-  { id: "id", label: "Order ID", render: (row) => (
-    <Link component={NextLink} href={`/account/orders/${row.id}`} underline="hover">
-      {row.id}
-    </Link>
-  ) },
+  { id: "id", label: "Order ID"},
   { id: "date", label: "Date" },
   { id: "status", label: "Status" },
   { id: "total", label: "Total", align: "right" },

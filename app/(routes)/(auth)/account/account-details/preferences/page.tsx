@@ -7,8 +7,8 @@ import {
   FormControlLabel,
   Switch,
   Stack,
-  Button,
 } from "@mui/material";
+import { FormSubmitButton } from "@/app/components/common/FormSubmitButton";
 
 const MOCK_PREFS = {
   language: "en",
@@ -56,9 +56,7 @@ export default function PreferencesPage() {
             control={<Switch defaultChecked={MOCK_PREFS.marketingEmails} />}
             label="Marketing emails"
           />
-          <Button type="submit" variant="contained" sx={{ alignSelf: "flex-start" }}>
-            Save preferences
-          </Button>
+          <FormSubmitButton>Save preferences</FormSubmitButton>
         </Stack>
       </Paper>
     </>

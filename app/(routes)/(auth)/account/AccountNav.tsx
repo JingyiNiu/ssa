@@ -8,23 +8,9 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ACCOUNT_NAV } from "./accountTabs";
-import { getAccountNavIcon } from "./accountNavIcons";
-
-const ICONS: Record<string, React.ReactNode> = {
-  "/account/dashboard": <DashboardOutlinedIcon />,
-  "/account/orders": <ShoppingBagOutlinedIcon />,
-  "/account/downloads": <DownloadOutlinedIcon />,
-  "/account/address": <LocationOnOutlinedIcon />,
-  "/account/account-details": <PersonOutlineIcon />,
-};
 
 const itemSx = {
   py: 1.5,
@@ -50,7 +36,7 @@ export default function AccountNav() {
   const pathname = usePathname();
 
   return (
-    <Box sx={{ py: 1 }}>
+    <Box sx={{ py: 1 }} data-testid="account-nav">
       <List sx={{ p: 0 }}>
         {ACCOUNT_NAV.map((item) => {
           const hasChildren = item.children && item.children.length > 0;
@@ -58,7 +44,7 @@ export default function AccountNav() {
           const showChildren =
             hasChildren &&
             (pathname === item.path || pathname.startsWith(item.path + "/"));
-          const icon = ICONS[item.path];
+          const icon = item.icon;
 
           return (
             <React.Fragment key={item.path}>
@@ -68,11 +54,7 @@ export default function AccountNav() {
                 selected={selected}
                 sx={itemSx}
               >
-                {icon && (
-                  <ListItemIcon sx={iconSx}>
-                    {icon}
-                  </ListItemIcon>
-                )}
+                {icon && <ListItemIcon sx={iconSx}>{icon}</ListItemIcon>}
                 <ListItemText
                   primary={item.label}
                   primaryTypographyProps={{ sx: textSx }}
@@ -81,7 +63,7 @@ export default function AccountNav() {
               {showChildren &&
                 item.children!.map((child) => {
                   const childSelected = pathname === child.path;
-                  const childIcon = child.icon ? getAccountNavIcon(child.icon) : null;
+                  const childIcon = child.icon ?? null;
                   return (
                     <ListItemButton
                       key={child.path}

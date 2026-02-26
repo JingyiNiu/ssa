@@ -1,14 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Typography,
-  Paper,
-  TextField,
-  Button,
-  Stack,
-  Box,
-} from "@mui/material";
+import { Typography, Paper, TextField, Stack, Box } from "@mui/material";
+import { FormSubmitButton } from "@/app/components/common/FormSubmitButton";
 
 export default function SecurityPage() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -49,9 +43,7 @@ export default function SecurityPage() {
             fullWidth
             size="small"
           />
-          <Button type="submit" variant="contained" sx={{ alignSelf: "flex-start" }}>
-            Update password
-          </Button>
+          <FormSubmitButton>Update password</FormSubmitButton>
         </Stack>
         <Box sx={{ mt: 4 }}>
           <Typography variant="subtitle2" color="text.secondary" gutterBottom>

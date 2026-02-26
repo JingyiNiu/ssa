@@ -3,7 +3,6 @@
 import { Typography, Paper, Box } from "@mui/material";
 import Link from "next/link";
 import type { AccountNavChild } from "./accountTabs";
-import { getAccountNavIcon } from "./accountNavIcons";
 
 interface AccountCardProps {
   item: AccountNavChild;
@@ -35,7 +34,7 @@ export function AccountCard({ item }: AccountCardProps) {
       sx={cardSx}
     >
       {item.icon && (
-        <Box sx={{ mb: 1 }}>{getAccountNavIcon(item.icon, 48)}</Box>
+        <Box sx={{ mb: 1, "& > *": { fontSize: 48 } }}>{item.icon}</Box>
       )}
       <Typography variant="subtitle1" fontWeight={600} gutterBottom>
         {item.label}

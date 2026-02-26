@@ -25,6 +25,7 @@ const UserInfo = () => {
         alignItems: "center",
         gap: 2,
       }}
+      data-testid="user-info"
     >
       <Avatar
         src={avatarUrl}

@@ -1,14 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Typography,
-  Paper,
-  TextField,
-  Button,
-  Stack,
-  Box,
-} from "@mui/material";
+import { Typography, Paper, TextField, Stack, Box } from "@mui/material";
+import { FormSubmitButton } from "@/app/components/common/FormSubmitButton";
 
 export interface AddressFormValues {
   name: string;
@@ -116,9 +110,7 @@ export function AddressForm({ title, initialValues }: AddressFormProps) {
               required
             />
             <Box sx={{ pt: 1 }}>
-              <Button type="submit" variant="contained">
-                Save address
-              </Button>
+              <FormSubmitButton>Save address</FormSubmitButton>
             </Box>
           </Stack>
         </form>

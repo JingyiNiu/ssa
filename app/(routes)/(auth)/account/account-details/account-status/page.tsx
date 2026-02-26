@@ -1,9 +1,5 @@
-import {
-  Typography,
-  Paper,
-  Box,
-  Button,
-} from "@mui/material";
+import { FormSubmitButton } from "@/app/components/common/FormSubmitButton";
+import { Typography, Paper, Box, Button } from "@mui/material";
 
 export default function AccountStatusPage() {
   return (
@@ -29,11 +25,10 @@ export default function AccountStatusPage() {
             Delete account
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            Permanently delete your account and all associated data. This action cannot be undone.
+            Permanently delete your account and all associated data. This action
+            cannot be undone.
           </Typography>
-          <Button variant="outlined" color="error" size="small">
-            Delete account
-          </Button>
+          <FormSubmitButton variant="outlined">Delete account</FormSubmitButton>
         </Box>
       </Paper>
     </>

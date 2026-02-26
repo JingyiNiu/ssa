@@ -4,6 +4,7 @@ import { ProtectedRoute } from "@/app/lib/auth";
 import { Box } from "@mui/material";
 import UserInfo from "./UserInfo";
 import AccountNav from "./AccountNav";
+import AccountBreadcrumb from "./AccountBreadcrumb";
 
 export default function AccountLayout({
   children,
@@ -14,7 +15,7 @@ export default function AccountLayout({
     <ProtectedRoute
       fallback={<Box sx={{ textAlign: "center", py: 4 }}>Loading...</Box>}
     >
-      <Box className="container mx-auto" sx={{ py: 4 }}>
+      <Box className="container mx-auto" data-testid="account-layout">
         <Box
           sx={{
             display: "flex",
@@ -22,6 +23,7 @@ export default function AccountLayout({
             gap: 4,
             minHeight: "70vh",
           }}
+          data-testid="account-layout-content"
         >
           <Box
             sx={{
@@ -33,6 +35,7 @@ export default function AccountLayout({
               overflow: "hidden",
               height: "fit-content",
             }}
+            data-testid="account-nav-wrapper"
           >
             <UserInfo />
             <AccountNav />
@@ -40,12 +43,13 @@ export default function AccountLayout({
           <Box
             sx={{
               flex: 1,
-              bgcolor: "white",
-              border: "1px solid #e0e0e0",
+              bgcolor: "grey.50",
               borderRadius: 1,
               p: 4,
             }}
+            data-testid="account-content-wrapper"
           >
+            <AccountBreadcrumb />
             {children}
           </Box>
         </Box>

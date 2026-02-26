@@ -1,13 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Typography,
-  Paper,
-  TextField,
-  Button,
-  Stack,
-} from "@mui/material";
+import { Typography, Paper, TextField, Stack } from "@mui/material";
+import { FormSubmitButton } from "@/app/components/common/FormSubmitButton";
 
 const MOCK_PROFILE = {
   firstName: "John",
@@ -60,9 +55,7 @@ export default function ProfilePage() {
             fullWidth
             size="small"
           />
-          <Button type="submit" variant="contained" sx={{ alignSelf: "flex-start" }}>
-            Save
-          </Button>
+          <FormSubmitButton>Save</FormSubmitButton>
         </Stack>
       </Paper>
     </>
