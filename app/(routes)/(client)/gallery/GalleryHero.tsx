@@ -18,9 +18,9 @@ export const GalleryHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/gallery.png)",
+          backgroundImage: "url(/images/pics/wheels3.png)",
           backgroundSize: "cover",
-          backgroundPosition: "bottom",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
         data-testid="hero-slides-container"

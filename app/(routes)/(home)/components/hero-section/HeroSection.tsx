@@ -7,13 +7,13 @@ import { CarouselArrow } from "./CarouselArrow";
 
 const heroSlides: HeroSlideData[] = [
   {
-    backgroundImage: "/images/pics/banner.png",
+    backgroundImage: "/images/pics/tyres3.jpeg",
     title: "Performance You Can Feel\nGrip You Can Trust",
     description:
       "Upgrade your ride with premium tyres and alloy wheels engineered for safety, durability, and ultimate road control.",
   },
   {
-    backgroundImage: "/images/pics/value-proposition.png",
+    backgroundImage: "/images/pics/wheels2.jpeg",
     title: "Style Meets Strength\nDrive with Confidence",
     description:
       "Discover high-quality wheels and tyres designed to enhance performance, improve handling, and elevate your vehicle’s look.",

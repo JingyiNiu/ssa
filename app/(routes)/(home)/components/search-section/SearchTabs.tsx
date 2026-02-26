@@ -22,7 +22,7 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
     { icon: <FaTags size={22} />, label: "SEARCH BRAND", type: "brand" },
     {
       icon: <FaToolbox size={22} />,
-      label: "ACCESSORIES",
+      label: "SEARCH ACCESSORIES",
       type: "accessories",
     },
   ];
@@ -63,7 +63,7 @@ export const SearchTabs = ({ activeTab, onTabChange }: SearchTabsProps) => {
                   borderRight: "1px solid #333",
                 }),
                 "&:hover": {
-                  backgroundColor: isActive ? "primary.dark" : "#333",
+                  backgroundColor: isActive ? "primary.dark" : "#f0f0f0",
                 },
               }}
               data-testid={`search-control-button-${tab.type}`}

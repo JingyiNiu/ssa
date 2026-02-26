@@ -57,7 +57,7 @@ export const BrandHero = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url(/images/pics/banner.png)",
+          backgroundImage: "url(/images/pics/tyres4.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "bottom",
           backgroundRepeat: "no-repeat",

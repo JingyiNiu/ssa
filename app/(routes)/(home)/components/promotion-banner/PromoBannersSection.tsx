@@ -15,7 +15,7 @@ export const PromoBannersSection = () => {
       description:
         "Lightweight yet durable alloy wheels designed to improve handling, enhance braking response, and elevate your vehicle’s style.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/value-proposition.png",
+      backgroundImage: "/images/pics/wheels5.png",
     },
     {
       id: "tyres",
@@ -25,7 +25,7 @@ export const PromoBannersSection = () => {
       description:
         "Advanced tread design and long-lasting compounds deliver exceptional traction, smoother rides, and confidence in all road conditions.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/value-proposition.png",
+      backgroundImage: "/images/pics/tyres1.png",
     },
   ];
 

@@ -18,9 +18,9 @@ export const AccessoriesHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/accessories.png)",
+          backgroundImage: "url(/images/pics/tyres3.jpeg)",
           backgroundSize: "cover",
-          backgroundPosition: "bottom",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
         data-testid="hero-slides-container"

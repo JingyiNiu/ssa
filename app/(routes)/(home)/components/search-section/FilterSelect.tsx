@@ -66,6 +66,10 @@ const FilterSelect = ({
               PaperProps: {
                 sx: {
                   "& .MuiMenuItem-root": { fontSize: "0.8rem" },
+                  "& .MuiFormLabel-root.MuiInputLabel-root": {
+                    fontSize: "1rem",
+                    top:"-10px"
+                  },
                 },
               },
             }}
@@ -92,7 +96,13 @@ const FilterSelect = ({
           ...selectSx["& .MuiOutlinedInput-root"],
           "& fieldset": { border: "none" },
         },
-        "& .MuiInputLabel-root": { fontSize: "0.8rem" },
+        "& .MuiFormLabel-root.MuiInputLabel-root": {
+          fontSize: "0.8rem",
+        },
+        "& .MuiInputLabel-shrink": {
+          fontSize: "0.9rem",
+          transform: "translate(14px, -10px) scale(0.75)",
+        },
       }}
       data-testid="filter-select"
     >

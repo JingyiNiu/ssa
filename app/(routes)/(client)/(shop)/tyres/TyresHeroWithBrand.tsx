@@ -57,9 +57,9 @@ export const TyresHeroWithBrand = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url(/images/pics/tyres.png)",
+          backgroundImage: "url(/images/pics/tyres2.png)",
           backgroundSize: "cover",
-          backgroundPosition: "bottom",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           zIndex: 0,
         }}
