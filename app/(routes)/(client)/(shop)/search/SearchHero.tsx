@@ -9,7 +9,7 @@ export const SearchHero = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        height: 200,
+        height: 300,
       }}
       data-testid="hero-section"
     >
@@ -18,7 +18,7 @@ export const SearchHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/tyres.png)",
+          backgroundImage: "url(/images/pics/tyres1.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

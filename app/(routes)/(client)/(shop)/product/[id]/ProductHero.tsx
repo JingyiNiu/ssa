@@ -16,7 +16,7 @@ const ProductHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/tyres.png)",
+          backgroundImage: "url(/images/pics/wheels6.png)",
           backgroundSize: "cover",
           backgroundPosition: "bottom",
           backgroundRepeat: "no-repeat",

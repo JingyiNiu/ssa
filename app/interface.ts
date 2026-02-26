@@ -13,8 +13,16 @@ interface Product {
   rating: number;
   total_sales: number;
   uploaded_at: string;
+  brand:Brand;
   price: Price; // 这里的价格是同一个产品里,价格最便宜的型号的价格
   images: Image[];
+}
+
+interface Brand {
+  id: string;
+  name: string;
+  logo_url: string;
+  // 以及其他brand相关信息
 }
 
 //无论登录与否，几级会员，都按照这个格式返回价格数据。没有的数据null就好
