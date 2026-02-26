@@ -1,14 +1,15 @@
-import { Typography } from "@mui/material";
+import { AddressForm } from "../AddressForm";
+
+const MOCK_SHIPPING = {
+  name: "John Doe",
+  line1: "456 Oak Avenue",
+  line2: "",
+  city: "Los Angeles",
+  state: "CA",
+  zip: "90001",
+  country: "United States",
+};
 
 export default function ShippingAddressPage() {
-  return (
-    <>
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        Shipping address
-      </Typography>
-      <Typography color="text.secondary">
-        Your shipping address will appear here.
-      </Typography>
-    </>
-  );
+  return <AddressForm title="Shipping address" initialValues={MOCK_SHIPPING} />;
 }

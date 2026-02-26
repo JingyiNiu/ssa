@@ -16,6 +16,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ACCOUNT_NAV } from "./accountTabs";
+import { getAccountNavIcon } from "./accountNavIcons";
 
 const ICONS: Record<string, React.ReactNode> = {
   "/account/dashboard": <DashboardOutlinedIcon />,
@@ -80,6 +81,7 @@ export default function AccountNav() {
               {showChildren &&
                 item.children!.map((child) => {
                   const childSelected = pathname === child.path;
+                  const childIcon = child.icon ? getAccountNavIcon(child.icon) : null;
                   return (
                     <ListItemButton
                       key={child.path}
@@ -88,7 +90,9 @@ export default function AccountNav() {
                       selected={childSelected}
                       sx={{ ...itemSx, pl: 5 }}
                     >
-                      <ListItemIcon sx={{ minWidth: 40 }} />
+                      <ListItemIcon sx={{ ...iconSx, minWidth: 40 }}>
+                        {childIcon}
+                      </ListItemIcon>
                       <ListItemText
                         primary={child.label}
                         primaryTypographyProps={{ sx: textSx }}
