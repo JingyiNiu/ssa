@@ -12,6 +12,7 @@ import { PublicProduct } from "@/app/components/layout/product-list/public-produ
 import { getProductPrice, getProductRegularPrice } from "@/app/lib/api";
 import { useAuthStore } from "@/app/store/authStore";
 import { LoginToAddToCartPrompt } from "@/app/components/common/LoginToAddToCartPrompt";
+import { useRouter } from "next/navigation";
 
 interface DealOfTheDayProps {
   products: (WCProduct | PublicProduct)[];
@@ -19,9 +20,7 @@ interface DealOfTheDayProps {
 
 export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
   const deals = products; // 直接使用传入的产品
-  const { addItem } = useCartStore();
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
 
@@ -35,10 +34,6 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
   const handleNext = () => {
     setDirection("right");
     setCurrentIndex((prev) => (prev < deals.length - 1 ? prev + 1 : 0));
-  };
-
-  const handleAddToCart = () => {
-    addItem(currentDeal, 1);
   };
 
   return (
@@ -133,7 +128,11 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
           >
             <Box
               component="img"
-              src={currentDeal.images && currentDeal.images.length > 0 ? currentDeal.images[0].src : ''}
+              src={
+                currentDeal.images && currentDeal.images.length > 0
+                  ? currentDeal.images[0].src
+                  : ""
+              }
               alt={currentDeal.name}
               sx={{
                 maxWidth: "80%",
@@ -190,17 +189,15 @@ export const DealOfTheDay = ({ products }: DealOfTheDayProps) => {
         </Box>
       </Box>
 
-      {isAuthenticated ? (
-        <ActionButton
-          endIcon={<ArrowForwardIcon />}
-          fullWidth
-          onClick={handleAddToCart}
-        >
-          Add To Cart
-        </ActionButton>
-      ) : (
-        <LoginToAddToCartPrompt />
-      )}
+      <ActionButton
+        endIcon={<ArrowForwardIcon />}
+        fullWidth
+        onClick={() => {
+          router.push(`/product/${currentDeal.slug}`);
+        }}
+      >
+        Shop Now
+      </ActionButton>
     </Box>
   );
 };

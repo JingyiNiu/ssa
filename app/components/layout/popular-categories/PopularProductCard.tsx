@@ -96,18 +96,6 @@ export const PopularProductCard = ({ product }: PopularCardProps) => {
           {product.name}
         </Typography>
 
-        {/* 产品SKU */}
-        <Typography
-          variant="body2"
-          sx={{
-            color: "text.secondary",
-            mb: 1,
-            fontSize: "0.75rem",
-          }}
-        >
-          SKU: {product.sku || "N/A"}
-        </Typography>
-
         {/* 价格 */}
         <Box
           sx={{

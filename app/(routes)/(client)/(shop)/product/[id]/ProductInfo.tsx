@@ -64,9 +64,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
         {product.name}
       </Typography>
-      <Typography variant="body1" sx={{ color: "text.secondary", mb: 2 }}>
-        SKU: {product.sku}
-      </Typography>
 
       {/* 评分和评论 */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
