@@ -15,7 +15,14 @@ const FindADealer = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: "#000", pt: 4, pb: 8 }} data-testid="find-a-dealer">
+    <Box
+      sx={{
+        bgcolor: "#000",
+        pt: 4,
+        pb: 8,
+      }}
+      data-testid="find-a-dealer"
+    >
       <Box className="" sx={{ mb: 4, px: 4 }}>
         <SectionTitle title="Find a Dealer" color="#fff" />
 
@@ -34,7 +41,7 @@ const FindADealer = () => {
               maxHeight: "400px",
               maxWidth: "500px",
               overflowY: "auto",
-              bgcolor: "#000",
+              bgcolor: "rgba(0, 0, 0, 0.9)",
             }}
             data-testid="dealer-list"
           >

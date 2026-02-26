@@ -75,7 +75,7 @@ export const WheelsHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/wheels4.png)",
+          backgroundImage: "url(/images/pics/wheels1.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

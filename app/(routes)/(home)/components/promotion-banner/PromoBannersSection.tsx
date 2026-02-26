@@ -25,7 +25,7 @@ export const PromoBannersSection = () => {
       description:
         "Advanced tread design and long-lasting compounds deliver exceptional traction, smoother rides, and confidence in all road conditions.",
       buttonText: "Shop Now",
-      backgroundImage: "/images/pics/tyres1.png",
+      backgroundImage: "/images/pics/tyres6.jpg",
     },
   ];
 

@@ -18,6 +18,18 @@ const heroSlides: HeroSlideData[] = [
     description:
       "Discover high-quality wheels and tyres designed to enhance performance, improve handling, and elevate your vehicle’s look.",
   },
+  {
+    backgroundImage: "/images/pics/tyres8.jpeg",
+    title: "Built for Every Road\nReady for Every Season",
+    description:
+      "From city streets to rugged terrain, explore tyres and wheels engineered for performance, safety, and all-weather reliability.",
+  },
+  {
+    backgroundImage: "/images/pics/wheels4.jpeg",
+    title: "Precision Engineering\nUnmatched Control",
+    description:
+      "Experience superior grip, responsive handling, and lasting durability with wheels and tyres crafted for drivers who demand more.",
+  },
 ];
 
 export const HeroSection = () => {

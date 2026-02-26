@@ -18,7 +18,7 @@ export const AccessoriesHero = () => {
         sx={{
           display: "flex",
           height: "100%",
-          backgroundImage: "url(/images/pics/tyres3.jpeg)",
+          backgroundImage: "url(/images/pics/wheels7.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
