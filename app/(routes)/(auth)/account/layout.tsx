@@ -3,7 +3,7 @@
 import { ProtectedRoute } from "@/app/lib/auth";
 import { Box } from "@mui/material";
 import UserInfo from "./UserInfo";
-import SidebarTabs from "./SidebarTabs";
+import AccountNav from "./AccountNav";
 
 export default function AccountLayout({
   children,
@@ -35,7 +35,7 @@ export default function AccountLayout({
             }}
           >
             <UserInfo />
-            <SidebarTabs />
+            <AccountNav />
           </Box>
           <Box
             sx={{
