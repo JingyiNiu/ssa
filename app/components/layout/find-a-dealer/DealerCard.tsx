@@ -22,7 +22,8 @@ const DealerCard = ({
         cursor: "pointer",
         borderBottom: "1px solid",
         borderColor: "divider",
-        p: 2,
+        px: 2,
+        py: 1.5,
         transition: "background-color 0.2s ease",
         "&:hover": {
           bgcolor: "action.hover",
@@ -43,6 +44,7 @@ const DealerCard = ({
             fontWeight: 600,
             fontSize: "1rem",
             color: "#fff",
+            pr: 2,
           }}
         >
           {store.name}
@@ -57,13 +59,12 @@ const DealerCard = ({
 
       {/* 详细信息（可折叠） */}
       <Collapse in={isExpanded}>
-        <Box sx={{ mt: 2, pl: 0 }}>
+        <Box sx={{ mt: 1, pl: 0 }}>
           {/* 地址 */}
           <Typography
             variant="body2"
             sx={{
               color: "grey",
-              mb: 1,
               lineHeight: 1.6,
             }}
           >
@@ -75,7 +76,6 @@ const DealerCard = ({
             variant="body2"
             sx={{
               color: "grey",
-              mb: 1,
               lineHeight: 1.6,
             }}
           >
